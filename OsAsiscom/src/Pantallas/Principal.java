@@ -5,15 +5,12 @@
  */
 package Pantallas;
 
-import java.awt.Color;
-import java.awt.Image;
-import javax.swing.JFrame;
+
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
-import javax.swing.Icon;
-import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
 /**
@@ -41,6 +38,9 @@ public class Principal extends javax.swing.JFrame {
 
     public Principal() {
         initComponents();
+        
+       
+
 
         DateTimeFormatter dtf5 = DateTimeFormatter.ofPattern("dd/MM/yyyy hh:mm");
         Runnable runnable = new Runnable() {
@@ -61,7 +61,7 @@ public class Principal extends javax.swing.JFrame {
         Thread hilo = new Thread(runnable);
         hilo.start();
         
-     
+      
 
     }
 
@@ -78,7 +78,7 @@ public class Principal extends javax.swing.JFrame {
         navmenu = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         nombre = new javax.swing.JLabel();
-        Tipo = new javax.swing.JLabel();
+        puesto = new javax.swing.JLabel();
         cerrarSesion = new javax.swing.JLabel();
         btnUsuarios = new javax.swing.JButton();
         btnClientes = new javax.swing.JButton();
@@ -91,7 +91,7 @@ public class Principal extends javax.swing.JFrame {
         minimizar = new javax.swing.JLabel();
         cerrar = new javax.swing.JLabel();
         Escritorio = new javax.swing.JPanel();
-        lbUser2 = new javax.swing.JLabel();
+        iconLogo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Sistema de ordenes de servicio ");
@@ -112,10 +112,10 @@ public class Principal extends javax.swing.JFrame {
         nombre.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         nombre.setText("Nombre de usuario");
 
-        Tipo.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
-        Tipo.setForeground(new java.awt.Color(255, 255, 255));
-        Tipo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        Tipo.setText("Administrador");
+        puesto.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
+        puesto.setForeground(new java.awt.Color(255, 255, 255));
+        puesto.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        puesto.setText("Administrador");
 
         cerrarSesion.setFont(new java.awt.Font("Roboto", 0, 12)); // NOI18N
         cerrarSesion.setForeground(new java.awt.Color(255, 255, 255));
@@ -203,7 +203,7 @@ public class Principal extends javax.swing.JFrame {
                         .addGroup(navmenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addComponent(nombre, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(cerrarSesion, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(Tipo, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                            .addComponent(puesto, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap(101, Short.MAX_VALUE))
             .addComponent(btnEstadoOs1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
@@ -215,7 +215,7 @@ public class Principal extends javax.swing.JFrame {
                 .addGap(77, 77, 77)
                 .addComponent(nombre)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(Tipo)
+                .addComponent(puesto)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(cerrarSesion)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 76, Short.MAX_VALUE)
@@ -272,24 +272,23 @@ public class Principal extends javax.swing.JFrame {
 
         Escritorio.setBackground(new java.awt.Color(46, 52, 60));
 
-        lbUser2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/user4.png"))); // NOI18N
-        lbUser2.setLabelFor(Escritorio);
-        lbUser2.setPreferredSize(new java.awt.Dimension(800, 800));
+        iconLogo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/logo.png"))); // NOI18N
 
         javax.swing.GroupLayout EscritorioLayout = new javax.swing.GroupLayout(Escritorio);
         Escritorio.setLayout(EscritorioLayout);
         EscritorioLayout.setHorizontalGroup(
             EscritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, EscritorioLayout.createSequentialGroup()
-                .addContainerGap(277, Short.MAX_VALUE)
-                .addComponent(lbUser2, javax.swing.GroupLayout.PREFERRED_SIZE, 787, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(262, 262, 262))
+            .addGroup(EscritorioLayout.createSequentialGroup()
+                .addGap(340, 340, 340)
+                .addComponent(iconLogo, javax.swing.GroupLayout.PREFERRED_SIZE, 483, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(503, Short.MAX_VALUE))
         );
         EscritorioLayout.setVerticalGroup(
             EscritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(EscritorioLayout.createSequentialGroup()
-                .addComponent(lbUser2, javax.swing.GroupLayout.PREFERRED_SIZE, 836, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 44, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, EscritorioLayout.createSequentialGroup()
+                .addContainerGap(189, Short.MAX_VALUE)
+                .addComponent(iconLogo)
+                .addGap(185, 185, 185))
         );
 
         background.add(Escritorio, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 40, 1326, 880));
@@ -315,11 +314,11 @@ public class Principal extends javax.swing.JFrame {
 
     private void cerrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cerrarMouseClicked
         // TODO add your handling code here:
-
+        
         int salir = JOptionPane.showConfirmDialog(null, "¿Desea salir del "
                 + "programa?", "Atención", JOptionPane.YES_NO_OPTION);
         if (salir == JOptionPane.YES_OPTION) {
-
+            
             System.exit(0);
 
         }
@@ -386,7 +385,6 @@ public class Principal extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel Escritorio;
-    private javax.swing.JLabel Tipo;
     private javax.swing.JPanel background;
     private javax.swing.JPanel bar;
     private javax.swing.JButton btOs;
@@ -396,12 +394,13 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JButton btnUsuarios;
     private javax.swing.JLabel cerrar;
     private javax.swing.JLabel cerrarSesion;
+    private javax.swing.JLabel iconLogo;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jlfecha;
-    private javax.swing.JLabel lbUser2;
     private javax.swing.JLabel minimizar;
     private javax.swing.JPanel navmenu;
     public static javax.swing.JLabel nombre;
+    public static javax.swing.JLabel puesto;
     private javax.swing.JLabel titulo;
     // End of variables declaration//GEN-END:variables
 }

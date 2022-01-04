@@ -18,14 +18,14 @@ public class conexionS {
         //llamamos la libreria
         String driver = "com.mysql.cj.jdbc.Driver";
         //informacion de la base de datos
-        String url="jdbc:mysql://23.236.60.245:3306/dbASISCOM";
-        String user="microservicio-sql";
-        String password="prueba123++";
+        String url="jdbc:mysql://gcosuministros.com:3306/gcosumin_OS";
+        String user="gcosumin";
+        String password="Asiscom2021*";
         
         //establecer conecion entre java y base de datos
         try {
             Class.forName(driver);
-            conexion = DriverManager.getConnection(url,user,password);
+            conexion  = DriverManager.getConnection(url,user,password);
             return conexion;
         } catch (Exception e) {
             return null;

@@ -43,7 +43,7 @@ public class Acerca extends javax.swing.JFrame {
         jLabel2.setText("Sistema para control de ordenes de servicio");
 
         jLabel3.setFont(new java.awt.Font("Roboto", 1, 14)); // NOI18N
-        jLabel3.setText("Desarrolado por Ricardo Pineda Caracheo");
+        jLabel3.setText("Desarrollado por Ricardo Pineda Caracheo");
 
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/dreams.png"))); // NOI18N
 
