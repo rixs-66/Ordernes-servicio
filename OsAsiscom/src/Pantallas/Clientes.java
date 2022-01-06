@@ -22,7 +22,7 @@ public class Clientes extends javax.swing.JInternalFrame {
     ResultSet rs = null;
     Statement st = null;
 
-    public static String id, numE, nombre, telefono, contraseña, correo, perfil;
+    public static String id, direccion, nombre, telefono,  correo;
 
     public Clientes() {
         initComponents();
@@ -67,13 +67,14 @@ public class Clientes extends javax.swing.JInternalFrame {
     }
 
     private void Delete() {
-        int confirmar = JOptionPane.showConfirmDialog(null, "¿Desea eliminar este usuario?");
+        int confirmar = JOptionPane.showConfirmDialog(null, "¿Desea eliminar al Cliente "+ nombre, "Atención", JOptionPane.YES_NO_OPTION);
         if (confirmar == JOptionPane.YES_OPTION) {
-            String sql = "delete from clientes where id=?";
+            String sql = "delete from clientes where idCliente=?";
             try {
                 pst = conexion.prepareStatement(sql);
                 pst.setString(1, id);
                 pst.executeUpdate();
+                JOptionPane.showMessageDialog(null,"Usuario Eliminado ");
                 mostrarDatos();
 
             } catch (Exception e) {
@@ -334,13 +335,13 @@ public class Clientes extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
 
         int seleccionar = tbClientes.rowAtPoint(evt.getPoint());
-        id = String.valueOf(tbClientes.getValueAt(seleccionar, 0));
-        numE = String.valueOf(tbClientes.getValueAt(seleccionar, 1));
-        nombre = String.valueOf(tbClientes.getValueAt(seleccionar, 2));
+        id = String.valueOf(tbClientes.getValueAt(seleccionar,0));
+        nombre = String.valueOf(tbClientes.getValueAt(seleccionar, 1));
+        direccion = String.valueOf(tbClientes.getValueAt(seleccionar, 2));
         telefono = String.valueOf(tbClientes.getValueAt(seleccionar, 3));
-        contraseña = String.valueOf(tbClientes.getValueAt(seleccionar, 4));
-        correo = String.valueOf(tbClientes.getValueAt(seleccionar, 5));
-        perfil = String.valueOf(tbClientes.getValueAt(seleccionar, 6));
+        correo = String.valueOf(tbClientes.getValueAt(seleccionar, 4));
+        
+        
 
 
     }//GEN-LAST:event_tbClientesMouseClicked

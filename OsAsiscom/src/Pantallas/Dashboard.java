@@ -157,6 +157,11 @@ public class Dashboard extends javax.swing.JFrame {
         btOs.setText("Ordenes de servicio");
         btOs.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         btOs.setIconTextGap(50);
+        btOs.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btOsActionPerformed(evt);
+            }
+        });
 
         btnAcerca.setBackground(new java.awt.Color(80, 34, 34));
         btnAcerca.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
@@ -359,6 +364,14 @@ public class Dashboard extends javax.swing.JFrame {
         Escritorio.removeAll();
         Escritorio.add(clientes).setVisible(true);
     }//GEN-LAST:event_btnClientesActionPerformed
+
+    private void btOsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btOsActionPerformed
+        // TODO add your handling code here:
+        Os os = new Os();
+        Escritorio.removeAll();
+        Escritorio.add(os).setVisible(true);
+        
+    }//GEN-LAST:event_btOsActionPerformed
 
     /**
      * @param args the command line arguments

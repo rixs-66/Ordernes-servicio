@@ -71,7 +71,7 @@ public class Usuarios extends javax.swing.JInternalFrame {
     }
 
     private void Delete() {
-        int confirmar = JOptionPane.showConfirmDialog(null, "¿Desea eliminar este usuario?");
+        int confirmar = JOptionPane.showConfirmDialog(null, "¿Desea eliminar al empleado "+ nombre,"Atención" , JOptionPane.YES_NO_OPTION);
         if (confirmar == JOptionPane.YES_OPTION) {
             String sql = "delete from empleados where id=?";
             try {

@@ -10,51 +10,44 @@ import javax.swing.JOptionPane;
 import server.conexionS;
 
 public class UpdateClient extends javax.swing.JFrame {
-    
+
     Connection conexion = null;
     PreparedStatement pst = null;
     ResultSet rs = null;
-    
+
     public UpdateClient() {
-        
+
         initComponents();
-        
+
         conexion = conexionS.conn();
+
+        txtNombre.setText(Clientes.nombre);
+        txtDireccion.setText(Clientes.direccion);
+        txtTelefono.setText(Clientes.telefono);
+        txtCorreo.setText(Clientes.correo);
         
-        txtnumEmpleado.setText(Usuarios.numE);
-        txtNombre.setText(Usuarios.nombre);   
-        txtTelefono.setText(Usuarios.telefono);
-        txtContraseña.setText(Usuarios.contraseña);
-        txtCorreo.setText(Usuarios.correo);        
-        listPerfil.setSelectedItem(Usuarios.perfil);
-        
+
     }
-    
+
     private void actualizar() {
-        String sql="update empleados set "
-                + "numE=?,"
+        String sql = "update clientes set "
                 + "nombre=?,"
+                + "direccion=?,"
                 + "telefono=?,"
-                + "pass=?,"
-                + "correo=?,"
-                + "perfil=? where id="+Usuarios.id;
+                + "correo=? where idCliente=" + Clientes.id ;
         try {
-            if (txtnumEmpleado.getText().isEmpty()
-                    || txtNombre.getText().isEmpty()
-                    || txtContraseña.getText().isEmpty()
+            if (txtNombre.getText().isEmpty()
                     || txtCorreo.getText().isEmpty()
-                    || listPerfil.getSelectedItem().toString().isEmpty()) {
+                    || txtTelefono.getText().isEmpty()) {
 
                 JOptionPane.showMessageDialog(null, "Campos obligatorios vacios");
             } else {
 
                 pst = conexion.prepareStatement(sql);
-                pst.setString(1, txtnumEmpleado.getText());
-                pst.setString(2, txtNombre.getText());
-                pst.setString(3, txtTelefono.getText());
-                pst.setString(4, txtContraseña.getText());
-                pst.setString(5, txtCorreo.getText());
-                pst.setString(6, listPerfil.getSelectedItem().toString());
+                pst.setString(1, txtNombre.getText());
+                pst.setString(2, txtCorreo.getText());
+                pst.setString(3, txtDireccion.getText());
+                pst.setString(4, txtTelefono.getText());
                 pst.executeUpdate();
                 dispose();
             }
@@ -63,7 +56,7 @@ public class UpdateClient extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, e);
         }
     }
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -74,10 +67,10 @@ public class UpdateClient extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        txtnumEmpleado = new javax.swing.JTextField();
+        txtNombre = new javax.swing.JTextField();
+        txtDireccion = new javax.swing.JTextField();
         txtTelefono = new javax.swing.JTextField();
         txtCorreo = new javax.swing.JTextField();
-        txtNombre = new javax.swing.JTextField();
         btnUpdate = new javax.swing.JButton();
         jLabel8 = new javax.swing.JLabel();
 
@@ -94,19 +87,19 @@ public class UpdateClient extends javax.swing.JFrame {
 
         jLabel2.setFont(new java.awt.Font("Roboto", 1, 12)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel2.setText("Numero de empleado *");
+        jLabel2.setText("Nombre Cliente");
 
         jLabel3.setFont(new java.awt.Font("Roboto", 1, 12)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel3.setText("Telefono ");
+        jLabel3.setText("Direccion");
 
         jLabel4.setFont(new java.awt.Font("Roboto", 1, 12)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel4.setText("Correo *");
+        jLabel4.setText("Telefono*");
 
         jLabel5.setFont(new java.awt.Font("Roboto", 1, 12)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel5.setText("Nombre*");
+        jLabel5.setText("Correo*");
 
         btnUpdate.setBackground(new java.awt.Color(80, 34, 34));
         btnUpdate.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
@@ -145,13 +138,13 @@ public class UpdateClient extends javax.swing.JFrame {
                     .addComponent(btnUpdate, javax.swing.GroupLayout.PREFERRED_SIZE, 440, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtnumEmpleado, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtDireccion, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(45, 45, 45)
                         .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(txtCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(154, 154, 154)
                         .addComponent(jLabel8)))
@@ -168,15 +161,15 @@ public class UpdateClient extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(jLabel5)
-                    .addComponent(txtnumEmpleado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(txtTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtDireccion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(19, 19, 19)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel4))
                 .addGap(58, 58, 58)
                 .addComponent(btnUpdate, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -207,7 +200,7 @@ public class UpdateClient extends javax.swing.JFrame {
     private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
         // TODO add your handling code here:
         actualizar();
-       
+
 
     }//GEN-LAST:event_btnUpdateActionPerformed
 
@@ -263,8 +256,8 @@ public class UpdateClient extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JTextField txtCorreo;
+    private javax.swing.JTextField txtDireccion;
     private javax.swing.JTextField txtNombre;
     private javax.swing.JTextField txtTelefono;
-    private javax.swing.JTextField txtnumEmpleado;
     // End of variables declaration//GEN-END:variables
 }
