@@ -15,7 +15,7 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author rica_
  */
-public class Usuarios extends javax.swing.JInternalFrame {
+public class Clientes extends javax.swing.JInternalFrame {
 
     Connection conexion = null;
     PreparedStatement pst = null;
@@ -24,7 +24,7 @@ public class Usuarios extends javax.swing.JInternalFrame {
 
     public static String id, numE, nombre, telefono, contraseña, correo, perfil;
 
-    public Usuarios() {
+    public Clientes() {
         initComponents();
         this.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 0, 0));
         BasicInternalFrameUI ui = (BasicInternalFrameUI) this.getUI();
@@ -36,18 +36,16 @@ public class Usuarios extends javax.swing.JInternalFrame {
 
     private void mostrarDatos() {
 
-        DefaultTableModel templeados = new DefaultTableModel();
-        templeados.addColumn("ID");
-        templeados.addColumn("Numero de empleado");
-        templeados.addColumn("Nombre");
-        templeados.addColumn("Telefono");
-        templeados.addColumn("Contraseña");
-        templeados.addColumn("correo");
-        templeados.addColumn("Perfil");
-        tbEmpleados.setModel(templeados);
-        String[] datos = new String[7];
+        DefaultTableModel tclientes = new DefaultTableModel();
+        tclientes.addColumn("ID");
+        tclientes.addColumn("Nombre");
+        tclientes.addColumn("Direccion");
+        tclientes.addColumn("Telefono");
+        tclientes.addColumn("Correo");
+        tbClientes.setModel(tclientes);
+        String[] datos = new String[5];
 
-        String sql = "select * from empleados";
+        String sql = "select * from clientes";
         try {
 
             Statement leer = conexion.createStatement();
@@ -59,11 +57,9 @@ public class Usuarios extends javax.swing.JInternalFrame {
                 datos[2] = rs.getString(3);
                 datos[3] = rs.getString(4);
                 datos[4] = rs.getString(5);
-                datos[5] = rs.getString(6);
-                datos[6] = rs.getString(7);
-                templeados.addRow(datos);
+                tclientes.addRow(datos);
             }
-            tbEmpleados.setModel(templeados);
+            tbClientes.setModel(tclientes);
 
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e);
@@ -73,13 +69,13 @@ public class Usuarios extends javax.swing.JInternalFrame {
     private void Delete() {
         int confirmar = JOptionPane.showConfirmDialog(null, "¿Desea eliminar este usuario?");
         if (confirmar == JOptionPane.YES_OPTION) {
-            String sql = "delete from empleados where id=?";
+            String sql = "delete from clientes where id=?";
             try {
                 pst = conexion.prepareStatement(sql);
-                pst.setString(1,id);
+                pst.setString(1, id);
                 pst.executeUpdate();
                 mostrarDatos();
-                
+
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(null, e);
             }
@@ -102,7 +98,7 @@ public class Usuarios extends javax.swing.JInternalFrame {
         btnUpdate = new javax.swing.JButton();
         btnDelete = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tbEmpleados = new javax.swing.JTable();
+        tbClientes = new javax.swing.JTable();
         btnBuscar = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         buscar = new javax.swing.JFormattedTextField();
@@ -123,7 +119,7 @@ public class Usuarios extends javax.swing.JInternalFrame {
         jLabel1.setFont(new java.awt.Font("Roboto", 0, 24)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/user3.png"))); // NOI18N
-        jLabel1.setText("USUARIOS");
+        jLabel1.setText("CLIENTES");
         jLabel1.setFocusable(false);
         jLabel1.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         jLabel1.setIconTextGap(50);
@@ -148,7 +144,7 @@ public class Usuarios extends javax.swing.JInternalFrame {
         btnRegistro.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
         btnRegistro.setForeground(new java.awt.Color(255, 255, 255));
         btnRegistro.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/registro.png"))); // NOI18N
-        btnRegistro.setText("Registrar Usuario");
+        btnRegistro.setText("Registrar cliente");
         btnRegistro.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         btnRegistro.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         btnRegistro.setIconTextGap(50);
@@ -164,7 +160,7 @@ public class Usuarios extends javax.swing.JInternalFrame {
         btnUpdate.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
         btnUpdate.setForeground(new java.awt.Color(255, 255, 255));
         btnUpdate.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/actualizar.png"))); // NOI18N
-        btnUpdate.setText("Editar usuario");
+        btnUpdate.setText("Editar Cliente");
         btnUpdate.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         btnUpdate.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         btnUpdate.setIconTextGap(50);
@@ -180,7 +176,7 @@ public class Usuarios extends javax.swing.JInternalFrame {
         btnDelete.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
         btnDelete.setForeground(new java.awt.Color(255, 255, 255));
         btnDelete.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/eliminar.png"))); // NOI18N
-        btnDelete.setText("Eliminar Usuario");
+        btnDelete.setText("Eliminar cliente");
         btnDelete.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         btnDelete.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         btnDelete.setIconTextGap(50);
@@ -192,13 +188,13 @@ public class Usuarios extends javax.swing.JInternalFrame {
         });
         jPanel2.add(btnDelete, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, 50, 440, 50));
 
-        tbEmpleados = new javax.swing.JTable(){
+        tbClientes = new javax.swing.JTable(){
             public boolean isCellEditable(int rowIndex, int colIndex){
                 return false;
             }
         };
-        tbEmpleados.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
-        tbEmpleados.setModel(new javax.swing.table.DefaultTableModel(
+        tbClientes.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
+        tbClientes.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {},
                 {},
@@ -215,17 +211,17 @@ public class Usuarios extends javax.swing.JInternalFrame {
 
             }
         ));
-        tbEmpleados.setFocusable(false);
-        tbEmpleados.setGridColor(new java.awt.Color(102, 0, 51));
-        tbEmpleados.setRowHeight(30);
-        tbEmpleados.setShowGrid(false);
-        tbEmpleados.getTableHeader().setReorderingAllowed(false);
-        tbEmpleados.addMouseListener(new java.awt.event.MouseAdapter() {
+        tbClientes.setFocusable(false);
+        tbClientes.setGridColor(new java.awt.Color(102, 0, 51));
+        tbClientes.setRowHeight(30);
+        tbClientes.setShowGrid(false);
+        tbClientes.getTableHeader().setReorderingAllowed(false);
+        tbClientes.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tbEmpleadosMouseClicked(evt);
+                tbClientesMouseClicked(evt);
             }
         });
-        jScrollPane1.setViewportView(tbEmpleados);
+        jScrollPane1.setViewportView(tbClientes);
 
         jPanel2.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 180, 1270, 660));
 
@@ -255,8 +251,8 @@ public class Usuarios extends javax.swing.JInternalFrame {
 
         jLabel2.setFont(new java.awt.Font("Roboto", 1, 14)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel2.setText("Buscar por ID");
-        jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 120, 90, -1));
+        jLabel2.setText("Buscar cliente por ID");
+        jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 120, 150, -1));
 
         getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
@@ -265,14 +261,14 @@ public class Usuarios extends javax.swing.JInternalFrame {
 
     private void btnRegistroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistroActionPerformed
         // TODO add your handling code here:
-        RegistroUser registroUser = new RegistroUser();
-        registroUser.setVisible(true);
+        RegistroClient registroClient = new RegistroClient();
+        registroClient.setVisible(true);
     }//GEN-LAST:event_btnRegistroActionPerformed
 
     private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
         // TODO add your handling code here:
-        UpdateUser UpdateUser = new UpdateUser();
-        UpdateUser.setVisible(true);
+        UpdateClient updateClient = new UpdateClient();
+        updateClient.setVisible(true);
 
     }//GEN-LAST:event_btnUpdateActionPerformed
 
@@ -291,20 +287,23 @@ public class Usuarios extends javax.swing.JInternalFrame {
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
         // TODO add your handling code here:
-        DefaultTableModel templeados = new DefaultTableModel();
-        templeados.addColumn("ID");
-        templeados.addColumn("Numero de empleado");
-        templeados.addColumn("Nombre");
-        templeados.addColumn("Telefono");
-        templeados.addColumn("Contraseña");
-        templeados.addColumn("correo");
-        templeados.addColumn("Perfil");
-        tbEmpleados.setModel(templeados);
-        String[] datos = new String[7];
+        DefaultTableModel tclientes = new DefaultTableModel();
+        tclientes.addColumn("ID");
+        tclientes.addColumn("Nombre");
+        tclientes.addColumn("Direccion");
+        tclientes.addColumn("Telefono");
+        tclientes.addColumn("Correo");
+        tbClientes.setModel(tclientes);
+        String[] datos = new String[5];
 
         String numero = buscar.getText();
 
-        String sql = "select * from empleados where id=" + numero;
+        String sql = "select * from clientes where idCliente=" + numero;
+        
+        if (numero == null) {
+            JOptionPane.showMessageDialog(null, "Campo Vació");
+            
+        }
         try {
 
             Statement leer = conexion.createStatement();
@@ -316,14 +315,14 @@ public class Usuarios extends javax.swing.JInternalFrame {
                 datos[2] = rs.getString(3);
                 datos[3] = rs.getString(4);
                 datos[4] = rs.getString(5);
-                datos[5] = rs.getString(6);
-                datos[6] = rs.getString(7);
-                templeados.addRow(datos);
+                tclientes.addRow(datos);
             }
-            tbEmpleados.setModel(templeados);
+            tbClientes.setModel(tclientes);
 
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, e);
+            
+            JOptionPane.showMessageDialog(null, "campos vacios");
+            mostrarDatos();
         }
     }//GEN-LAST:event_btnBuscarActionPerformed
 
@@ -331,20 +330,20 @@ public class Usuarios extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_buscarActionPerformed
 
-    private void tbEmpleadosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbEmpleadosMouseClicked
+    private void tbClientesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbClientesMouseClicked
         // TODO add your handling code here:
 
-        int seleccionar = tbEmpleados.rowAtPoint(evt.getPoint());
-        id = String.valueOf(tbEmpleados.getValueAt(seleccionar, 0));
-        numE = String.valueOf(tbEmpleados.getValueAt(seleccionar, 1));
-        nombre = String.valueOf(tbEmpleados.getValueAt(seleccionar, 2));
-        telefono = String.valueOf(tbEmpleados.getValueAt(seleccionar, 3));
-        contraseña = String.valueOf(tbEmpleados.getValueAt(seleccionar, 4));
-        correo = String.valueOf(tbEmpleados.getValueAt(seleccionar, 5));
-        perfil = String.valueOf(tbEmpleados.getValueAt(seleccionar, 6));
+        int seleccionar = tbClientes.rowAtPoint(evt.getPoint());
+        id = String.valueOf(tbClientes.getValueAt(seleccionar, 0));
+        numE = String.valueOf(tbClientes.getValueAt(seleccionar, 1));
+        nombre = String.valueOf(tbClientes.getValueAt(seleccionar, 2));
+        telefono = String.valueOf(tbClientes.getValueAt(seleccionar, 3));
+        contraseña = String.valueOf(tbClientes.getValueAt(seleccionar, 4));
+        correo = String.valueOf(tbClientes.getValueAt(seleccionar, 5));
+        perfil = String.valueOf(tbClientes.getValueAt(seleccionar, 6));
 
 
-    }//GEN-LAST:event_tbEmpleadosMouseClicked
+    }//GEN-LAST:event_tbClientesMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -359,6 +358,6 @@ public class Usuarios extends javax.swing.JInternalFrame {
     public static javax.swing.JPanel jPanel1;
     public static javax.swing.JPanel jPanel2;
     public static javax.swing.JScrollPane jScrollPane1;
-    public static javax.swing.JTable tbEmpleados;
+    public static javax.swing.JTable tbClientes;
     // End of variables declaration//GEN-END:variables
 }

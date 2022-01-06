@@ -59,21 +59,22 @@ public class Login extends javax.swing.JFrame {
                 if (validarLogin.equals("Administrador")) {
                     audio("bells");
                     JOptionPane.showMessageDialog(null, "Bienvenido " + usuario);
-                    Principal principal = new Principal();
+                    Dashboard principal = new Dashboard();
                     principal.setVisible(true);
-                    Principal.nombre.setText(rs.getString(3));
-                    Principal.puesto.setText(rs.getString(7));
-                    
+                    Dashboard.nombre.setText(rs.getString(3));
+                    Dashboard.puesto.setText(rs.getString(7));                    
                     this.dispose();
                     conexion.close();
+                    
                 } else if (validarLogin.equals("Tecnico")) {
                     audio("bells");
                     JOptionPane.showMessageDialog(null, "Bienvenido " + usuario);
-                    Tecnico tecnico = new Tecnico();
-                    tecnico.setVisible(true);
-                    Principal.nombre.setText(rs.getString(3));
-                    Principal.puesto.setText(rs.getString(7));
+                    Dashboard principal = new Dashboard();
+                    principal.setVisible(true);
+                    Dashboard.nombre.setText(rs.getString(3));
+                    Dashboard.puesto.setText(rs.getString(7));                    
                     this.dispose();
+                    conexion.close();
                 }
 
             } else {

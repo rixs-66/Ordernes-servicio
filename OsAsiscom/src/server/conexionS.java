@@ -18,9 +18,9 @@ public class conexionS {
         //llamamos la libreria
         String driver = "com.mysql.cj.jdbc.Driver";
         //informacion de la base de datos
-        String url="jdbc:mysql://gcosuministros.com:3306/gcosumin_OS";
-        String user="gcosumin";
-        String password="Asiscom2021*";
+        String url="jdbc:mysql://localhost:3306/dbasiscom";
+        String user="root";
+        String password="";
         
         //establecer conecion entre java y base de datos
         try {

@@ -17,10 +17,10 @@ import javax.swing.JOptionPane;
  *
  * @author rica_
  */
-public class Principal extends javax.swing.JFrame {
+public class Dashboard extends javax.swing.JFrame {
 
     /**
-     * Creates new form Principal
+     * Creates new form Dashboard
      */
     public Clip clip;
     public String ruta = "/audio/";
@@ -36,7 +36,7 @@ public class Principal extends javax.swing.JFrame {
 
     }
 
-    public Principal() {
+    public Dashboard() {
         initComponents();
         
        
@@ -83,7 +83,7 @@ public class Principal extends javax.swing.JFrame {
         btnUsuarios = new javax.swing.JButton();
         btnClientes = new javax.swing.JButton();
         btOs = new javax.swing.JButton();
-        btnEstadoOs = new javax.swing.JButton();
+        btnAcerca = new javax.swing.JButton();
         jlfecha = new javax.swing.JLabel();
         btnEstadoOs1 = new javax.swing.JButton();
         bar = new javax.swing.JPanel();
@@ -144,6 +144,11 @@ public class Principal extends javax.swing.JFrame {
         btnClientes.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         btnClientes.setIconTextGap(80);
         btnClientes.setVerifyInputWhenFocusTarget(false);
+        btnClientes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnClientesActionPerformed(evt);
+            }
+        });
 
         btOs.setBackground(new java.awt.Color(80, 34, 34));
         btOs.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
@@ -153,16 +158,16 @@ public class Principal extends javax.swing.JFrame {
         btOs.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         btOs.setIconTextGap(50);
 
-        btnEstadoOs.setBackground(new java.awt.Color(80, 34, 34));
-        btnEstadoOs.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
-        btnEstadoOs.setForeground(new java.awt.Color(255, 255, 255));
-        btnEstadoOs.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/acerca.png"))); // NOI18N
-        btnEstadoOs.setText("Acerca de ");
-        btnEstadoOs.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        btnEstadoOs.setIconTextGap(80);
-        btnEstadoOs.addActionListener(new java.awt.event.ActionListener() {
+        btnAcerca.setBackground(new java.awt.Color(80, 34, 34));
+        btnAcerca.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
+        btnAcerca.setForeground(new java.awt.Color(255, 255, 255));
+        btnAcerca.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/acerca.png"))); // NOI18N
+        btnAcerca.setText("Acerca de ");
+        btnAcerca.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        btnAcerca.setIconTextGap(80);
+        btnAcerca.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnEstadoOsActionPerformed(evt);
+                btnAcercaActionPerformed(evt);
             }
         });
 
@@ -191,7 +196,7 @@ public class Principal extends javax.swing.JFrame {
             .addComponent(btnUsuarios, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(btnClientes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(btOs, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(btnEstadoOs, javax.swing.GroupLayout.DEFAULT_SIZE, 320, Short.MAX_VALUE)
+            .addComponent(btnAcerca, javax.swing.GroupLayout.DEFAULT_SIZE, 320, Short.MAX_VALUE)
             .addComponent(jlfecha, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(navmenuLayout.createSequentialGroup()
                 .addGroup(navmenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -229,7 +234,7 @@ public class Principal extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnEstadoOs1, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(73, 73, 73)
-                .addComponent(btnEstadoOs, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnAcerca, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(31, 31, 31))
         );
 
@@ -279,9 +284,9 @@ public class Principal extends javax.swing.JFrame {
         EscritorioLayout.setHorizontalGroup(
             EscritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(EscritorioLayout.createSequentialGroup()
-                .addGap(340, 340, 340)
+                .addGap(329, 329, 329)
                 .addComponent(iconLogo, javax.swing.GroupLayout.PREFERRED_SIZE, 483, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(503, Short.MAX_VALUE))
+                .addContainerGap(514, Short.MAX_VALUE))
         );
         EscritorioLayout.setVerticalGroup(
             EscritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -342,11 +347,18 @@ public class Principal extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_btnEstadoOs1ActionPerformed
 
-    private void btnEstadoOsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEstadoOsActionPerformed
+    private void btnAcercaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAcercaActionPerformed
         // TODO add your handling code here:
         Acerca acerca = new Acerca();
         acerca.setVisible(true);
-    }//GEN-LAST:event_btnEstadoOsActionPerformed
+    }//GEN-LAST:event_btnAcercaActionPerformed
+
+    private void btnClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClientesActionPerformed
+        // TODO add your handling code here:
+        Clientes clientes = new Clientes();
+        Escritorio.removeAll();
+        Escritorio.add(clientes).setVisible(true);
+    }//GEN-LAST:event_btnClientesActionPerformed
 
     /**
      * @param args the command line arguments
@@ -365,20 +377,21 @@ public class Principal extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Principal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Dashboard.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Principal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Dashboard.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Principal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Dashboard.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Principal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Dashboard.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Principal().setVisible(true);
+                new Dashboard().setVisible(true);
             }
         });
     }
@@ -388,8 +401,8 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JPanel background;
     private javax.swing.JPanel bar;
     private javax.swing.JButton btOs;
+    private javax.swing.JButton btnAcerca;
     private javax.swing.JButton btnClientes;
-    private javax.swing.JButton btnEstadoOs;
     private javax.swing.JButton btnEstadoOs1;
     private javax.swing.JButton btnUsuarios;
     private javax.swing.JLabel cerrar;

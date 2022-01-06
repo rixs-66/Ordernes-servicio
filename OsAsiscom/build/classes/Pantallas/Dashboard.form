@@ -79,7 +79,7 @@
                   <Component id="btnUsuarios" max="32767" attributes="0"/>
                   <Component id="btnClientes" alignment="0" max="32767" attributes="0"/>
                   <Component id="btOs" alignment="0" max="32767" attributes="0"/>
-                  <Component id="btnEstadoOs" alignment="0" pref="320" max="32767" attributes="0"/>
+                  <Component id="btnAcerca" alignment="0" pref="320" max="32767" attributes="0"/>
                   <Component id="jlfecha" alignment="1" max="32767" attributes="0"/>
                   <Group type="102" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
@@ -123,7 +123,7 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="btnEstadoOs1" min="-2" pref="45" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="73" max="-2" attributes="0"/>
-                      <Component id="btnEstadoOs" min="-2" pref="45" max="-2" attributes="0"/>
+                      <Component id="btnAcerca" min="-2" pref="45" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
                   </Group>
               </Group>
@@ -223,6 +223,9 @@
                 <Property name="iconTextGap" type="int" value="80"/>
                 <Property name="verifyInputWhenFocusTarget" type="boolean" value="false"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnClientesActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JButton" name="btOs">
               <Properties>
@@ -243,7 +246,7 @@
                 <Property name="iconTextGap" type="int" value="50"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JButton" name="btnEstadoOs">
+            <Component class="javax.swing.JButton" name="btnAcerca">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="22" green="22" red="50" type="rgb"/>
@@ -262,7 +265,7 @@
                 <Property name="iconTextGap" type="int" value="80"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnEstadoOsActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAcercaActionPerformed"/>
               </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="jlfecha">
@@ -400,9 +403,9 @@
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="340" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="329" max="-2" attributes="0"/>
                       <Component id="iconLogo" min="-2" pref="483" max="-2" attributes="0"/>
-                      <EmptySpace pref="503" max="32767" attributes="0"/>
+                      <EmptySpace pref="514" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
