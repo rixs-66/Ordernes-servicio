@@ -5,10 +5,12 @@
  */
 package Pantallas;
 
+import static Pantallas.Clientes.tbClientes;
 import javax.swing.plaf.basic.BasicInternalFrameUI;
 import server.conexionS;
 import java.sql.*;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 import server.conexionS;
 
 /**
@@ -31,6 +33,19 @@ public class Os extends javax.swing.JInternalFrame {
         BasicInternalFrameUI ui = (BasicInternalFrameUI) this.getUI();
         ui.setNorthPane(null);
         conexion = conexionS.conn();
+        jTxtAccesorios.setLineWrap(true);
+        jTxtAccesorios.setWrapStyleWord(true);
+        jTxtObservaciones.setLineWrap(true);
+        jTxtObservaciones.setWrapStyleWord(true);
+        
+        
+        DefaultTableModel tclientes = new DefaultTableModel();
+        tclientes.addColumn("Servicio");
+        tclientes.addColumn("Costo");
+        jTableServicios.setModel(tclientes);
+        
+        
+        
     }
 
     /**
@@ -43,6 +58,87 @@ public class Os extends javax.swing.JInternalFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
+        Banner = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        DatosGenereales = new javax.swing.JPanel();
+        jPanel8 = new javax.swing.JPanel();
+        jLabel5 = new javax.swing.JLabel();
+        label1 = new javax.swing.JLabel();
+        label2 = new javax.swing.JLabel();
+        label4 = new javax.swing.JLabel();
+        label5 = new javax.swing.JLabel();
+        label6 = new javax.swing.JLabel();
+        numOS = new javax.swing.JTextField();
+        jDateChooser1 = new com.toedter.calendar.JDateChooser();
+        jDateChooser2 = new com.toedter.calendar.JDateChooser();
+        EmitidaPor = new javax.swing.JTextField();
+        jComboBox1 = new javax.swing.JComboBox<>();
+        DatosClientes = new javax.swing.JPanel();
+        jPanel21 = new javax.swing.JPanel();
+        jLabel14 = new javax.swing.JLabel();
+        jPanel22 = new javax.swing.JPanel();
+        jPanel23 = new javax.swing.JPanel();
+        jLabel15 = new javax.swing.JLabel();
+        label7 = new javax.swing.JLabel();
+        label8 = new javax.swing.JLabel();
+        label9 = new javax.swing.JLabel();
+        label10 = new javax.swing.JLabel();
+        Nombre = new javax.swing.JTextField();
+        Direccion = new javax.swing.JTextField();
+        Telefono = new javax.swing.JTextField();
+        correo = new javax.swing.JTextField();
+        jButton3 = new javax.swing.JButton();
+        jButton6 = new javax.swing.JButton();
+        DatosEquipo = new javax.swing.JPanel();
+        jPanel4 = new javax.swing.JPanel();
+        jLabel3 = new javax.swing.JLabel();
+        label13 = new javax.swing.JLabel();
+        label12 = new javax.swing.JLabel();
+        label14 = new javax.swing.JLabel();
+        label11 = new javax.swing.JLabel();
+        jComboBox2 = new javax.swing.JComboBox<>();
+        Marca = new javax.swing.JTextField();
+        Modelo = new javax.swing.JTextField();
+        modelo = new javax.swing.JTextField();
+        Accesorios = new javax.swing.JPanel();
+        jPanel15 = new javax.swing.JPanel();
+        jLabel11 = new javax.swing.JLabel();
+        jRadioButton1 = new javax.swing.JRadioButton();
+        jRadioButton2 = new javax.swing.JRadioButton();
+        jPanel19 = new javax.swing.JPanel();
+        jPanel20 = new javax.swing.JPanel();
+        jLabel12 = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTxtAccesorios = new javax.swing.JTextArea();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jTextField1 = new javax.swing.JTextField();
+        Observaciones = new javax.swing.JPanel();
+        jPanel13 = new javax.swing.JPanel();
+        jLabel8 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTxtObservaciones = new javax.swing.JTextArea();
+        ReporteCliente = new javax.swing.JPanel();
+        num = new javax.swing.JPanel();
+        jLabel13 = new javax.swing.JLabel();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        jTxtReporte = new javax.swing.JTextArea();
+        Servicios = new javax.swing.JPanel();
+        jPanel12 = new javax.swing.JPanel();
+        jLabel7 = new javax.swing.JLabel();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        jTableServicios = new javax.swing.JTable();
+        jComoboxServicios = new javax.swing.JComboBox<>();
+        jLabel6 = new javax.swing.JLabel();
+        jButton4 = new javax.swing.JButton();
+        jLabel10 = new javax.swing.JLabel();
+        jTextField2 = new javax.swing.JTextField();
+        Pago = new javax.swing.JPanel();
+        jPanel16 = new javax.swing.JPanel();
+        jLabel9 = new javax.swing.JLabel();
+        jButton2 = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
+        jButton5 = new javax.swing.JButton();
 
         setMaximumSize(new java.awt.Dimension(1326, 880));
         setPreferredSize(new java.awt.Dimension(1326, 880));
@@ -50,14 +146,594 @@ public class Os extends javax.swing.JInternalFrame {
 
         jPanel1.setBackground(new java.awt.Color(153, 153, 153));
         jPanel1.setPreferredSize(new java.awt.Dimension(1326, 880));
-        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1310, -1));
 
-        setBounds(0, 0, 1326, 880);
+        Banner.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel1.setFont(new java.awt.Font("Roboto", 0, 24)); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/icons8_bill_32px.png"))); // NOI18N
+        jLabel1.setText("Ordenes de Servicio");
+        jLabel1.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        jLabel1.setIconTextGap(10);
+        Banner.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 0, -1, 40));
+
+        DatosGenereales.setBackground(new java.awt.Color(153, 153, 153));
+        DatosGenereales.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        DatosGenereales.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jPanel8.setBackground(new java.awt.Color(80, 34, 34));
+        jPanel8.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jPanel8.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel5.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel5.setText("DATOS GENERALES");
+        jPanel8.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 0, -1, 30));
+
+        DatosGenereales.add(jPanel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 350, 30));
+
+        label1.setFont(new java.awt.Font("Roboto", 1, 14)); // NOI18N
+        label1.setText("N° OS");
+        DatosGenereales.add(label1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 50, -1, -1));
+
+        label2.setFont(new java.awt.Font("Roboto", 1, 14)); // NOI18N
+        label2.setText("Fecha de ingreso");
+        DatosGenereales.add(label2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, -1, -1));
+
+        label4.setFont(new java.awt.Font("Roboto", 1, 14)); // NOI18N
+        label4.setText("Fecha de entrega");
+        DatosGenereales.add(label4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 110, -1, -1));
+
+        label5.setFont(new java.awt.Font("Roboto", 1, 14)); // NOI18N
+        label5.setText("Emitida por");
+        DatosGenereales.add(label5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 140, -1, -1));
+
+        label6.setFont(new java.awt.Font("Roboto", 1, 14)); // NOI18N
+        label6.setText("Tecnico asignado");
+        DatosGenereales.add(label6, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 170, -1, -1));
+
+        numOS.setFont(new java.awt.Font("Roboto", 0, 11)); // NOI18N
+        numOS.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                numOSActionPerformed(evt);
+            }
+        });
+        DatosGenereales.add(numOS, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 50, 170, -1));
+
+        jDateChooser1.setDateFormatString("DD/MM/YYY\n");
+        DatosGenereales.add(jDateChooser1, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 80, 170, -1));
+        DatosGenereales.add(jDateChooser2, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 110, 170, -1));
+
+        EmitidaPor.setFont(new java.awt.Font("Roboto", 0, 11)); // NOI18N
+        DatosGenereales.add(EmitidaPor, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 140, 170, -1));
+
+        jComboBox1.setFont(new java.awt.Font("Roboto", 0, 11)); // NOI18N
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox1ActionPerformed(evt);
+            }
+        });
+        DatosGenereales.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 170, 170, -1));
+
+        DatosClientes.setBackground(new java.awt.Color(153, 153, 153));
+        DatosClientes.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        DatosClientes.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jPanel21.setBackground(new java.awt.Color(80, 34, 34));
+        jPanel21.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jPanel21.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel14.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
+        jLabel14.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel14.setText("DATOS DE CLIENTE");
+        jPanel21.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 0, -1, 30));
+
+        DatosClientes.add(jPanel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 350, 30));
+
+        jPanel22.setBackground(new java.awt.Color(153, 153, 153));
+        jPanel22.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jPanel22.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jPanel23.setBackground(new java.awt.Color(80, 34, 34));
+        jPanel23.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jPanel23.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel15.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
+        jLabel15.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel15.setText("DATOS DE CLIENTE");
+        jPanel23.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 0, -1, 30));
+
+        jPanel22.add(jPanel23, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 350, 30));
+
+        DatosClientes.add(jPanel22, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 50, 350, 150));
+
+        label7.setFont(new java.awt.Font("Roboto", 1, 14)); // NOI18N
+        label7.setText("Correo");
+        DatosClientes.add(label7, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 140, -1, -1));
+
+        label8.setFont(new java.awt.Font("Roboto", 1, 14)); // NOI18N
+        label8.setText("Nombre");
+        DatosClientes.add(label8, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 50, -1, -1));
+
+        label9.setFont(new java.awt.Font("Roboto", 1, 14)); // NOI18N
+        label9.setText("Dirección");
+        DatosClientes.add(label9, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, -1, -1));
+
+        label10.setFont(new java.awt.Font("Roboto", 1, 14)); // NOI18N
+        label10.setText("Teléfono");
+        DatosClientes.add(label10, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 110, -1, -1));
+
+        Nombre.setFont(new java.awt.Font("Roboto", 0, 11)); // NOI18N
+        Nombre.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                NombreActionPerformed(evt);
+            }
+        });
+        DatosClientes.add(Nombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 50, 170, -1));
+
+        Direccion.setFont(new java.awt.Font("Roboto", 0, 11)); // NOI18N
+        Direccion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                DireccionActionPerformed(evt);
+            }
+        });
+        DatosClientes.add(Direccion, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 80, 170, -1));
+
+        Telefono.setFont(new java.awt.Font("Roboto", 0, 11)); // NOI18N
+        Telefono.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                TelefonoActionPerformed(evt);
+            }
+        });
+        DatosClientes.add(Telefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 110, 170, -1));
+
+        correo.setFont(new java.awt.Font("Roboto", 0, 11)); // NOI18N
+        correo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                correoActionPerformed(evt);
+            }
+        });
+        DatosClientes.add(correo, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 140, 170, -1));
+
+        jButton3.setFont(new java.awt.Font("Roboto", 0, 11)); // NOI18N
+        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/icons8_add_24px_1.png"))); // NOI18N
+        jButton3.setText("Agregar");
+        DatosClientes.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 170, 110, 30));
+
+        jButton6.setFont(new java.awt.Font("Roboto", 0, 11)); // NOI18N
+        jButton6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/icons8_checklist_24px.png"))); // NOI18N
+        jButton6.setText("Seleccionar");
+        DatosClientes.add(jButton6, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 170, 130, 30));
+
+        DatosEquipo.setBackground(new java.awt.Color(153, 153, 153));
+        DatosEquipo.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        DatosEquipo.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jPanel4.setBackground(new java.awt.Color(80, 34, 34));
+        jPanel4.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel3.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel3.setText("DATOS DEL EQUIPO");
+        jPanel4.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 0, -1, 30));
+
+        DatosEquipo.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 540, 30));
+
+        label13.setFont(new java.awt.Font("Roboto", 1, 14)); // NOI18N
+        label13.setText("Tipo de Dispositivo");
+        DatosEquipo.add(label13, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 50, -1, -1));
+
+        label12.setFont(new java.awt.Font("Roboto", 1, 14)); // NOI18N
+        label12.setText("Marca");
+        DatosEquipo.add(label12, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, -1, -1));
+
+        label14.setFont(new java.awt.Font("Roboto", 1, 14)); // NOI18N
+        label14.setText("Modelo");
+        DatosEquipo.add(label14, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 110, -1, -1));
+
+        label11.setFont(new java.awt.Font("Roboto", 1, 14)); // NOI18N
+        label11.setText("N° Serie");
+        DatosEquipo.add(label11, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 140, -1, -1));
+
+        jComboBox2.setFont(new java.awt.Font("Roboto", 0, 11)); // NOI18N
+        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-------Selecciona un Dispositivo-------", "Laptop", "Proyector", "Impresora", "PC", "Tablet", "Monitor", "Teclado" }));
+        jComboBox2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox2ActionPerformed(evt);
+            }
+        });
+        DatosEquipo.add(jComboBox2, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 50, 310, -1));
+        DatosEquipo.add(Marca, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 80, 310, -1));
+        DatosEquipo.add(Modelo, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 110, 310, -1));
+
+        modelo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                modeloActionPerformed(evt);
+            }
+        });
+        DatosEquipo.add(modelo, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 140, 310, -1));
+
+        Accesorios.setBackground(new java.awt.Color(153, 153, 153));
+        Accesorios.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        Accesorios.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jPanel15.setBackground(new java.awt.Color(80, 34, 34));
+        jPanel15.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jPanel15.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel11.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
+        jLabel11.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel11.setText("Accesorios");
+        jPanel15.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 0, -1, 30));
+
+        jRadioButton1.setForeground(new java.awt.Color(255, 255, 255));
+        jRadioButton1.setText("SI");
+        jPanel15.add(jRadioButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, 40, 30));
+
+        jRadioButton2.setForeground(new java.awt.Color(255, 255, 255));
+        jRadioButton2.setText("No");
+        jPanel15.add(jRadioButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 0, 40, 30));
+
+        Accesorios.add(jPanel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 350, 30));
+
+        jPanel19.setBackground(new java.awt.Color(153, 153, 153));
+        jPanel19.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jPanel19.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jPanel20.setBackground(new java.awt.Color(80, 34, 34));
+        jPanel20.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jPanel20.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel12.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
+        jLabel12.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel12.setText("DATOS DE CLIENTE");
+        jPanel20.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 0, -1, 30));
+
+        jPanel19.add(jPanel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 350, 30));
+
+        Accesorios.add(jPanel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 50, 350, 150));
+
+        jTxtAccesorios.setColumns(20);
+        jTxtAccesorios.setRows(5);
+        jScrollPane2.setViewportView(jTxtAccesorios);
+
+        Accesorios.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, 320, 70));
+
+        jLabel2.setFont(new java.awt.Font("Roboto", 1, 14)); // NOI18N
+        jLabel2.setText("Accesorios");
+        Accesorios.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 60, -1, -1));
+
+        jLabel4.setFont(new java.awt.Font("Roboto", 1, 14)); // NOI18N
+        jLabel4.setText("Contraseña");
+        Accesorios.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 40, -1, -1));
+        Accesorios.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 40, 170, -1));
+
+        Observaciones.setBackground(new java.awt.Color(153, 153, 153));
+        Observaciones.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        Observaciones.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jPanel13.setBackground(new java.awt.Color(80, 34, 34));
+        jPanel13.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jPanel13.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel8.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
+        jLabel8.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel8.setText("OBSERVACIONES");
+        jPanel13.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 0, -1, 30));
+
+        Observaciones.add(jPanel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 910, 30));
+
+        jTxtObservaciones.setColumns(20);
+        jTxtObservaciones.setRows(5);
+        jScrollPane1.setViewportView(jTxtObservaciones);
+
+        Observaciones.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 40, 890, 110));
+
+        ReporteCliente.setBackground(new java.awt.Color(153, 153, 153));
+        ReporteCliente.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        ReporteCliente.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        num.setBackground(new java.awt.Color(80, 34, 34));
+        num.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        num.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel13.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
+        jLabel13.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel13.setText("REPORTE CLIENTE");
+        num.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 0, -1, 30));
+
+        ReporteCliente.add(num, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1280, 30));
+
+        jTxtReporte.setColumns(20);
+        jTxtReporte.setRows(5);
+        jScrollPane3.setViewportView(jTxtReporte);
+
+        ReporteCliente.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 40, 1260, 110));
+
+        Servicios.setBackground(new java.awt.Color(153, 153, 153));
+        Servicios.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        Servicios.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jPanel12.setBackground(new java.awt.Color(80, 34, 34));
+        jPanel12.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jPanel12.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel7.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel7.setText("SERVICIOS");
+        jPanel12.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 0, -1, 30));
+
+        Servicios.add(jPanel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 950, 30));
+
+        jTableServicios.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane4.setViewportView(jTableServicios);
+
+        Servicios.add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 40, 400, 150));
+
+        jComoboxServicios.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-------Selecciona un Servicio-------", "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComoboxServicios.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComoboxServiciosActionPerformed(evt);
+            }
+        });
+        Servicios.add(jComoboxServicios, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 60, 200, -1));
+
+        jLabel6.setFont(new java.awt.Font("Roboto", 1, 14)); // NOI18N
+        jLabel6.setText("Costo         $");
+        Servicios.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 160, 80, -1));
+
+        jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/icons8_add_24px_1.png"))); // NOI18N
+        jButton4.setText("Agregar");
+        Servicios.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 60, -1, 20));
+
+        jLabel10.setFont(new java.awt.Font("Roboto", 1, 14)); // NOI18N
+        jLabel10.setText("Seleccionar Servicio a realizar ");
+        Servicios.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, -1, -1));
+        Servicios.add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 160, 190, -1));
+
+        Pago.setBackground(new java.awt.Color(153, 153, 153));
+        Pago.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        Pago.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jPanel16.setBackground(new java.awt.Color(80, 34, 34));
+        jPanel16.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jPanel16.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel9.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
+        jLabel9.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel9.setText("IMPORTE");
+        jPanel16.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 0, -1, 30));
+
+        Pago.add(jPanel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 310, 30));
+
+        jButton2.setFont(new java.awt.Font("Roboto", 0, 11)); // NOI18N
+        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/icons8_add_24px_1.png"))); // NOI18N
+        jButton2.setText("Nuevo");
+        jButton2.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        jButton2.setPreferredSize(new java.awt.Dimension(75, 23));
+
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/icons8_save_24px.png"))); // NOI18N
+        jButton1.setText("Guardar ");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        jButton5.setFont(new java.awt.Font("Roboto", 0, 11)); // NOI18N
+        jButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/icons8_edit_24px.png"))); // NOI18N
+        jButton5.setText("Editar");
+        jButton5.setMaximumSize(new java.awt.Dimension(75, 23));
+        jButton5.setMinimumSize(new java.awt.Dimension(75, 23));
+        jButton5.setPreferredSize(new java.awt.Dimension(75, 23));
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(10, 10, 10)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(10, 10, 10)
+                        .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(DatosGenereales, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(20, 20, 20)
+                        .addComponent(DatosClientes, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(20, 20, 20)
+                        .addComponent(DatosEquipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(Accesorios, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(20, 20, 20)
+                        .addComponent(Observaciones, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(ReporteCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(Servicios, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(20, 20, 20)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(Pago, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 310, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(30, 40, Short.MAX_VALUE))
+            .addComponent(Banner, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addComponent(Banner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(7, 7, 7)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(DatosGenereales, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(DatosClientes, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(DatosEquipo, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(10, 10, 10)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(Accesorios, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Observaciones, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(10, 10, 10)
+                .addComponent(ReporteCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(10, 10, 10)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(Servicios, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(Pago, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(10, 10, 10)
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))))
+        );
+
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1330, -1));
+
+        setBounds(0, 0, 1345, 880);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void correoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_correoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_correoActionPerformed
+
+    private void numOSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_numOSActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_numOSActionPerformed
+
+    private void NombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NombreActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_NombreActionPerformed
+
+    private void DireccionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DireccionActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_DireccionActionPerformed
+
+    private void TelefonoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TelefonoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_TelefonoActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton5ActionPerformed
+
+    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBox1ActionPerformed
+
+    private void jComboBox2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBox2ActionPerformed
+
+    private void modeloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_modeloActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_modeloActionPerformed
+
+    private void jComoboxServiciosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComoboxServiciosActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComoboxServiciosActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel Accesorios;
+    private javax.swing.JPanel Banner;
+    private javax.swing.JPanel DatosClientes;
+    private javax.swing.JPanel DatosEquipo;
+    private javax.swing.JPanel DatosGenereales;
+    private javax.swing.JTextField Direccion;
+    private javax.swing.JTextField EmitidaPor;
+    private javax.swing.JTextField Marca;
+    private javax.swing.JTextField Modelo;
+    private javax.swing.JTextField Nombre;
+    private javax.swing.JPanel Observaciones;
+    private javax.swing.JPanel Pago;
+    private javax.swing.JPanel ReporteCliente;
+    private javax.swing.JPanel Servicios;
+    private javax.swing.JTextField Telefono;
+    private javax.swing.JTextField correo;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
+    private javax.swing.JButton jButton5;
+    private javax.swing.JButton jButton6;
+    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JComboBox<String> jComboBox2;
+    private javax.swing.JComboBox<String> jComoboxServicios;
+    private com.toedter.calendar.JDateChooser jDateChooser1;
+    private com.toedter.calendar.JDateChooser jDateChooser2;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel12;
+    private javax.swing.JPanel jPanel13;
+    private javax.swing.JPanel jPanel15;
+    private javax.swing.JPanel jPanel16;
+    private javax.swing.JPanel jPanel19;
+    private javax.swing.JPanel jPanel20;
+    private javax.swing.JPanel jPanel21;
+    private javax.swing.JPanel jPanel22;
+    private javax.swing.JPanel jPanel23;
+    private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel8;
+    private javax.swing.JRadioButton jRadioButton1;
+    private javax.swing.JRadioButton jRadioButton2;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JTable jTableServicios;
+    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField jTextField2;
+    private javax.swing.JTextArea jTxtAccesorios;
+    private javax.swing.JTextArea jTxtObservaciones;
+    private javax.swing.JTextArea jTxtReporte;
+    private javax.swing.JLabel label1;
+    private javax.swing.JLabel label10;
+    private javax.swing.JLabel label11;
+    private javax.swing.JLabel label12;
+    private javax.swing.JLabel label13;
+    private javax.swing.JLabel label14;
+    private javax.swing.JLabel label2;
+    private javax.swing.JLabel label4;
+    private javax.swing.JLabel label5;
+    private javax.swing.JLabel label6;
+    private javax.swing.JLabel label7;
+    private javax.swing.JLabel label8;
+    private javax.swing.JLabel label9;
+    private javax.swing.JTextField modelo;
+    private javax.swing.JPanel num;
+    private javax.swing.JTextField numOS;
     // End of variables declaration//GEN-END:variables
 }

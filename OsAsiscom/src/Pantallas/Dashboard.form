@@ -239,7 +239,7 @@
                   <Color blue="ff" green="ff" red="ff" type="rgb"/>
                 </Property>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/Icons/os.png"/>
+                  <Image iconType="3" name="/Icons/icons8_bill_32px.png"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Ordenes de servicio"/>
                 <Property name="horizontalAlignment" type="int" value="2"/>
@@ -295,7 +295,7 @@
                   <Color blue="ff" green="ff" red="ff" type="rgb"/>
                 </Property>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/Icons/estado.png"/>
+                  <Image iconType="3" name="/Icons/icons8_true_false_32px_1.png"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Estado de ordenes de servicio"/>
                 <Property name="horizontalAlignment" type="int" value="2"/>
@@ -393,7 +393,7 @@
         <Container class="javax.swing.JPanel" name="Escritorio">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="3c" green="34" red="2e" type="rgb"/>
+              <Color blue="66" green="66" red="66" type="rgb"/>
             </Property>
           </Properties>
           <Constraints>
@@ -406,9 +406,9 @@
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="329" max="-2" attributes="0"/>
-                      <Component id="iconLogo" min="-2" pref="483" max="-2" attributes="0"/>
-                      <EmptySpace pref="514" max="32767" attributes="0"/>
+                      <EmptySpace min="-2" pref="323" max="-2" attributes="0"/>
+                      <Component id="iconLogo" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace pref="503" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>

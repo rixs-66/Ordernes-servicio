@@ -153,7 +153,7 @@ public class Dashboard extends javax.swing.JFrame {
         btOs.setBackground(new java.awt.Color(80, 34, 34));
         btOs.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
         btOs.setForeground(new java.awt.Color(255, 255, 255));
-        btOs.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/os.png"))); // NOI18N
+        btOs.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/icons8_bill_32px.png"))); // NOI18N
         btOs.setText("Ordenes de servicio");
         btOs.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         btOs.setIconTextGap(50);
@@ -184,7 +184,7 @@ public class Dashboard extends javax.swing.JFrame {
         btnEstadoOs1.setBackground(new java.awt.Color(80, 34, 34));
         btnEstadoOs1.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
         btnEstadoOs1.setForeground(new java.awt.Color(255, 255, 255));
-        btnEstadoOs1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/estado.png"))); // NOI18N
+        btnEstadoOs1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/icons8_true_false_32px_1.png"))); // NOI18N
         btnEstadoOs1.setText("Estado de ordenes de servicio");
         btnEstadoOs1.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         btnEstadoOs1.setIconTextGap(30);
@@ -280,7 +280,7 @@ public class Dashboard extends javax.swing.JFrame {
 
         background.add(bar, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1646, 40));
 
-        Escritorio.setBackground(new java.awt.Color(46, 52, 60));
+        Escritorio.setBackground(new java.awt.Color(102, 102, 102));
 
         iconLogo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/logo.png"))); // NOI18N
 
@@ -289,9 +289,9 @@ public class Dashboard extends javax.swing.JFrame {
         EscritorioLayout.setHorizontalGroup(
             EscritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(EscritorioLayout.createSequentialGroup()
-                .addGap(329, 329, 329)
-                .addComponent(iconLogo, javax.swing.GroupLayout.PREFERRED_SIZE, 483, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(514, Short.MAX_VALUE))
+                .addGap(323, 323, 323)
+                .addComponent(iconLogo)
+                .addContainerGap(503, Short.MAX_VALUE))
         );
         EscritorioLayout.setVerticalGroup(
             EscritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

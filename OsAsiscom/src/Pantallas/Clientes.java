@@ -31,6 +31,7 @@ public class Clientes extends javax.swing.JInternalFrame {
         ui.setNorthPane(null);
         conexion = conexionS.conn();
         mostrarDatos();
+        System.out.println("hola mudno");
 
     }
 
@@ -119,20 +120,20 @@ public class Clientes extends javax.swing.JInternalFrame {
 
         jLabel1.setFont(new java.awt.Font("Roboto", 0, 24)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/user3.png"))); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/clientes.png"))); // NOI18N
         jLabel1.setText("CLIENTES");
         jLabel1.setFocusable(false);
         jLabel1.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
-        jLabel1.setIconTextGap(50);
+        jLabel1.setIconTextGap(10);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(496, 496, 496)
+                .addGap(588, 588, 588)
                 .addComponent(jLabel1)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(587, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
