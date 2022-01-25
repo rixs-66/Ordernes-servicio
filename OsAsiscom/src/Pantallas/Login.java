@@ -11,7 +11,7 @@ import javax.swing.ImageIcon;
 import java.sql.*;
 import javax.sound.sampled.AudioSystem;
 import javax.swing.JOptionPane;
-import server.conexionS;
+import clases.conexionS;
 import javax.sound.sampled.Clip;
 
 /**
@@ -32,6 +32,7 @@ public class Login extends javax.swing.JFrame {
             clip = AudioSystem.getClip();
             clip.open(AudioSystem.getAudioInputStream(getClass().getResource(ruta + archivo + ".wav")));
             clip.start();
+            
         } catch (Exception e) {
         }
 
@@ -66,7 +67,7 @@ public class Login extends javax.swing.JFrame {
                     this.dispose();
                     conexion.close();
                     
-                } else if (validarLogin.equals("Tecnico")) {
+                } else if (validarLogin.equals("Técnico")) {
                     audio("bells");
                     JOptionPane.showMessageDialog(null, "Bienvenido " + usuario);
                     Dashboard principal = new Dashboard();
@@ -90,6 +91,12 @@ public class Login extends javax.swing.JFrame {
 
     public Login() {
         initComponents();
+        
+        try {
+            setIconImage(new ImageIcon(getClass().getResource("../icons/logo.png")).getImage());
+        } catch (Exception e) {
+        }
+
 
         ImageIcon imgUser = new ImageIcon("src/Icons/user.png");
         Icon iconUser = new ImageIcon(imgUser.getImage().getScaledInstance(

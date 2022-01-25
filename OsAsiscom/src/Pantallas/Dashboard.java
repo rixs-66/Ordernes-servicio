@@ -7,10 +7,12 @@ package Pantallas;
 
 
 
+import java.awt.Image;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
 /**
@@ -39,7 +41,10 @@ public class Dashboard extends javax.swing.JFrame {
     public Dashboard() {
         initComponents();
         
-       
+        try {
+            setIconImage(new ImageIcon(getClass().getResource("../icons/logo.png")).getImage());
+        } catch (Exception e) {
+        }
 
 
         DateTimeFormatter dtf5 = DateTimeFormatter.ofPattern("dd/MM/yyyy hh:mm");
@@ -354,8 +359,10 @@ public class Dashboard extends javax.swing.JFrame {
 
     private void btnAcercaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAcercaActionPerformed
         // TODO add your handling code here:
-        Acerca acerca = new Acerca();
+        
+        Acerca acerca = new Acerca();        
         acerca.setVisible(true);
+
     }//GEN-LAST:event_btnAcercaActionPerformed
 
     private void btnClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClientesActionPerformed
@@ -410,7 +417,7 @@ public class Dashboard extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JPanel Escritorio;
+    public javax.swing.JPanel Escritorio;
     private javax.swing.JPanel background;
     private javax.swing.JPanel bar;
     private javax.swing.JButton btOs;

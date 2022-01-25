@@ -7,7 +7,7 @@ package Pantallas;
 
 import java.sql.*;
 import javax.swing.JOptionPane;
-import server.conexionS;
+import clases.conexionS;
 
 public class RegistroUser extends javax.swing.JFrame {
 
@@ -18,6 +18,7 @@ public class RegistroUser extends javax.swing.JFrame {
     public RegistroUser() {
 
         initComponents();
+       
 
         conexion = conexionS.conn();
     }

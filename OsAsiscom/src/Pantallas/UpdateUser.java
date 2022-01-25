@@ -7,7 +7,7 @@ package Pantallas;
 
 import java.sql.*;
 import javax.swing.JOptionPane;
-import server.conexionS;
+import clases.conexionS;
 
 public class UpdateUser extends javax.swing.JFrame {
     

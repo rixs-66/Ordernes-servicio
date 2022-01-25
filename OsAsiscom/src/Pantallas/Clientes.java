@@ -6,7 +6,7 @@
 package Pantallas;
 
 import javax.swing.plaf.basic.BasicInternalFrameUI;
-import server.conexionS;
+import clases.conexionS;
 import java.sql.*;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -31,7 +31,7 @@ public class Clientes extends javax.swing.JInternalFrame {
         ui.setNorthPane(null);
         conexion = conexionS.conn();
         mostrarDatos();
-        System.out.println("hola mudno");
+        
 
     }
 

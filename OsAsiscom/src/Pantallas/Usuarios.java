@@ -6,7 +6,7 @@
 package Pantallas;
 
 import javax.swing.plaf.basic.BasicInternalFrameUI;
-import server.conexionS;
+import clases.conexionS;
 import java.sql.*;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -32,6 +32,17 @@ public class Usuarios extends javax.swing.JInternalFrame {
         conexion = conexionS.conn();
         mostrarDatos();
 
+    }
+
+    private void Resetear() {
+
+        String sql = "ALTER TABLE empleados AUTO_INCREMENT = 0";
+        try {
+            Statement leer = conexion.createStatement();
+            rs = leer.executeQuery(sql);
+            System.out.println("hola mundo");
+        } catch (Exception e) {
+        }
     }
 
     private void mostrarDatos() {
@@ -71,15 +82,15 @@ public class Usuarios extends javax.swing.JInternalFrame {
     }
 
     private void Delete() {
-        int confirmar = JOptionPane.showConfirmDialog(null, "¿Desea eliminar al empleado "+ nombre,"Atención" , JOptionPane.YES_NO_OPTION);
+        int confirmar = JOptionPane.showConfirmDialog(null, "¿Desea eliminar al empleado " + nombre, "Atención", JOptionPane.YES_NO_OPTION);
         if (confirmar == JOptionPane.YES_OPTION) {
             String sql = "delete from empleados where id=?";
             try {
                 pst = conexion.prepareStatement(sql);
-                pst.setString(1,id);
+                pst.setString(1, id);
                 pst.executeUpdate();
                 mostrarDatos();
-                
+
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(null, e);
             }
@@ -265,8 +276,10 @@ public class Usuarios extends javax.swing.JInternalFrame {
 
     private void btnRegistroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistroActionPerformed
         // TODO add your handling code here:
+        Resetear();
         RegistroUser registroUser = new RegistroUser();
         registroUser.setVisible(true);
+
     }//GEN-LAST:event_btnRegistroActionPerformed
 
     private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
@@ -287,6 +300,8 @@ public class Usuarios extends javax.swing.JInternalFrame {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
         mostrarDatos();
+
+
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
