@@ -5,23 +5,21 @@
  */
 package Pantallas;
 
-import static Pantallas.Clientes.tbClientes;
 import javax.swing.plaf.basic.BasicInternalFrameUI;
 import clases.conexionS;
 import java.sql.*;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import clases.*;
+import java.util.Date;
 import java.awt.Color;
-import java.util.ArrayList;
-import java.util.Iterator;
 
 /**
  *
  * @author rica_
  */
 public class Os extends javax.swing.JInternalFrame {
-    
+
     Connection conexion = null;
     PreparedStatement pst = null;
     ResultSet rs = null;
@@ -32,71 +30,70 @@ public class Os extends javax.swing.JInternalFrame {
      */
     public Os() {
         initComponents();
-        
+        Contraseña.setEnabled(false);
+        txtAccerosorios.setEnabled(false);
+
         this.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 0, 0));
         BasicInternalFrameUI ui = (BasicInternalFrameUI) this.getUI();
         ui.setNorthPane(null);
         conexion = conexionS.conn();
-        jTxtAccesorios.setLineWrap(true);
-        jTxtAccesorios.setWrapStyleWord(true);
+        txtAccerosorios.setLineWrap(true);
+        txtAccerosorios.setWrapStyleWord(true);
         jTxtObservaciones.setLineWrap(true);
         jTxtObservaciones.setWrapStyleWord(true);
-        
-        CambiarEstatus();        
+
+        CambiarEstatus();
         cargarCombobox();
         MostrarServicios();
     }
-    
+
     private void cargarCombobox() {
-        
+
         cbTecnicos cb = new cbTecnicos();
         cbTecnico.setModel(cb.getvalues());
-        
+
         cbServicios cb2 = new cbServicios();
         cbServicios.setModel(cb2.getvalues());
     }
-    
+
     private void MostrarServicios() {
-        
+
         tServicios.addColumn("Servicio");
         tServicios.addColumn("Costo");
         jTableServicios.setModel(tServicios);
-        
+
     }
-    
-    private void SumarDatos(){
-        
+
+    private void SumarDatos() {
+
         int aux = jTableServicios.getRowCount();
-        int suma= 0;
-        
-        
+        int suma = 0;
+
         for (int i = 0; i < aux; i++) {
             suma += Integer.parseInt(jTableServicios.getValueAt(i, 1).toString());
-            
-            
+
         }
         Total.setText(String.valueOf(suma));
     }
-    
+
     private void CambiarEstatus() {
-        
+
         if (Estatus.getText() == "Asignado") {
             Estatus.setBackground(new Color(36, 113, 163));
-            
+
         } else if (Estatus.getText() == "Sin Asignar") {
             Estatus.setBackground(Color.red);
         }
-        
+
         if (Pago.getText() == "No Pagado") {
             Pago.setBackground(Color.red);
-        }  
-        else if (Pago.getText() == "Pagado") {
+        } else if (Pago.getText() == "Pagado") {
             Pago.setBackground(new Color(0, 184, 33));
-            
-        }else if (Pago.getText() == "Estatus Pago"){
+
+        } else if (Pago.getText() == "Estatus Pago") {
             Pago.setBackground(Color.GRAY);
         }
-        
+
     }
 
     /**
@@ -121,10 +118,10 @@ public class Os extends javax.swing.JInternalFrame {
         label5 = new javax.swing.JLabel();
         label6 = new javax.swing.JLabel();
         numOS = new javax.swing.JTextField();
-        jDateChooser1 = new com.toedter.calendar.JDateChooser();
-        jDateChooser2 = new com.toedter.calendar.JDateChooser();
         EmitidaPor = new javax.swing.JTextField();
         cbTecnico = new javax.swing.JComboBox<>();
+        Salida = new com.toedter.calendar.JDateChooser();
+        ingreso1 = new com.toedter.calendar.JDateChooser();
         DatosClientes = new javax.swing.JPanel();
         jPanel21 = new javax.swing.JPanel();
         jLabel14 = new javax.swing.JLabel();
@@ -161,7 +158,7 @@ public class Os extends javax.swing.JInternalFrame {
         jPanel20 = new javax.swing.JPanel();
         jLabel12 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTxtAccesorios = new javax.swing.JTextArea();
+        txtAccerosorios = new javax.swing.JTextArea();
         jLabel2 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         Contraseña = new javax.swing.JTextField();
@@ -257,10 +254,6 @@ public class Os extends javax.swing.JInternalFrame {
         });
         DatosGenereales.add(numOS, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 50, 170, -1));
 
-        jDateChooser1.setDateFormatString("DD/MM/YYY\n");
-        DatosGenereales.add(jDateChooser1, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 80, 170, -1));
-        DatosGenereales.add(jDateChooser2, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 110, 170, -1));
-
         EmitidaPor.setFont(new java.awt.Font("Roboto", 0, 11)); // NOI18N
         DatosGenereales.add(EmitidaPor, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 140, 170, -1));
 
@@ -276,6 +269,12 @@ public class Os extends javax.swing.JInternalFrame {
             }
         });
         DatosGenereales.add(cbTecnico, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 170, 170, -1));
+
+        Salida.setDateFormatString("d/ MM/y");
+        DatosGenereales.add(Salida, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 110, 170, -1));
+
+        ingreso1.setDateFormatString("d/ MM/y");
+        DatosGenereales.add(ingreso1, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 80, 170, -1));
 
         DatosClientes.setBackground(new java.awt.Color(153, 153, 153));
         DatosClientes.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -370,6 +369,11 @@ public class Os extends javax.swing.JInternalFrame {
         SeleccionarCliente.setFont(new java.awt.Font("Roboto", 0, 11)); // NOI18N
         SeleccionarCliente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/icons8_checklist_24px.png"))); // NOI18N
         SeleccionarCliente.setText("Seleccionar");
+        SeleccionarCliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                SeleccionarClienteActionPerformed(evt);
+            }
+        });
         DatosClientes.add(SeleccionarCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 170, 130, 30));
 
         DatosEquipo.setBackground(new java.awt.Color(153, 153, 153));
@@ -404,7 +408,7 @@ public class Os extends javax.swing.JInternalFrame {
         DatosEquipo.add(label11, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 140, -1, -1));
 
         jComboBox2.setFont(new java.awt.Font("Roboto", 0, 11)); // NOI18N
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "  ------------------------Selecciona un Dispositivo------------------------", "Laptop", "Proyector", "Impresora", "PC", "Tablet", "Monitor", "Teclado", "Plotter", "No Breaks", " " }));
+        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "  ------------------------Selecciona un Dispositivo------------------------", "Laptop", "Proyector", "Impresora", "PC", "Tablet", "Monitor", "Teclado", "Plotter", "No Breaks" }));
         jComboBox2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboBox2ActionPerformed(evt);
@@ -438,12 +442,22 @@ public class Os extends javax.swing.JInternalFrame {
         Si.setFont(new java.awt.Font("Roboto", 0, 11)); // NOI18N
         Si.setForeground(new java.awt.Color(255, 255, 255));
         Si.setText("SI");
+        Si.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                SiActionPerformed(evt);
+            }
+        });
         jPanel15.add(Si, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, 40, 30));
 
         buttonGroup1.add(No);
         No.setFont(new java.awt.Font("Roboto", 0, 11)); // NOI18N
         No.setForeground(new java.awt.Color(255, 255, 255));
         No.setText("No");
+        No.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                NoActionPerformed(evt);
+            }
+        });
         jPanel15.add(No, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 0, 40, 30));
 
         Accesorios.add(jPanel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 350, 30));
@@ -465,9 +479,9 @@ public class Os extends javax.swing.JInternalFrame {
 
         Accesorios.add(jPanel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 50, 350, 150));
 
-        jTxtAccesorios.setColumns(20);
-        jTxtAccesorios.setRows(5);
-        jScrollPane2.setViewportView(jTxtAccesorios);
+        txtAccerosorios.setColumns(20);
+        txtAccerosorios.setRows(5);
+        jScrollPane2.setViewportView(txtAccerosorios);
 
         Accesorios.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, 320, 70));
 
@@ -807,106 +821,152 @@ public class Os extends javax.swing.JInternalFrame {
             pst = conexion.prepareStatement(sql);
             pst.setString(1, cbServicios.getSelectedItem().toString());
             rs = pst.executeQuery();
-            
-            if (rs.next()) {                
-                
+
+            if (rs.next()) {
+
                 Costo.setText(rs.getString(1));
-                
+
             } else {
                 Costo.setText("");
             }
-            
+
         } catch (SQLException e) {
         }
-        
+
 
     }//GEN-LAST:event_cbServiciosItemStateChanged
 
     private void AgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AgregarActionPerformed
         // TODO add your handling code here:
-        
-        
-        String Dato[] = new String [2];
+
+        String Dato[] = new String[2];
         Dato[0] = cbServicios.getSelectedItem().toString();
         Dato[1] = Costo.getText();
         if (Dato[0] == "   ------Selecciona Servicio------" && Dato[1].isEmpty()) {
-            
-            JOptionPane.showMessageDialog(null,"Agregue un servicio");
-                        
-        }else{
-        tServicios.addRow(Dato);
-        
+
+            JOptionPane.showMessageDialog(null, "Agregue un servicio");
+
+        } else {
+            tServicios.addRow(Dato);
+
         }
         SumarDatos();
-        
-        
+
+
     }//GEN-LAST:event_AgregarActionPerformed
 
     private void EliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EliminarActionPerformed
         // TODO add your handling code here:
         int FilaSelect = jTableServicios.getSelectedRow();
-        
+
         if (FilaSelect >= 0) {
-            tServicios.removeRow(FilaSelect);            
+            tServicios.removeRow(FilaSelect);
         }
         SumarDatos();
     }//GEN-LAST:event_EliminarActionPerformed
 
     private void cbTecnicoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbTecnicoItemStateChanged
         // TODO add your handling code here:
-        
+
         if (cbTecnico.getSelectedItem().toString() == "------Selecciona tecnico------") {
-            
+
             Estatus.setText("Sin Asignar");
-                        
-        }else{
+
+        } else {
             Estatus.setText("Asignado");
         }
-        
+
         CambiarEstatus();
     }//GEN-LAST:event_cbTecnicoItemStateChanged
 
     private void cbPagoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbPagoItemStateChanged
         // TODO add your handling code here:
-        
-      Pago.setText((cbPago.getSelectedItem().toString()));
-      CambiarEstatus();
+
+        Pago.setText((cbPago.getSelectedItem().toString()));
+        CambiarEstatus();
     }//GEN-LAST:event_cbPagoItemStateChanged
 
     private void AgregarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AgregarClienteActionPerformed
         // TODO add your handling code here:
-        
-        String sql = ("insert into clientes(nombre,direccion,telefono,correo)"
-                + "values(?,?,?,?)");
-        try {
-            if (Nombre.getText().isEmpty()
-                    || Correo.getText().isEmpty()
-                    || Telefono.getText().isEmpty()
-                    || Direccion.getText().isEmpty()) {
 
-                JOptionPane.showMessageDialog(null, "Campos obligatorios vacios");
+        String sql = "Select nombre from clientes where nombre=?";
+
+        try {
+            pst = conexion.prepareStatement(sql);
+            pst.setString(1, Nombre.getText());
+            rs = pst.executeQuery();
+
+            if (rs.next()) {
+                JOptionPane.showMessageDialog(null, "El cliente "
+                        + rs.getString(1) + " Ya esta registrado");
             } else {
 
-                pst = conexion.prepareStatement(sql);
-                pst.setString(1, Nombre.getText());
-                pst.setString(2, Correo.getText());
-                pst.setString(3, Direccion.getText());
-                pst.setString(4, Telefono.getText());
-                pst.executeUpdate();
-                
-                JOptionPane.showMessageDialog(null, "Cliente Agregado");
-                conexion.close();
-                
-                
-               
+                sql = ("insert into clientes(nombre,direccion,telefono,correo)"
+                        + "values(?,?,?,?)");
+                try {
+                    if (Nombre.getText().isEmpty()
+                            || Direccion.getText().isEmpty()
+                            || Telefono.getText().isEmpty()
+                            || Correo.getText().isEmpty()) {
+
+                        JOptionPane.showMessageDialog(null, "Campos obligatorios vacios");
+                    } else {
+
+                        pst = conexion.prepareStatement(sql);
+                        pst.setString(1, Nombre.getText());
+                        pst.setString(2, Correo.getText());
+                        pst.setString(3, Direccion.getText());
+                        pst.setString(4, Telefono.getText());
+                        pst.executeUpdate();
+
+                        JOptionPane.showMessageDialog(null, "Cliente agregado exitosamente");
+                    }
+
+                } catch (Exception e) {
+                    JOptionPane.showMessageDialog(null, e);
+                }
+
             }
 
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, e);
+
         }
-        
-        
+
+
     }//GEN-LAST:event_AgregarClienteActionPerformed
+
+    private void SeleccionarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SeleccionarClienteActionPerformed
+        // TODO add your handling code here:
+
+        TableClient tableclient = new TableClient();
+        tableclient.setVisible(true);
+    }//GEN-LAST:event_SeleccionarClienteActionPerformed
+
+    private void SiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SiActionPerformed
+        // TODO add your handling code here:
+
+        if (Si.isSelected()) {
+
+            Contraseña.setEnabled(true);
+            txtAccerosorios.setEnabled(true);
+
+        }
+    }//GEN-LAST:event_SiActionPerformed
+
+    private void NoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NoActionPerformed
+        // TODO add your handling code here:
+        if (No.isSelected()) {
+
+            Contraseña.setEnabled(false);
+            txtAccerosorios.setEnabled(false);
+            
+            Contraseña.setText("");
+            txtAccerosorios.setText("");
+            
+           
+
+        }
+    }//GEN-LAST:event_NoActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -915,12 +975,12 @@ public class Os extends javax.swing.JInternalFrame {
     private javax.swing.JButton AgregarCliente;
     private javax.swing.JPanel Banner;
     private javax.swing.JTextField Contraseña;
-    private javax.swing.JTextField Correo;
+    public static javax.swing.JTextField Correo;
     private javax.swing.JFormattedTextField Costo;
     private javax.swing.JPanel DatosClientes;
     private javax.swing.JPanel DatosEquipo;
     private javax.swing.JPanel DatosGenereales;
-    private javax.swing.JTextField Direccion;
+    public static javax.swing.JTextField Direccion;
     private javax.swing.JButton EditarOs;
     private javax.swing.JButton Eliminar;
     private javax.swing.JTextField EmitidaPor;
@@ -930,23 +990,23 @@ public class Os extends javax.swing.JInternalFrame {
     private javax.swing.JTextField Marca;
     private javax.swing.JTextField Modelo;
     private javax.swing.JRadioButton No;
-    private javax.swing.JTextField Nombre;
+    public static javax.swing.JTextField Nombre;
     private javax.swing.JButton NuevaOs;
     private javax.swing.JPanel Observaciones;
     private javax.swing.JLabel Pago;
     private javax.swing.JPanel ReporteCliente;
+    private com.toedter.calendar.JDateChooser Salida;
     private javax.swing.JButton SeleccionarCliente;
     private javax.swing.JPanel Servicios;
     private javax.swing.JRadioButton Si;
-    private javax.swing.JTextField Telefono;
+    public static javax.swing.JTextField Telefono;
     private javax.swing.JFormattedTextField Total;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JComboBox<String> cbPago;
     private javax.swing.JComboBox<String> cbServicios;
     private javax.swing.JComboBox<String> cbTecnico;
+    private com.toedter.calendar.JDateChooser ingreso1;
     private javax.swing.JComboBox<String> jComboBox2;
-    private com.toedter.calendar.JDateChooser jDateChooser1;
-    private com.toedter.calendar.JDateChooser jDateChooser2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -980,7 +1040,6 @@ public class Os extends javax.swing.JInternalFrame {
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JTable jTableServicios;
-    private javax.swing.JTextArea jTxtAccesorios;
     private javax.swing.JTextArea jTxtObservaciones;
     private javax.swing.JTextArea jTxtReporte;
     private javax.swing.JLabel label1;
@@ -999,5 +1058,6 @@ public class Os extends javax.swing.JInternalFrame {
     private javax.swing.JTextField modelo;
     private javax.swing.JPanel num;
     private javax.swing.JTextField numOS;
+    private javax.swing.JTextArea txtAccerosorios;
     // End of variables declaration//GEN-END:variables
 }

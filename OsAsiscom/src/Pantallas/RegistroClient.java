@@ -23,29 +23,49 @@ public class RegistroClient extends javax.swing.JFrame {
     }
 
     private void insertar() {
-        String sql = ("insert into clientes(nombre,direccion,telefono,correo)"
-                + "values(?,?,?,?)");
-        try {
-            if (txtNombre.getText().isEmpty()
-                    || txtCorreo.getText().isEmpty()
-                    || txtTelefono.getText().isEmpty()
-                    || txtDireccion.getText().isEmpty()) {
 
-                JOptionPane.showMessageDialog(null, "Campos obligatorios vacios");
+        String sql = "Select nombre from clientes where nombre=?";
+
+        try {
+            pst = conexion.prepareStatement(sql);
+            pst.setString(1, txtNombre.getText());
+            rs = pst.executeQuery();
+
+            if (rs.next()) {
+                JOptionPane.showMessageDialog(null, "El cliente "
+                        + rs.getString(1) + " Ya esta registrado");
             } else {
 
-                pst = conexion.prepareStatement(sql);
-                pst.setString(1, txtNombre.getText());
-                pst.setString(2, txtCorreo.getText());
-                pst.setString(3, txtDireccion.getText());
-                pst.setString(4, txtTelefono.getText());
-                pst.executeUpdate();
-                dispose();
+                sql = ("insert into clientes(nombre,direccion,telefono,correo)"
+                        + "values(?,?,?,?)");
+                try {
+                    if (txtNombre.getText().isEmpty()
+                            || txtCorreo.getText().isEmpty()
+                            || txtTelefono.getText().isEmpty()
+                            || txtDireccion.getText().isEmpty()) {
+
+                        JOptionPane.showMessageDialog(null, "Campos obligatorios vacios");
+                    } else {
+
+                        pst = conexion.prepareStatement(sql);
+                        pst.setString(1, txtNombre.getText());
+                        pst.setString(2, txtCorreo.getText());
+                        pst.setString(3, txtDireccion.getText());
+                        pst.setString(4, txtTelefono.getText());
+                        pst.executeUpdate();
+                        dispose();
+                    }
+
+                } catch (Exception e) {
+                    JOptionPane.showMessageDialog(null, e);
+                }
+
             }
 
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, e);
+
         }
+
     }
 
     @SuppressWarnings("unchecked")
