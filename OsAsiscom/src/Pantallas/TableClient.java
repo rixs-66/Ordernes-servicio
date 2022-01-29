@@ -223,6 +223,8 @@ public class TableClient extends javax.swing.JFrame {
                 datos[1] = rs.getString(3);
                 datos[2] = rs.getString(4);
                 datos[3] = rs.getString(5);
+                
+                
 
                 tclientes.addRow(datos);
             }
@@ -253,6 +255,7 @@ public class TableClient extends javax.swing.JFrame {
         Os.Direccion.setText(Direccion);
         Os.Telefono.setText(Telefono);
         Os.Correo.setText(Correo);
+        dispose();
        
                 
     }//GEN-LAST:event_jButton2ActionPerformed

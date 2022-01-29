@@ -49,9 +49,9 @@ public class RegistroClient extends javax.swing.JFrame {
 
                         pst = conexion.prepareStatement(sql);
                         pst.setString(1, txtNombre.getText());
-                        pst.setString(2, txtCorreo.getText());
-                        pst.setString(3, txtDireccion.getText());
-                        pst.setString(4, txtTelefono.getText());
+                        pst.setString(2, txtDireccion.getText());
+                        pst.setString(3, txtTelefono.getText());
+                        pst.setString(4, txtCorreo.getText());
                         pst.executeUpdate();
                         dispose();
                     }

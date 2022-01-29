@@ -127,7 +127,7 @@ public class Usuarios extends javax.swing.JInternalFrame {
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel2.setBackground(new java.awt.Color(102, 102, 102));
-        jPanel2.setPreferredSize(new java.awt.Dimension(1326, 880));
+        jPanel2.setPreferredSize(new java.awt.Dimension(1326, 770));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel1.setPreferredSize(new java.awt.Dimension(1326, 40));
@@ -170,7 +170,7 @@ public class Usuarios extends javax.swing.JInternalFrame {
                 btnRegistroActionPerformed(evt);
             }
         });
-        jPanel2.add(btnRegistro, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 50, 440, 50));
+        jPanel2.add(btnRegistro, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 60, 400, 50));
 
         btnUpdate.setBackground(new java.awt.Color(80, 34, 34));
         btnUpdate.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
@@ -186,7 +186,7 @@ public class Usuarios extends javax.swing.JInternalFrame {
                 btnUpdateActionPerformed(evt);
             }
         });
-        jPanel2.add(btnUpdate, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 50, 440, 50));
+        jPanel2.add(btnUpdate, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 60, 400, 50));
 
         btnDelete.setBackground(new java.awt.Color(80, 34, 34));
         btnDelete.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
@@ -202,7 +202,7 @@ public class Usuarios extends javax.swing.JInternalFrame {
                 btnDeleteActionPerformed(evt);
             }
         });
-        jPanel2.add(btnDelete, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, 50, 440, 50));
+        jPanel2.add(btnDelete, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 60, 400, 50));
 
         tbEmpleados = new javax.swing.JTable(){
             public boolean isCellEditable(int rowIndex, int colIndex){
@@ -239,7 +239,7 @@ public class Usuarios extends javax.swing.JInternalFrame {
         });
         jScrollPane1.setViewportView(tbEmpleados);
 
-        jPanel2.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 180, 1270, 660));
+        jPanel2.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 180, 1270, 570));
 
         btnBuscar.setText("Buscar");
         btnBuscar.addActionListener(new java.awt.event.ActionListener() {
@@ -272,7 +272,7 @@ public class Usuarios extends javax.swing.JInternalFrame {
 
         getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
-        setBounds(0, 0, 1326, 880);
+        setBounds(0, 0, 1326, 799);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnRegistroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistroActionPerformed

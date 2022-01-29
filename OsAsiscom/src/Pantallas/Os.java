@@ -11,8 +11,9 @@ import java.sql.*;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import clases.*;
-import java.util.Date;
+import Pantallas.*;
 import java.awt.Color;
+import javax.swing.JTextField;
 
 /**
  *
@@ -56,6 +57,10 @@ public class Os extends javax.swing.JInternalFrame {
         cbServicios.setModel(cb2.getvalues());
     }
 
+    private void insertarOs() {
+
+    }
+
     private void MostrarServicios() {
 
         tServicios.addColumn("Servicio");
@@ -73,7 +78,15 @@ public class Os extends javax.swing.JInternalFrame {
             suma += Integer.parseInt(jTableServicios.getValueAt(i, 1).toString());
 
         }
-        Total.setText(String.valueOf(suma));
+        System.out.println(suma);
+
+        if (suma == 0) {
+
+            Total.setText("");
+
+        } else {
+            Total.setText(String.valueOf(suma));
+        }
     }
 
     private void CambiarEstatus() {
@@ -109,6 +122,8 @@ public class Os extends javax.swing.JInternalFrame {
         jPanel1 = new javax.swing.JPanel();
         Banner = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
+        NuevaOs = new javax.swing.JButton();
+        EditarOs = new javax.swing.JButton();
         DatosGenereales = new javax.swing.JPanel();
         jPanel8 = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
@@ -121,7 +136,7 @@ public class Os extends javax.swing.JInternalFrame {
         EmitidaPor = new javax.swing.JTextField();
         cbTecnico = new javax.swing.JComboBox<>();
         Salida = new com.toedter.calendar.JDateChooser();
-        ingreso1 = new com.toedter.calendar.JDateChooser();
+        ingreso = new com.toedter.calendar.JDateChooser();
         DatosClientes = new javax.swing.JPanel();
         jPanel21 = new javax.swing.JPanel();
         jLabel14 = new javax.swing.JLabel();
@@ -145,10 +160,10 @@ public class Os extends javax.swing.JInternalFrame {
         label12 = new javax.swing.JLabel();
         label14 = new javax.swing.JLabel();
         label11 = new javax.swing.JLabel();
-        jComboBox2 = new javax.swing.JComboBox<>();
+        cbDispositivo = new javax.swing.JComboBox<>();
         Marca = new javax.swing.JTextField();
         Modelo = new javax.swing.JTextField();
-        modelo = new javax.swing.JTextField();
+        numSerie = new javax.swing.JTextField();
         Accesorios = new javax.swing.JPanel();
         jPanel15 = new javax.swing.JPanel();
         jLabel11 = new javax.swing.JLabel();
@@ -168,7 +183,7 @@ public class Os extends javax.swing.JInternalFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTxtObservaciones = new javax.swing.JTextArea();
         ReporteCliente = new javax.swing.JPanel();
-        num = new javax.swing.JPanel();
+        reporte = new javax.swing.JPanel();
         jLabel13 = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
         jTxtReporte = new javax.swing.JTextArea();
@@ -191,16 +206,14 @@ public class Os extends javax.swing.JInternalFrame {
         Pago = new javax.swing.JLabel();
         Total = new javax.swing.JFormattedTextField();
         cbPago = new javax.swing.JComboBox<>();
-        NuevaOs = new javax.swing.JButton();
         GuardarOs = new javax.swing.JButton();
-        EditarOs = new javax.swing.JButton();
 
         setMaximumSize(new java.awt.Dimension(1326, 880));
         setPreferredSize(new java.awt.Dimension(1326, 880));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel1.setBackground(new java.awt.Color(153, 153, 153));
-        jPanel1.setPreferredSize(new java.awt.Dimension(1326, 880));
+        jPanel1.setPreferredSize(new java.awt.Dimension(1326, 770));
 
         Banner.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -210,6 +223,31 @@ public class Os extends javax.swing.JInternalFrame {
         jLabel1.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         jLabel1.setIconTextGap(10);
         Banner.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 0, -1, 40));
+
+        NuevaOs.setFont(new java.awt.Font("Roboto", 0, 11)); // NOI18N
+        NuevaOs.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/icons8_add_24px_1.png"))); // NOI18N
+        NuevaOs.setText("Nuevo");
+        NuevaOs.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        NuevaOs.setPreferredSize(new java.awt.Dimension(75, 23));
+        NuevaOs.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                NuevaOsActionPerformed(evt);
+            }
+        });
+        Banner.add(NuevaOs, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 100, 27));
+
+        EditarOs.setFont(new java.awt.Font("Roboto", 0, 11)); // NOI18N
+        EditarOs.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/icons8_edit_24px.png"))); // NOI18N
+        EditarOs.setText("Editar");
+        EditarOs.setMaximumSize(new java.awt.Dimension(75, 23));
+        EditarOs.setMinimumSize(new java.awt.Dimension(75, 23));
+        EditarOs.setPreferredSize(new java.awt.Dimension(75, 23));
+        EditarOs.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                EditarOsActionPerformed(evt);
+            }
+        });
+        Banner.add(EditarOs, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 10, 110, 27));
 
         DatosGenereales.setBackground(new java.awt.Color(153, 153, 153));
         DatosGenereales.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -273,8 +311,8 @@ public class Os extends javax.swing.JInternalFrame {
         Salida.setDateFormatString("d/ MM/y");
         DatosGenereales.add(Salida, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 110, 170, -1));
 
-        ingreso1.setDateFormatString("d/ MM/y");
-        DatosGenereales.add(ingreso1, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 80, 170, -1));
+        ingreso.setDateFormatString("d/ MM/y");
+        DatosGenereales.add(ingreso, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 80, 170, -1));
 
         DatosClientes.setBackground(new java.awt.Color(153, 153, 153));
         DatosClientes.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -407,23 +445,23 @@ public class Os extends javax.swing.JInternalFrame {
         label11.setText("N° Serie");
         DatosEquipo.add(label11, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 140, -1, -1));
 
-        jComboBox2.setFont(new java.awt.Font("Roboto", 0, 11)); // NOI18N
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "  ------------------------Selecciona un Dispositivo------------------------", "Laptop", "Proyector", "Impresora", "PC", "Tablet", "Monitor", "Teclado", "Plotter", "No Breaks" }));
-        jComboBox2.addActionListener(new java.awt.event.ActionListener() {
+        cbDispositivo.setFont(new java.awt.Font("Roboto", 0, 11)); // NOI18N
+        cbDispositivo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "  ------------------------Selecciona un Dispositivo------------------------", "Laptop", "Proyector", "Impresora", "PC", "Tablet", "Monitor", "Teclado", "Plotter", "No Breaks" }));
+        cbDispositivo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox2ActionPerformed(evt);
+                cbDispositivoActionPerformed(evt);
             }
         });
-        DatosEquipo.add(jComboBox2, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 50, 310, -1));
+        DatosEquipo.add(cbDispositivo, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 50, 310, -1));
         DatosEquipo.add(Marca, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 80, 310, -1));
         DatosEquipo.add(Modelo, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 110, 310, -1));
 
-        modelo.addActionListener(new java.awt.event.ActionListener() {
+        numSerie.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                modeloActionPerformed(evt);
+                numSerieActionPerformed(evt);
             }
         });
-        DatosEquipo.add(modelo, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 140, 310, -1));
+        DatosEquipo.add(numSerie, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 140, 310, -1));
 
         Accesorios.setBackground(new java.awt.Color(153, 153, 153));
         Accesorios.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -519,16 +557,16 @@ public class Os extends javax.swing.JInternalFrame {
         ReporteCliente.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         ReporteCliente.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        num.setBackground(new java.awt.Color(80, 34, 34));
-        num.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        num.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        reporte.setBackground(new java.awt.Color(80, 34, 34));
+        reporte.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        reporte.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel13.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
         jLabel13.setForeground(new java.awt.Color(255, 255, 255));
         jLabel13.setText("REPORTE CLIENTE");
-        num.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 0, -1, 30));
+        reporte.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 0, -1, 30));
 
-        ReporteCliente.add(num, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1280, 30));
+        ReporteCliente.add(reporte, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1280, 30));
 
         jTxtReporte.setColumns(20);
         jTxtReporte.setRows(5);
@@ -565,7 +603,7 @@ public class Os extends javax.swing.JInternalFrame {
         ));
         jScrollPane4.setViewportView(jTableServicios);
 
-        Servicios.add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 80, 910, 110));
+        Servicios.add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 70, 910, 80));
 
         cbServicios.setFont(new java.awt.Font("Roboto", 0, 11)); // NOI18N
         cbServicios.addItemListener(new java.awt.event.ItemListener() {
@@ -578,11 +616,11 @@ public class Os extends javax.swing.JInternalFrame {
                 cbServiciosActionPerformed(evt);
             }
         });
-        Servicios.add(cbServicios, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 60, 210, -1));
+        Servicios.add(cbServicios, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 40, 210, -1));
 
         jLabel6.setFont(new java.awt.Font("Roboto", 1, 18)); // NOI18N
         jLabel6.setText("Costo    $");
-        Servicios.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 60, 80, 20));
+        Servicios.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 40, 80, 20));
 
         Agregar.setFont(new java.awt.Font("Roboto", 0, 11)); // NOI18N
         Agregar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/icons8_add_24px_1.png"))); // NOI18N
@@ -592,11 +630,11 @@ public class Os extends javax.swing.JInternalFrame {
                 AgregarActionPerformed(evt);
             }
         });
-        Servicios.add(Agregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 60, 110, 20));
+        Servicios.add(Agregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 40, 110, 20));
 
         jLabel10.setFont(new java.awt.Font("Roboto", 1, 14)); // NOI18N
         jLabel10.setText("Seleccionar Servicio a realizar ");
-        Servicios.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, -1, -1));
+        Servicios.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 40, -1, -1));
 
         Costo.setEditable(false);
         Costo.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("###.00"))));
@@ -605,7 +643,7 @@ public class Os extends javax.swing.JInternalFrame {
                 CostoActionPerformed(evt);
             }
         });
-        Servicios.add(Costo, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 50, 150, 30));
+        Servicios.add(Costo, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 30, 150, 30));
 
         Eliminar.setFont(new java.awt.Font("Roboto", 0, 11)); // NOI18N
         Eliminar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/icons8_cancel_24px.png"))); // NOI18N
@@ -615,7 +653,7 @@ public class Os extends javax.swing.JInternalFrame {
                 EliminarActionPerformed(evt);
             }
         });
-        Servicios.add(Eliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 60, 110, 20));
+        Servicios.add(Eliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 40, 110, 20));
 
         Importe.setBackground(new java.awt.Color(153, 153, 153));
         Importe.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -641,19 +679,19 @@ public class Os extends javax.swing.JInternalFrame {
         Estatus.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         Estatus.setText("Sin Asignar");
         Estatus.setOpaque(true);
-        Importe.add(Estatus, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 100, 120, 40));
+        Importe.add(Estatus, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 70, 120, 40));
 
         Pago.setFont(new java.awt.Font("Roboto", 1, 14)); // NOI18N
         Pago.setForeground(new java.awt.Color(0, 0, 0));
         Pago.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         Pago.setText("Estatus Pago");
         Pago.setOpaque(true);
-        Importe.add(Pago, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 100, 120, 40));
+        Importe.add(Pago, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 70, 120, 40));
 
         Total.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#,###.00"))));
         Total.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         Total.setEnabled(false);
-        Importe.add(Total, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 40, 210, -1));
+        Importe.add(Total, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 40, 80, -1));
 
         cbPago.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Estatus Pago", "Pagado", "No Pagado" }));
         cbPago.addItemListener(new java.awt.event.ItemListener() {
@@ -661,50 +699,29 @@ public class Os extends javax.swing.JInternalFrame {
                 cbPagoItemStateChanged(evt);
             }
         });
-        Importe.add(cbPago, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 70, 120, -1));
-
-        NuevaOs.setFont(new java.awt.Font("Roboto", 0, 11)); // NOI18N
-        NuevaOs.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/icons8_add_24px_1.png"))); // NOI18N
-        NuevaOs.setText("Nuevo");
-        NuevaOs.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
-        NuevaOs.setPreferredSize(new java.awt.Dimension(75, 23));
-        NuevaOs.addActionListener(new java.awt.event.ActionListener() {
+        cbPago.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                NuevaOsActionPerformed(evt);
+                cbPagoActionPerformed(evt);
             }
         });
+        Importe.add(cbPago, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 40, 120, -1));
 
-        GuardarOs.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/icons8_save_24px.png"))); // NOI18N
-        GuardarOs.setText("Guardar ");
+        GuardarOs.setText("Guardar");
         GuardarOs.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 GuardarOsActionPerformed(evt);
             }
         });
-
-        EditarOs.setFont(new java.awt.Font("Roboto", 0, 11)); // NOI18N
-        EditarOs.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/icons8_edit_24px.png"))); // NOI18N
-        EditarOs.setText("Editar");
-        EditarOs.setMaximumSize(new java.awt.Dimension(75, 23));
-        EditarOs.setMinimumSize(new java.awt.Dimension(75, 23));
-        EditarOs.setPreferredSize(new java.awt.Dimension(75, 23));
-        EditarOs.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                EditarOsActionPerformed(evt);
-            }
-        });
+        Importe.add(GuardarOs, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 120, 250, -1));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(Banner, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(10, 10, 10)
+                .addGap(22, 22, 22)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(NuevaOs, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(10, 10, 10)
-                        .addComponent(EditarOs, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(DatosGenereales, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(20, 20, 20)
@@ -718,22 +735,15 @@ public class Os extends javax.swing.JInternalFrame {
                     .addComponent(ReporteCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(Servicios, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(20, 20, 20)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(Importe, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(GuardarOs, javax.swing.GroupLayout.PREFERRED_SIZE, 310, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addComponent(Banner, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(18, 18, 18)
+                        .addComponent(Importe, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(28, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addComponent(Banner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(EditarOs, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(NuevaOs, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(7, 7, 7)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(DatosGenereales, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(DatosClientes, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -745,17 +755,15 @@ public class Os extends javax.swing.JInternalFrame {
                 .addGap(10, 10, 10)
                 .addComponent(ReporteCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(10, 10, 10)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(Servicios, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(Importe, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(10, 10, 10)
-                        .addComponent(GuardarOs, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(Servicios, javax.swing.GroupLayout.DEFAULT_SIZE, 159, Short.MAX_VALUE)
+                    .addComponent(Importe, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(228, 228, 228))
         );
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1330, -1));
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1330, 770));
 
-        setBounds(0, 0, 1345, 880);
+        setBounds(0, 0, 1345, 801);
     }// </editor-fold>//GEN-END:initComponents
 
     private void CorreoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CorreoActionPerformed
@@ -778,12 +786,6 @@ public class Os extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_TelefonoActionPerformed
 
-    private void GuardarOsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GuardarOsActionPerformed
-        // TODO add your handling code here:
-
-
-    }//GEN-LAST:event_GuardarOsActionPerformed
-
     private void EditarOsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EditarOsActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_EditarOsActionPerformed
@@ -792,13 +794,13 @@ public class Os extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_cbTecnicoActionPerformed
 
-    private void jComboBox2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox2ActionPerformed
+    private void cbDispositivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbDispositivoActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBox2ActionPerformed
+    }//GEN-LAST:event_cbDispositivoActionPerformed
 
-    private void modeloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_modeloActionPerformed
+    private void numSerieActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_numSerieActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_modeloActionPerformed
+    }//GEN-LAST:event_numSerieActionPerformed
 
     private void cbServiciosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbServiciosActionPerformed
         // TODO add your handling code here:
@@ -810,6 +812,12 @@ public class Os extends javax.swing.JInternalFrame {
 
     private void NuevaOsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NuevaOsActionPerformed
         // TODO add your handling code here:
+        
+         
+      
+        
+        
+        
 
 
     }//GEN-LAST:event_NuevaOsActionPerformed
@@ -959,14 +967,114 @@ public class Os extends javax.swing.JInternalFrame {
 
             Contraseña.setEnabled(false);
             txtAccerosorios.setEnabled(false);
-            
+
             Contraseña.setText("");
             txtAccerosorios.setText("");
-            
-           
 
         }
     }//GEN-LAST:event_NoActionPerformed
+
+    private void cbPagoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbPagoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cbPagoActionPerformed
+
+    private void GuardarOsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GuardarOsActionPerformed
+        // TODO add your handling code here:
+
+        String sql = "Select NumOs from os where NumOs=?";
+
+        try {
+            pst = conexion.prepareStatement(sql);
+            pst.setString(1, numOS.getText());
+            rs = pst.executeQuery();
+
+            if (rs.next()) {
+                JOptionPane.showMessageDialog(null, "La orden Numero:  "
+                        + rs.getString(1) + " Ya esta registrado");
+            } else {
+
+                sql = ("insert into os (NumOs," //1
+                        + "FechaIngreso," //2
+                        + "FechaEntrega," //3
+                        + "EmitidaPor," //4 
+                        + "TecnicoAsignado,"//5
+                        + "NombreCliente,"//6
+                        + "DireccionCliente,"//7
+                        + "TelefonoCliente,"//8
+                        + "CorreoCliente,"//9
+                        + "TipoDispositivo,"//10
+                        + "MarcaDispositivo,"//11
+                        + "Modelo,"//12
+                        + "NumSerie,"//13
+                        + "Contraseña,"//14
+                        + "Accesorios,"//15
+                        + "Observaciones,"//16
+                        + "ReporteCliente,"//17
+                        + "Estatus,"//18
+                        + "EstatusPago,"//19
+                        + "Total)"//20
+                        + "values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
+
+                try {
+                    if (numOS.getText().isBlank()
+                            || EmitidaPor.getText().isEmpty()
+                            || cbTecnico.getSelectedItem().toString()
+                            == "------Selecciona tecnico------"
+                            || Nombre.getText().isEmpty()
+                            || Direccion.getText().isEmpty()
+                            || Telefono.getText().isEmpty()
+                            || Correo.getText().isEmpty()
+                            || cbDispositivo.getSelectedItem().toString()
+                            == "  ------------------------Selecciona un Dispositivo------------------------"
+                            || Marca.getText().isEmpty()
+                            || Modelo.getText().isEmpty()
+                            || numSerie.getText().isEmpty()
+                            || jTxtObservaciones.getText().isEmpty()
+                            || jTxtReporte.getText().isEmpty()
+                            || Total.getText().isEmpty()
+                            || cbPago.getSelectedItem().toString() == "Estatus Pago") {
+
+                        JOptionPane.showMessageDialog(null, "Campos obligatorios"
+                                + " vacios, favor de verificar los campos");
+                    } else {
+
+                        pst = conexion.prepareStatement(sql);
+                        pst.setString(1, numOS.getText());
+                        pst.setString(2, ((JTextField) ingreso.getDateEditor().getUiComponent()).getText());
+                        pst.setString(3, ((JTextField) Salida.getDateEditor().getUiComponent()).getText());
+                        pst.setString(4, EmitidaPor.getText());
+                        pst.setString(5, cbTecnico.getSelectedItem().toString());
+                        pst.setString(6, Nombre.getText());
+                        pst.setString(7, Direccion.getText());
+                        pst.setString(8, Telefono.getText());
+                        pst.setString(9, Correo.getText());
+                        pst.setString(10, cbDispositivo.getSelectedItem().toString());
+                        pst.setString(11, Marca.getText());
+                        pst.setString(12, Modelo.getText());
+                        pst.setString(13, numSerie.getText());
+                        pst.setString(14, Contraseña.getText());
+                        pst.setString(15, txtAccerosorios.getText());
+                        pst.setString(16, jTxtObservaciones.getText());
+                        pst.setString(17, jTxtReporte.getText());
+                        pst.setString(18, Estatus.getText());
+                        pst.setString(19, Pago.getText());
+                        pst.setString(20, Total.getText());
+                        pst.executeUpdate();
+
+                    }
+
+                } catch (Exception e) {
+                    JOptionPane.showMessageDialog(null, e);
+                }
+
+            }
+
+        } catch (Exception e) {
+
+        }
+
+
+    }//GEN-LAST:event_GuardarOsActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -1002,11 +1110,11 @@ public class Os extends javax.swing.JInternalFrame {
     public static javax.swing.JTextField Telefono;
     private javax.swing.JFormattedTextField Total;
     private javax.swing.ButtonGroup buttonGroup1;
+    private javax.swing.JComboBox<String> cbDispositivo;
     private javax.swing.JComboBox<String> cbPago;
     private javax.swing.JComboBox<String> cbServicios;
     private javax.swing.JComboBox<String> cbTecnico;
-    private com.toedter.calendar.JDateChooser ingreso1;
-    private javax.swing.JComboBox<String> jComboBox2;
+    private com.toedter.calendar.JDateChooser ingreso;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -1055,9 +1163,9 @@ public class Os extends javax.swing.JInternalFrame {
     private javax.swing.JLabel label7;
     private javax.swing.JLabel label8;
     private javax.swing.JLabel label9;
-    private javax.swing.JTextField modelo;
-    private javax.swing.JPanel num;
     private javax.swing.JTextField numOS;
+    private javax.swing.JTextField numSerie;
+    private javax.swing.JPanel reporte;
     private javax.swing.JTextArea txtAccerosorios;
     // End of variables declaration//GEN-END:variables
 }
