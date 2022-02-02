@@ -12,6 +12,7 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import clases.*;
 import Pantallas.*;
+import com.toedter.calendar.JDateChooser;
 import java.awt.Color;
 import javax.swing.JTextField;
 
@@ -25,6 +26,7 @@ public class Os extends javax.swing.JInternalFrame {
     PreparedStatement pst = null;
     ResultSet rs = null;
     DefaultTableModel tServicios = new DefaultTableModel();
+    int suma = 0;
 
     /**
      * Creates new form Os
@@ -57,8 +59,11 @@ public class Os extends javax.swing.JInternalFrame {
         cbServicios.setModel(cb2.getvalues());
     }
 
-    private void insertarOs() {
-
+    private void LimpiarTabla() {
+        for (int i = 0; i < tServicios.getRowCount(); i++) {
+            tServicios.removeRow(i);
+            i -= 1;
+        }
     }
 
     private void MostrarServicios() {
@@ -72,7 +77,7 @@ public class Os extends javax.swing.JInternalFrame {
     private void SumarDatos() {
 
         int aux = jTableServicios.getRowCount();
-        int suma = 0;
+        
 
         for (int i = 0; i < aux; i++) {
             suma += Integer.parseInt(jTableServicios.getValueAt(i, 1).toString());
@@ -311,7 +316,7 @@ public class Os extends javax.swing.JInternalFrame {
         Salida.setDateFormatString("d/ MM/y");
         DatosGenereales.add(Salida, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 110, 170, -1));
 
-        ingreso.setDateFormatString("d/ MM/y");
+        ingreso.setDateFormatString("dd/MM/y");
         DatosGenereales.add(ingreso, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 80, 170, -1));
 
         DatosClientes.setBackground(new java.awt.Color(153, 153, 153));
@@ -589,6 +594,11 @@ public class Os extends javax.swing.JInternalFrame {
 
         Servicios.add(jPanel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 950, 30));
 
+        jTableServicios = new javax.swing.JTable(){
+            public boolean isCellEditable(int rowIndex, int colIndex){
+                return false;
+            }
+        };
         jTableServicios.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
         jTableServicios.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -601,6 +611,8 @@ public class Os extends javax.swing.JInternalFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        jTableServicios.setFocusable(false);
+        jTableServicios.getTableHeader().setReorderingAllowed(false);
         jScrollPane4.setViewportView(jTableServicios);
 
         Servicios.add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 70, 910, 80));
@@ -686,6 +698,15 @@ public class Os extends javax.swing.JInternalFrame {
         Pago.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         Pago.setText("Estatus Pago");
         Pago.setOpaque(true);
+        Pago.addAncestorListener(new javax.swing.event.AncestorListener() {
+            public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
+                PagoAncestorAdded(evt);
+            }
+            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
+            }
+            public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
+            }
+        });
         Importe.add(Pago, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 70, 120, 40));
 
         Total.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#,###.00"))));
@@ -812,12 +833,30 @@ public class Os extends javax.swing.JInternalFrame {
 
     private void NuevaOsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NuevaOsActionPerformed
         // TODO add your handling code here:
-        
-         
-      
-        
-        
-        
+
+        numOS.setText("");
+        ingreso.setDate(null);
+        Salida.setDate(null);
+        EmitidaPor.setText("");
+        cbTecnico.setSelectedIndex(0);
+        Nombre.setText("");
+        Direccion.setText("");
+        Telefono.setText("");
+        Correo.setText("");
+        cbDispositivo.setSelectedIndex(0);
+        Marca.setText("");
+        Modelo.setText("");
+        numSerie.setText("");
+        Contraseña.setText("");
+        txtAccerosorios.setText("");
+        jTxtObservaciones.setText("");
+        jTxtReporte.setText("");
+        cbServicios.setSelectedIndex(0);
+        Costo.setText("");
+        LimpiarTabla();
+        suma = 0;
+        Total.setText("");
+        cbPago.setSelectedIndex(0);        
 
 
     }//GEN-LAST:event_NuevaOsActionPerformed
@@ -1040,8 +1079,8 @@ public class Os extends javax.swing.JInternalFrame {
 
                         pst = conexion.prepareStatement(sql);
                         pst.setString(1, numOS.getText());
-                        pst.setString(2, ((JTextField) ingreso.getDateEditor().getUiComponent()).getText());
-                        pst.setString(3, ((JTextField) Salida.getDateEditor().getUiComponent()).getText());
+                        pst.setString(2, ((JTextField)ingreso.getDateEditor().getUiComponent()).getText());
+                        pst.setString(3, ((JTextField)Salida.getDateEditor().getUiComponent()).getText());
                         pst.setString(4, EmitidaPor.getText());
                         pst.setString(5, cbTecnico.getSelectedItem().toString());
                         pst.setString(6, Nombre.getText());
@@ -1075,6 +1114,10 @@ public class Os extends javax.swing.JInternalFrame {
 
 
     }//GEN-LAST:event_GuardarOsActionPerformed
+
+    private void PagoAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_PagoAncestorAdded
+        // TODO add your handling code here:
+    }//GEN-LAST:event_PagoAncestorAdded
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
