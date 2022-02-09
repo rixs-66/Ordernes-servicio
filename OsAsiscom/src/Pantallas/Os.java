@@ -12,8 +12,8 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import clases.*;
 import Pantallas.*;
-import com.toedter.calendar.JDateChooser;
-import java.awt.Color;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JTextField;
 
 /**
@@ -35,6 +35,7 @@ public class Os extends javax.swing.JInternalFrame {
         initComponents();
         Contraseña.setEnabled(false);
         txtAccerosorios.setEnabled(false);
+        Actualizar.setEnabled(false);
 
         this.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 0, 0));
         BasicInternalFrameUI ui = (BasicInternalFrameUI) this.getUI();
@@ -44,73 +45,46 @@ public class Os extends javax.swing.JInternalFrame {
         txtAccerosorios.setWrapStyleWord(true);
         jTxtObservaciones.setLineWrap(true);
         jTxtObservaciones.setWrapStyleWord(true);
+        numOS.setEnabled(false);
+        agregarnumOS();
 
-        CambiarEstatus();
         cargarCombobox();
-        MostrarServicios();
+
+    }
+
+    private void agregarnumOS() {
+        String sql = "Select count(*) from os";
+
+        Statement leer;
+        try {
+            leer = conexion.createStatement();
+            rs = leer.executeQuery(sql);
+
+            if (rs.next()) {
+                int aux = Integer.parseInt(rs.getString(1));
+
+                aux += 1;
+
+                if (aux <= 9) {
+                    numOS.setText("A00" + aux);
+                } else if (aux >= 10 && aux <= 99) {
+                    numOS.setText("A0" + aux);
+                } else if (aux >= 100) {
+                    numOS.setText("A" + aux);
+                }
+
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(Os.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
     }
 
     private void cargarCombobox() {
 
         cbTecnicos cb = new cbTecnicos();
         cbTecnico.setModel(cb.getvalues());
-
-        cbServicios cb2 = new cbServicios();
-        cbServicios.setModel(cb2.getvalues());
-    }
-
-    private void LimpiarTabla() {
-        for (int i = 0; i < tServicios.getRowCount(); i++) {
-            tServicios.removeRow(i);
-            i -= 1;
-        }
-    }
-
-    private void MostrarServicios() {
-
-        tServicios.addColumn("Servicio");
-        tServicios.addColumn("Costo");
-        jTableServicios.setModel(tServicios);
-
-    }
-
-    private void SumarDatos() {
-
-        int aux = jTableServicios.getRowCount();
-        
-
-        for (int i = 0; i < aux; i++) {
-            suma += Integer.parseInt(jTableServicios.getValueAt(i, 1).toString());
-
-        }
-        System.out.println(suma);
-
-        if (suma == 0) {
-
-            Total.setText("");
-
-        } else {
-            Total.setText(String.valueOf(suma));
-        }
-    }
-
-    private void CambiarEstatus() {
-
-        if (Estatus.getText() == "Asignado") {
-            Estatus.setBackground(new Color(36, 113, 163));
-
-        } else if (Estatus.getText() == "Sin Asignar") {
-            Estatus.setBackground(Color.red);
-        }
-
-        if (Pago.getText() == "No Pagado") {
-            Pago.setBackground(Color.red);
-        } else if (Pago.getText() == "Pagado") {
-            Pago.setBackground(new Color(0, 184, 33));
-
-        } else if (Pago.getText() == "Estatus Pago") {
-            Pago.setBackground(Color.GRAY);
-        }
 
     }
 
@@ -128,7 +102,7 @@ public class Os extends javax.swing.JInternalFrame {
         Banner = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         NuevaOs = new javax.swing.JButton();
-        EditarOs = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
         DatosGenereales = new javax.swing.JPanel();
         jPanel8 = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
@@ -192,26 +166,10 @@ public class Os extends javax.swing.JInternalFrame {
         jLabel13 = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
         jTxtReporte = new javax.swing.JTextArea();
-        Servicios = new javax.swing.JPanel();
-        jPanel12 = new javax.swing.JPanel();
-        jLabel7 = new javax.swing.JLabel();
-        jScrollPane4 = new javax.swing.JScrollPane();
-        jTableServicios = new javax.swing.JTable();
-        cbServicios = new javax.swing.JComboBox<>();
-        jLabel6 = new javax.swing.JLabel();
-        Agregar = new javax.swing.JButton();
-        jLabel10 = new javax.swing.JLabel();
-        Costo = new javax.swing.JFormattedTextField();
-        Eliminar = new javax.swing.JButton();
-        Importe = new javax.swing.JPanel();
-        jPanel16 = new javax.swing.JPanel();
-        jLabel9 = new javax.swing.JLabel();
-        jLabel16 = new javax.swing.JLabel();
         Estatus = new javax.swing.JLabel();
         Pago = new javax.swing.JLabel();
-        Total = new javax.swing.JFormattedTextField();
-        cbPago = new javax.swing.JComboBox<>();
         GuardarOs = new javax.swing.JButton();
+        Actualizar = new javax.swing.JButton();
 
         setMaximumSize(new java.awt.Dimension(1326, 880));
         setPreferredSize(new java.awt.Dimension(1326, 880));
@@ -239,20 +197,17 @@ public class Os extends javax.swing.JInternalFrame {
                 NuevaOsActionPerformed(evt);
             }
         });
-        Banner.add(NuevaOs, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 100, 27));
+        Banner.add(NuevaOs, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, 100, 40));
 
-        EditarOs.setFont(new java.awt.Font("Roboto", 0, 11)); // NOI18N
-        EditarOs.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/icons8_edit_24px.png"))); // NOI18N
-        EditarOs.setText("Editar");
-        EditarOs.setMaximumSize(new java.awt.Dimension(75, 23));
-        EditarOs.setMinimumSize(new java.awt.Dimension(75, 23));
-        EditarOs.setPreferredSize(new java.awt.Dimension(75, 23));
-        EditarOs.addActionListener(new java.awt.event.ActionListener() {
+        jButton1.setFont(new java.awt.Font("Roboto", 0, 12)); // NOI18N
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/icons8_edit_24px.png"))); // NOI18N
+        jButton1.setText("Editar");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                EditarOsActionPerformed(evt);
+                jButton1ActionPerformed(evt);
             }
         });
-        Banner.add(EditarOs, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 10, 110, 27));
+        Banner.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 0, 100, 40));
 
         DatosGenereales.setBackground(new java.awt.Color(153, 153, 153));
         DatosGenereales.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -289,7 +244,7 @@ public class Os extends javax.swing.JInternalFrame {
         label6.setText("Tecnico asignado");
         DatosGenereales.add(label6, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 170, -1, -1));
 
-        numOS.setFont(new java.awt.Font("Roboto", 0, 11)); // NOI18N
+        numOS.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
         numOS.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 numOSActionPerformed(evt);
@@ -297,10 +252,10 @@ public class Os extends javax.swing.JInternalFrame {
         });
         DatosGenereales.add(numOS, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 50, 170, -1));
 
-        EmitidaPor.setFont(new java.awt.Font("Roboto", 0, 11)); // NOI18N
+        EmitidaPor.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
         DatosGenereales.add(EmitidaPor, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 140, 170, -1));
 
-        cbTecnico.setFont(new java.awt.Font("Roboto", 0, 11)); // NOI18N
+        cbTecnico.setFont(new java.awt.Font("Roboto", 0, 12)); // NOI18N
         cbTecnico.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 cbTecnicoItemStateChanged(evt);
@@ -313,10 +268,12 @@ public class Os extends javax.swing.JInternalFrame {
         });
         DatosGenereales.add(cbTecnico, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 170, 170, -1));
 
-        Salida.setDateFormatString("d/ MM/y");
+        Salida.setDateFormatString("dd/MM/y");
+        Salida.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
         DatosGenereales.add(Salida, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 110, 170, -1));
 
         ingreso.setDateFormatString("dd/MM/y");
+        ingreso.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
         DatosGenereales.add(ingreso, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 80, 170, -1));
 
         DatosClientes.setBackground(new java.awt.Color(153, 153, 153));
@@ -367,7 +324,7 @@ public class Os extends javax.swing.JInternalFrame {
         label10.setText("Teléfono");
         DatosClientes.add(label10, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 110, -1, -1));
 
-        Nombre.setFont(new java.awt.Font("Roboto", 0, 11)); // NOI18N
+        Nombre.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
         Nombre.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 NombreActionPerformed(evt);
@@ -375,7 +332,7 @@ public class Os extends javax.swing.JInternalFrame {
         });
         DatosClientes.add(Nombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 50, 170, -1));
 
-        Direccion.setFont(new java.awt.Font("Roboto", 0, 11)); // NOI18N
+        Direccion.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
         Direccion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 DireccionActionPerformed(evt);
@@ -383,7 +340,7 @@ public class Os extends javax.swing.JInternalFrame {
         });
         DatosClientes.add(Direccion, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 80, 170, -1));
 
-        Telefono.setFont(new java.awt.Font("Roboto", 0, 11)); // NOI18N
+        Telefono.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
         Telefono.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 TelefonoActionPerformed(evt);
@@ -391,7 +348,7 @@ public class Os extends javax.swing.JInternalFrame {
         });
         DatosClientes.add(Telefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 110, 170, -1));
 
-        Correo.setFont(new java.awt.Font("Roboto", 0, 11)); // NOI18N
+        Correo.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
         Correo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 CorreoActionPerformed(evt);
@@ -450,7 +407,7 @@ public class Os extends javax.swing.JInternalFrame {
         label11.setText("N° Serie");
         DatosEquipo.add(label11, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 140, -1, -1));
 
-        cbDispositivo.setFont(new java.awt.Font("Roboto", 0, 11)); // NOI18N
+        cbDispositivo.setFont(new java.awt.Font("Roboto", 0, 12)); // NOI18N
         cbDispositivo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "  ------------------------Selecciona un Dispositivo------------------------", "Laptop", "Proyector", "Impresora", "PC", "Tablet", "Monitor", "Teclado", "Plotter", "No Breaks" }));
         cbDispositivo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -458,9 +415,14 @@ public class Os extends javax.swing.JInternalFrame {
             }
         });
         DatosEquipo.add(cbDispositivo, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 50, 310, -1));
+
+        Marca.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
         DatosEquipo.add(Marca, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 80, 310, -1));
+
+        Modelo.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
         DatosEquipo.add(Modelo, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 110, 310, -1));
 
+        numSerie.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
         numSerie.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 numSerieActionPerformed(evt);
@@ -523,6 +485,7 @@ public class Os extends javax.swing.JInternalFrame {
         Accesorios.add(jPanel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 50, 350, 150));
 
         txtAccerosorios.setColumns(20);
+        txtAccerosorios.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
         txtAccerosorios.setRows(5);
         jScrollPane2.setViewportView(txtAccerosorios);
 
@@ -535,6 +498,8 @@ public class Os extends javax.swing.JInternalFrame {
         jLabel4.setFont(new java.awt.Font("Roboto", 1, 14)); // NOI18N
         jLabel4.setText("Contraseña");
         Accesorios.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 40, -1, -1));
+
+        Contraseña.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
         Accesorios.add(Contraseña, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 40, 170, -1));
 
         Observaciones.setBackground(new java.awt.Color(153, 153, 153));
@@ -553,6 +518,7 @@ public class Os extends javax.swing.JInternalFrame {
         Observaciones.add(jPanel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 910, 30));
 
         jTxtObservaciones.setColumns(20);
+        jTxtObservaciones.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
         jTxtObservaciones.setRows(5);
         jScrollPane1.setViewportView(jTxtObservaciones);
 
@@ -574,129 +540,23 @@ public class Os extends javax.swing.JInternalFrame {
         ReporteCliente.add(reporte, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1280, 30));
 
         jTxtReporte.setColumns(20);
+        jTxtReporte.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
         jTxtReporte.setRows(5);
         jScrollPane3.setViewportView(jTxtReporte);
 
         ReporteCliente.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 40, 1260, 110));
-
-        Servicios.setBackground(new java.awt.Color(153, 153, 153));
-        Servicios.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        Servicios.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jPanel12.setBackground(new java.awt.Color(80, 34, 34));
-        jPanel12.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        jPanel12.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel7.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
-        jLabel7.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel7.setText("SERVICIOS");
-        jPanel12.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 0, -1, 30));
-
-        Servicios.add(jPanel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 950, 30));
-
-        jTableServicios = new javax.swing.JTable(){
-            public boolean isCellEditable(int rowIndex, int colIndex){
-                return false;
-            }
-        };
-        jTableServicios.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
-        jTableServicios.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
-        jTableServicios.setFocusable(false);
-        jTableServicios.getTableHeader().setReorderingAllowed(false);
-        jScrollPane4.setViewportView(jTableServicios);
-
-        Servicios.add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 70, 910, 80));
-
-        cbServicios.setFont(new java.awt.Font("Roboto", 0, 11)); // NOI18N
-        cbServicios.addItemListener(new java.awt.event.ItemListener() {
-            public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                cbServiciosItemStateChanged(evt);
-            }
-        });
-        cbServicios.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cbServiciosActionPerformed(evt);
-            }
-        });
-        Servicios.add(cbServicios, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 40, 210, -1));
-
-        jLabel6.setFont(new java.awt.Font("Roboto", 1, 18)); // NOI18N
-        jLabel6.setText("Costo    $");
-        Servicios.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 40, 80, 20));
-
-        Agregar.setFont(new java.awt.Font("Roboto", 0, 11)); // NOI18N
-        Agregar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/icons8_add_24px_1.png"))); // NOI18N
-        Agregar.setText("Agregar");
-        Agregar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                AgregarActionPerformed(evt);
-            }
-        });
-        Servicios.add(Agregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 40, 110, 20));
-
-        jLabel10.setFont(new java.awt.Font("Roboto", 1, 14)); // NOI18N
-        jLabel10.setText("Seleccionar Servicio a realizar ");
-        Servicios.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 40, -1, -1));
-
-        Costo.setEditable(false);
-        Costo.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("###.00"))));
-        Costo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                CostoActionPerformed(evt);
-            }
-        });
-        Servicios.add(Costo, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 30, 150, 30));
-
-        Eliminar.setFont(new java.awt.Font("Roboto", 0, 11)); // NOI18N
-        Eliminar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/icons8_cancel_24px.png"))); // NOI18N
-        Eliminar.setText("Eliminar");
-        Eliminar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                EliminarActionPerformed(evt);
-            }
-        });
-        Servicios.add(Eliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 40, 110, 20));
-
-        Importe.setBackground(new java.awt.Color(153, 153, 153));
-        Importe.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        Importe.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jPanel16.setBackground(new java.awt.Color(80, 34, 34));
-        jPanel16.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        jPanel16.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel9.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
-        jLabel9.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel9.setText("IMPORTE");
-        jPanel16.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 0, -1, 30));
-
-        Importe.add(jPanel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 310, 30));
-
-        jLabel16.setFont(new java.awt.Font("Roboto", 1, 14)); // NOI18N
-        jLabel16.setText("Total");
-        Importe.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 40, -1, -1));
 
         Estatus.setFont(new java.awt.Font("Roboto", 1, 14)); // NOI18N
         Estatus.setForeground(new java.awt.Color(0, 0, 0));
         Estatus.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         Estatus.setText("Sin Asignar");
         Estatus.setOpaque(true);
-        Importe.add(Estatus, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 70, 120, 40));
+        ReporteCliente.add(Estatus, new org.netbeans.lib.awtextra.AbsoluteConstraints(1010, 160, 110, 30));
 
         Pago.setFont(new java.awt.Font("Roboto", 1, 14)); // NOI18N
         Pago.setForeground(new java.awt.Color(0, 0, 0));
         Pago.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        Pago.setText("Estatus Pago");
+        Pago.setText("No Pagado");
         Pago.setOpaque(true);
         Pago.addAncestorListener(new javax.swing.event.AncestorListener() {
             public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
@@ -707,33 +567,25 @@ public class Os extends javax.swing.JInternalFrame {
             public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
             }
         });
-        Importe.add(Pago, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 70, 120, 40));
+        ReporteCliente.add(Pago, new org.netbeans.lib.awtextra.AbsoluteConstraints(1130, 160, 120, 30));
 
-        Total.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#,###.00"))));
-        Total.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        Total.setEnabled(false);
-        Importe.add(Total, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 40, 80, -1));
-
-        cbPago.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Estatus Pago", "Pagado", "No Pagado" }));
-        cbPago.addItemListener(new java.awt.event.ItemListener() {
-            public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                cbPagoItemStateChanged(evt);
-            }
-        });
-        cbPago.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cbPagoActionPerformed(evt);
-            }
-        });
-        Importe.add(cbPago, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 40, 120, -1));
-
+        GuardarOs.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/icons8_save_24px.png"))); // NOI18N
         GuardarOs.setText("Guardar");
         GuardarOs.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 GuardarOsActionPerformed(evt);
             }
         });
-        Importe.add(GuardarOs, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 120, 250, -1));
+        ReporteCliente.add(GuardarOs, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 160, 480, 30));
+
+        Actualizar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/icons8_update_left_rotation_24px.png"))); // NOI18N
+        Actualizar.setText("Actualizar");
+        Actualizar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ActualizarActionPerformed(evt);
+            }
+        });
+        ReporteCliente.add(Actualizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 160, 480, 30));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -753,18 +605,14 @@ public class Os extends javax.swing.JInternalFrame {
                         .addComponent(Accesorios, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(20, 20, 20)
                         .addComponent(Observaciones, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(ReporteCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(Servicios, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(Importe, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(ReporteCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(28, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addComponent(Banner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 61, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(DatosGenereales, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(DatosClientes, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -774,12 +622,8 @@ public class Os extends javax.swing.JInternalFrame {
                     .addComponent(Accesorios, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(Observaciones, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(10, 10, 10)
-                .addComponent(ReporteCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(10, 10, 10)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(Servicios, javax.swing.GroupLayout.DEFAULT_SIZE, 159, Short.MAX_VALUE)
-                    .addComponent(Importe, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(228, 228, 228))
+                .addComponent(ReporteCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(72, 72, 72))
         );
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1330, 770));
@@ -807,10 +651,6 @@ public class Os extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_TelefonoActionPerformed
 
-    private void EditarOsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EditarOsActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_EditarOsActionPerformed
-
     private void cbTecnicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbTecnicoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_cbTecnicoActionPerformed
@@ -823,18 +663,9 @@ public class Os extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_numSerieActionPerformed
 
-    private void cbServiciosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbServiciosActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cbServiciosActionPerformed
-
-    private void CostoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CostoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_CostoActionPerformed
-
     private void NuevaOsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NuevaOsActionPerformed
         // TODO add your handling code here:
-
-        numOS.setText("");
+        agregarnumOS();
         ingreso.setDate(null);
         Salida.setDate(null);
         EmitidaPor.setText("");
@@ -851,66 +682,12 @@ public class Os extends javax.swing.JInternalFrame {
         txtAccerosorios.setText("");
         jTxtObservaciones.setText("");
         jTxtReporte.setText("");
-        cbServicios.setSelectedIndex(0);
-        Costo.setText("");
-        LimpiarTabla();
-        suma = 0;
-        Total.setText("");
-        cbPago.setSelectedIndex(0);        
+
+        Actualizar.setEnabled(false);
+        GuardarOs.setEnabled(true);
 
 
     }//GEN-LAST:event_NuevaOsActionPerformed
-
-    private void cbServiciosItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbServiciosItemStateChanged
-        // TODO add your handling code here:
-        String sql = "SELECT precio FROM catalogoprecios where descripcion=?";
-        try {
-            pst = conexion.prepareStatement(sql);
-            pst.setString(1, cbServicios.getSelectedItem().toString());
-            rs = pst.executeQuery();
-
-            if (rs.next()) {
-
-                Costo.setText(rs.getString(1));
-
-            } else {
-                Costo.setText("");
-            }
-
-        } catch (SQLException e) {
-        }
-
-
-    }//GEN-LAST:event_cbServiciosItemStateChanged
-
-    private void AgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AgregarActionPerformed
-        // TODO add your handling code here:
-
-        String Dato[] = new String[2];
-        Dato[0] = cbServicios.getSelectedItem().toString();
-        Dato[1] = Costo.getText();
-        if (Dato[0] == "   ------Selecciona Servicio------" && Dato[1].isEmpty()) {
-
-            JOptionPane.showMessageDialog(null, "Agregue un servicio");
-
-        } else {
-            tServicios.addRow(Dato);
-
-        }
-        SumarDatos();
-
-
-    }//GEN-LAST:event_AgregarActionPerformed
-
-    private void EliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EliminarActionPerformed
-        // TODO add your handling code here:
-        int FilaSelect = jTableServicios.getSelectedRow();
-
-        if (FilaSelect >= 0) {
-            tServicios.removeRow(FilaSelect);
-        }
-        SumarDatos();
-    }//GEN-LAST:event_EliminarActionPerformed
 
     private void cbTecnicoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbTecnicoItemStateChanged
         // TODO add your handling code here:
@@ -923,15 +700,8 @@ public class Os extends javax.swing.JInternalFrame {
             Estatus.setText("Asignado");
         }
 
-        CambiarEstatus();
+
     }//GEN-LAST:event_cbTecnicoItemStateChanged
-
-    private void cbPagoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbPagoItemStateChanged
-        // TODO add your handling code here:
-
-        Pago.setText((cbPago.getSelectedItem().toString()));
-        CambiarEstatus();
-    }//GEN-LAST:event_cbPagoItemStateChanged
 
     private void AgregarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AgregarClienteActionPerformed
         // TODO add your handling code here:
@@ -1013,10 +783,6 @@ public class Os extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_NoActionPerformed
 
-    private void cbPagoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbPagoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cbPagoActionPerformed
-
     private void GuardarOsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GuardarOsActionPerformed
         // TODO add your handling code here:
 
@@ -1049,10 +815,9 @@ public class Os extends javax.swing.JInternalFrame {
                         + "Accesorios,"//15
                         + "Observaciones,"//16
                         + "ReporteCliente,"//17
-                        + "Estatus,"//18
-                        + "EstatusPago,"//19
-                        + "Total)"//20
-                        + "values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
+                        + "Estatus,"
+                        + "EstatusPago)"
+                        + "values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
 
                 try {
                     if (numOS.getText().isBlank()
@@ -1066,12 +831,8 @@ public class Os extends javax.swing.JInternalFrame {
                             || cbDispositivo.getSelectedItem().toString()
                             == "  ------------------------Selecciona un Dispositivo------------------------"
                             || Marca.getText().isEmpty()
-                            || Modelo.getText().isEmpty()
-                            || numSerie.getText().isEmpty()
                             || jTxtObservaciones.getText().isEmpty()
-                            || jTxtReporte.getText().isEmpty()
-                            || Total.getText().isEmpty()
-                            || cbPago.getSelectedItem().toString() == "Estatus Pago") {
+                            || jTxtReporte.getText().isEmpty()) {
 
                         JOptionPane.showMessageDialog(null, "Campos obligatorios"
                                 + " vacios, favor de verificar los campos");
@@ -1079,8 +840,8 @@ public class Os extends javax.swing.JInternalFrame {
 
                         pst = conexion.prepareStatement(sql);
                         pst.setString(1, numOS.getText());
-                        pst.setString(2, ((JTextField)ingreso.getDateEditor().getUiComponent()).getText());
-                        pst.setString(3, ((JTextField)Salida.getDateEditor().getUiComponent()).getText());
+                        pst.setString(2, ((JTextField) ingreso.getDateEditor().getUiComponent()).getText());
+                        pst.setString(3, ((JTextField) Salida.getDateEditor().getUiComponent()).getText());
                         pst.setString(4, EmitidaPor.getText());
                         pst.setString(5, cbTecnico.getSelectedItem().toString());
                         pst.setString(6, Nombre.getText());
@@ -1097,8 +858,9 @@ public class Os extends javax.swing.JInternalFrame {
                         pst.setString(17, jTxtReporte.getText());
                         pst.setString(18, Estatus.getText());
                         pst.setString(19, Pago.getText());
-                        pst.setString(20, Total.getText());
                         pst.executeUpdate();
+
+                        JOptionPane.showMessageDialog(null, "Orden de servicio " + numOS.getText() + " Se agrego correctamente");
 
                     }
 
@@ -1119,66 +881,133 @@ public class Os extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_PagoAncestorAdded
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        TableOS tableos = new TableOS();
+        tableos.setVisible(true);
+        GuardarOs.setEnabled(false);
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void ActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ActualizarActionPerformed
+        // TODO add your handling code here:
+        String sql = ("Update os set "
+                + "FechaIngreso=?," //2
+                + "FechaEntrega=?," //3
+                + "EmitidaPor=?," //4 
+                + "TecnicoAsignado=?,"//5
+                + "NombreCliente=?,"//6
+                + "DireccionCliente=?,"//7
+                + "TelefonoCliente=?,"//8
+                + "CorreoCliente=?,"//9
+                + "TipoDispositivo=?,"//10
+                + "MarcaDispositivo=?,"//11
+                + "Modelo=?,"//12
+                + "NumSerie=?,"//13
+                + "Contraseña=?,"//14
+                + "Accesorios=?,"//15
+                + "Observaciones=?,"//16
+                + "ReporteCliente=?,"//17
+                + "Estatus=?,"//18
+                + "EstatusPago=? where NumOs='" + numOS.getText()+"'");
+        
+        System.out.println(sql);
+
+        try {
+            if (numOS.getText().isBlank()
+                    || EmitidaPor.getText().isEmpty()
+                    || cbTecnico.getSelectedItem().toString()
+                    == "------Selecciona tecnico------"
+                    || Nombre.getText().isEmpty()
+                    || Direccion.getText().isEmpty()
+                    || Telefono.getText().isEmpty()
+                    || Correo.getText().isEmpty()
+                    || cbDispositivo.getSelectedItem().toString()
+                    == "  ------------------------Selecciona un Dispositivo------------------------"
+                    || Marca.getText().isEmpty()
+                    || jTxtObservaciones.getText().isEmpty()
+                    || jTxtReporte.getText().isEmpty()) {
+
+                JOptionPane.showMessageDialog(null, "Campos obligatorios"
+                        + " vacios, favor de verificar los campos");
+            } else {
+
+                pst = conexion.prepareStatement(sql);
+                pst.setString(1, ((JTextField) ingreso.getDateEditor().getUiComponent()).getText());
+                pst.setString(2, ((JTextField) Salida.getDateEditor().getUiComponent()).getText());
+                pst.setString(3, EmitidaPor.getText());
+                pst.setString(4, cbTecnico.getSelectedItem().toString());
+                pst.setString(5, Nombre.getText());
+                pst.setString(6, Direccion.getText());
+                pst.setString(7, Telefono.getText());
+                pst.setString(8, Correo.getText());
+                pst.setString(9, cbDispositivo.getSelectedItem().toString());
+                pst.setString(10, Marca.getText());
+                pst.setString(11, Modelo.getText());
+                pst.setString(12, numSerie.getText());
+                pst.setString(13, Contraseña.getText());
+                pst.setString(14, txtAccerosorios.getText());
+                pst.setString(15, jTxtObservaciones.getText());
+                pst.setString(16, jTxtReporte.getText());
+                pst.setString(17, Estatus.getText());
+                pst.setString(18, Pago.getText());
+                pst.executeUpdate();
+
+                JOptionPane.showMessageDialog(null, "Orden de servicio " + numOS.getText() + " Se Actualizo correctamente");
+
+            }
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e);
+        }
+
+    }//GEN-LAST:event_ActualizarActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel Accesorios;
-    private javax.swing.JButton Agregar;
+    public static javax.swing.JButton Actualizar;
     private javax.swing.JButton AgregarCliente;
     private javax.swing.JPanel Banner;
-    private javax.swing.JTextField Contraseña;
+    public static javax.swing.JTextField Contraseña;
     public static javax.swing.JTextField Correo;
-    private javax.swing.JFormattedTextField Costo;
     private javax.swing.JPanel DatosClientes;
     private javax.swing.JPanel DatosEquipo;
     private javax.swing.JPanel DatosGenereales;
     public static javax.swing.JTextField Direccion;
-    private javax.swing.JButton EditarOs;
-    private javax.swing.JButton Eliminar;
-    private javax.swing.JTextField EmitidaPor;
-    private javax.swing.JLabel Estatus;
+    public static javax.swing.JTextField EmitidaPor;
+    public static javax.swing.JLabel Estatus;
     private javax.swing.JButton GuardarOs;
-    private javax.swing.JPanel Importe;
-    private javax.swing.JTextField Marca;
-    private javax.swing.JTextField Modelo;
-    private javax.swing.JRadioButton No;
+    public static javax.swing.JTextField Marca;
+    public static javax.swing.JTextField Modelo;
+    public static javax.swing.JRadioButton No;
     public static javax.swing.JTextField Nombre;
     private javax.swing.JButton NuevaOs;
     private javax.swing.JPanel Observaciones;
-    private javax.swing.JLabel Pago;
+    public static javax.swing.JLabel Pago;
     private javax.swing.JPanel ReporteCliente;
-    private com.toedter.calendar.JDateChooser Salida;
+    public static com.toedter.calendar.JDateChooser Salida;
     private javax.swing.JButton SeleccionarCliente;
-    private javax.swing.JPanel Servicios;
-    private javax.swing.JRadioButton Si;
+    public static javax.swing.JRadioButton Si;
     public static javax.swing.JTextField Telefono;
-    private javax.swing.JFormattedTextField Total;
     private javax.swing.ButtonGroup buttonGroup1;
-    private javax.swing.JComboBox<String> cbDispositivo;
-    private javax.swing.JComboBox<String> cbPago;
-    private javax.swing.JComboBox<String> cbServicios;
-    private javax.swing.JComboBox<String> cbTecnico;
-    private com.toedter.calendar.JDateChooser ingreso;
+    public static javax.swing.JComboBox<String> cbDispositivo;
+    public static javax.swing.JComboBox<String> cbTecnico;
+    public static com.toedter.calendar.JDateChooser ingreso;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
-    private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel12;
     private javax.swing.JPanel jPanel13;
     private javax.swing.JPanel jPanel15;
-    private javax.swing.JPanel jPanel16;
     private javax.swing.JPanel jPanel19;
     private javax.swing.JPanel jPanel20;
     private javax.swing.JPanel jPanel21;
@@ -1189,10 +1018,8 @@ public class Os extends javax.swing.JInternalFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JScrollPane jScrollPane4;
-    private javax.swing.JTable jTableServicios;
-    private javax.swing.JTextArea jTxtObservaciones;
-    private javax.swing.JTextArea jTxtReporte;
+    public static javax.swing.JTextArea jTxtObservaciones;
+    public static javax.swing.JTextArea jTxtReporte;
     private javax.swing.JLabel label1;
     private javax.swing.JLabel label10;
     private javax.swing.JLabel label11;
@@ -1206,9 +1033,9 @@ public class Os extends javax.swing.JInternalFrame {
     private javax.swing.JLabel label7;
     private javax.swing.JLabel label8;
     private javax.swing.JLabel label9;
-    private javax.swing.JTextField numOS;
-    private javax.swing.JTextField numSerie;
+    public static javax.swing.JTextField numOS;
+    public static javax.swing.JTextField numSerie;
     private javax.swing.JPanel reporte;
-    private javax.swing.JTextArea txtAccerosorios;
+    public static javax.swing.JTextArea txtAccerosorios;
     // End of variables declaration//GEN-END:variables
 }

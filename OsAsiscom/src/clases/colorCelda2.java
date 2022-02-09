@@ -15,27 +15,22 @@ import javax.swing.table.DefaultTableCellRenderer;
  *
  * @author rica_
  */
-public class colorCelda extends DefaultTableCellRenderer {
+public class colorCelda2 extends DefaultTableCellRenderer {
 
     int index;
 
-    public colorCelda(int color) {
+    public colorCelda2(int color) {
         this.index = color;
     }
 
     @Override
     public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
         switch (table.getValueAt(row, index).toString()) {
-            case "En proceso":
-                setBackground(new Color(223, 225, 133));
-                break;
-            case "Asignado":
-                setBackground(new Color(36, 113, 163));
-                break;
-            case "Terminada":
+
+            case "Pagado":
                 setBackground(new Color(133, 225, 150));
                 break;
-            case "Cancelada":
+            case "No Pagado":
                 setBackground(new Color(225, 133, 133));
                 break;
         }

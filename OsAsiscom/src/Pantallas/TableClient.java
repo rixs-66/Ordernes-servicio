@@ -12,6 +12,7 @@ import javax.swing.table.DefaultTableModel;
 import java.sql.*;
 import clases.conexionS;
 import Pantallas.Os;
+
 /**
  *
  * @author rica_
@@ -22,8 +23,8 @@ public class TableClient extends javax.swing.JFrame {
     PreparedStatement pst = null;
     ResultSet rs = null;
     Statement st = null;
-    
-     public static String  Nombre, Telefono, Direccion, Correo;
+
+    public static String Nombre, Telefono, Direccion, Correo;
 
     /**
      * Creates new form TableClient
@@ -223,8 +224,6 @@ public class TableClient extends javax.swing.JFrame {
                 datos[1] = rs.getString(3);
                 datos[2] = rs.getString(4);
                 datos[3] = rs.getString(5);
-                
-                
 
                 tclientes.addRow(datos);
             }
@@ -244,20 +243,22 @@ public class TableClient extends javax.swing.JFrame {
         Direccion = String.valueOf(SeleccionarCliente.getValueAt(seleccionar, 1));
         Telefono = String.valueOf(SeleccionarCliente.getValueAt(seleccionar, 2));
         Correo = String.valueOf(SeleccionarCliente.getValueAt(seleccionar, 3));
-        
-        System.out.println(Nombre + Direccion + Telefono + Correo);
-       
+
+
     }//GEN-LAST:event_SeleccionarClienteMouseClicked
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-        Os.Nombre.setText(Nombre);
-        Os.Direccion.setText(Direccion);
-        Os.Telefono.setText(Telefono);
-        Os.Correo.setText(Correo);
-        dispose();
-       
-                
+        try {
+            Os.Nombre.setText(Nombre);
+            Os.Direccion.setText(Direccion);
+            Os.Telefono.setText(Telefono);
+            Os.Correo.setText(Correo);
+            dispose();
+        } catch (Exception e) {
+        }
+
+
     }//GEN-LAST:event_jButton2ActionPerformed
 
     /**

@@ -5,8 +5,7 @@
  */
 package Pantallas;
 
-import static Pantallas.Clientes.tbClientes;
-import clases.colorCelda;
+import clases.*;
 import clases.conexionS;
 import java.sql.*;
 import java.sql.Statement;
@@ -24,6 +23,7 @@ public class EstadoOS extends javax.swing.JInternalFrame {
     PreparedStatement pst = null;
     ResultSet rs = null;
     Statement st = null;
+    public static String NumOS, Pago, Status,Seguimiento;
 
     /**
      * Creates new form EstadoOS
@@ -37,9 +37,48 @@ public class EstadoOS extends javax.swing.JInternalFrame {
 
     }
 
-    private void colorear() {
-        colorCelda color = new colorCelda(11);
-        jTableGeneral.getColumnModel().getColumn(11).setCellRenderer(color);
+    private void colorear1() {
+        colorCelda estatus = new colorCelda(11);
+        jTableGeneral.getColumnModel().getColumn(11).setCellRenderer(estatus);
+
+        colorCelda2 pago = new colorCelda2(12);
+        jTableGeneral.getColumnModel().getColumn(12).setCellRenderer(pago);
+
+    }
+
+    private void colorear2() {
+        colorCelda color1 = new colorCelda(11);
+        jTableProceso.getColumnModel().getColumn(11).setCellRenderer(color1);
+
+        colorCelda2 pago = new colorCelda2(12);
+        jTableProceso.getColumnModel().getColumn(12).setCellRenderer(pago);
+
+    }
+
+    private void colorear3() {
+        colorCelda color1 = new colorCelda(11);
+        jTableTerminadas.getColumnModel().getColumn(11).setCellRenderer(color1);
+
+        colorCelda2 pago = new colorCelda2(12);
+        jTableTerminadas.getColumnModel().getColumn(12).setCellRenderer(pago);
+
+    }
+
+    private void colorear4() {
+        colorCelda color1 = new colorCelda(11);
+        jTableCanceladas.getColumnModel().getColumn(11).setCellRenderer(color1);
+
+        colorCelda2 pago = new colorCelda2(12);
+        jTableCanceladas.getColumnModel().getColumn(12).setCellRenderer(pago);
+
+    }
+
+    private void colorear5() {
+        colorCelda color1 = new colorCelda(11);
+        jTableAsignado.getColumnModel().getColumn(11).setCellRenderer(color1);
+
+        colorCelda2 pago = new colorCelda2(12);
+        jTableAsignado.getColumnModel().getColumn(12).setCellRenderer(pago);
 
     }
 
@@ -59,10 +98,15 @@ public class EstadoOS extends javax.swing.JInternalFrame {
         jPanel3 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTableGeneral = new javax.swing.JTable();
-        jPanel5 = new javax.swing.JPanel();
+        jPanel4 = new javax.swing.JPanel();
+        Escritorio6 = new javax.swing.JPanel();
+        jButton7 = new javax.swing.JButton();
+        jScrollPane9 = new javax.swing.JScrollPane();
+        jTableAsignado = new javax.swing.JTable();
+        Escritorio5 = new javax.swing.JPanel();
         jScrollPane7 = new javax.swing.JScrollPane();
         jTableProceso = new javax.swing.JTable();
-        jButton1 = new javax.swing.JButton();
+        seguimiento = new javax.swing.JButton();
         jPanel6 = new javax.swing.JPanel();
         jScrollPane6 = new javax.swing.JScrollPane();
         jTableTerminadas = new javax.swing.JTable();
@@ -71,6 +115,8 @@ public class EstadoOS extends javax.swing.JInternalFrame {
         jPanel7 = new javax.swing.JPanel();
         jScrollPane5 = new javax.swing.JScrollPane();
         jTableCanceladas = new javax.swing.JTable();
+        jButton5 = new javax.swing.JButton();
+        jButton6 = new javax.swing.JButton();
 
         setPreferredSize(new java.awt.Dimension(1320, 770));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -88,7 +134,7 @@ public class EstadoOS extends javax.swing.JInternalFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(493, Short.MAX_VALUE)
                 .addComponent(jLabel1)
                 .addGap(495, 495, 495))
         );
@@ -131,7 +177,69 @@ public class EstadoOS extends javax.swing.JInternalFrame {
 
         Pestañas.addTab("General", jPanel3);
 
-        jPanel5.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        Escritorio6.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jButton7.setText("Iniciar Seguimiento");
+        jButton7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton7ActionPerformed(evt);
+            }
+        });
+        Escritorio6.add(jButton7, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
+
+        jTableGeneral = new javax.swing.JTable(){
+            public boolean isCellEditable(int rowIndex, int colIndex){
+                return false;
+            }
+        };
+        jTableAsignado.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
+        jTableAsignado.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {},
+                {},
+                {},
+                {}
+            },
+            new String [] {
+
+            }
+        ));
+        jTableAsignado.setFocusable(false);
+        jTableAsignado.setRowHeight(30);
+        jTableAsignado.getTableHeader().setReorderingAllowed(false);
+        jTableAsignado.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTableAsignadoMouseClicked(evt);
+            }
+        });
+        jScrollPane9.setViewportView(jTableAsignado);
+
+        Escritorio6.add(jScrollPane9, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 40, 1260, 630));
+
+        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
+        jPanel4.setLayout(jPanel4Layout);
+        jPanel4Layout.setHorizontalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 1287, Short.MAX_VALUE)
+            .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel4Layout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(Escritorio6, javax.swing.GroupLayout.PREFERRED_SIZE, 1287, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 0, Short.MAX_VALUE)))
+        );
+        jPanel4Layout.setVerticalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 673, Short.MAX_VALUE)
+            .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel4Layout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(Escritorio6, javax.swing.GroupLayout.PREFERRED_SIZE, 673, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 0, Short.MAX_VALUE)))
+        );
+
+        Pestañas.addTab("Asignada", jPanel4);
+
+        Escritorio5.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jTableGeneral = new javax.swing.JTable(){
             public boolean isCellEditable(int rowIndex, int colIndex){
@@ -153,14 +261,24 @@ public class EstadoOS extends javax.swing.JInternalFrame {
         jTableProceso.setFocusable(false);
         jTableProceso.setRowHeight(30);
         jTableProceso.getTableHeader().setReorderingAllowed(false);
+        jTableProceso.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTableProcesoMouseClicked(evt);
+            }
+        });
         jScrollPane7.setViewportView(jTableProceso);
 
-        jPanel5.add(jScrollPane7, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 40, 1260, 630));
+        Escritorio5.add(jScrollPane7, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 40, 1260, 630));
 
-        jButton1.setText("Editar");
-        jPanel5.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
+        seguimiento.setText("Actualizar Seguimiento");
+        seguimiento.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                seguimientoActionPerformed(evt);
+            }
+        });
+        Escritorio5.add(seguimiento, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
 
-        Pestañas.addTab("En proceso", jPanel5);
+        Pestañas.addTab("En proceso", Escritorio5);
 
         jPanel6.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -223,6 +341,12 @@ public class EstadoOS extends javax.swing.JInternalFrame {
 
         jPanel7.add(jScrollPane5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 40, 1260, 630));
 
+        jButton5.setText("Imprimir informe");
+        jPanel7.add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 10, -1, -1));
+
+        jButton6.setText("Ver informe");
+        jPanel7.add(jButton6, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
+
         Pestañas.addTab("Canceladas", jPanel7);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -230,10 +354,10 @@ public class EstadoOS extends javax.swing.JInternalFrame {
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 1320, Short.MAX_VALUE)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(21, Short.MAX_VALUE)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
                 .addComponent(Pestañas, javax.swing.GroupLayout.PREFERRED_SIZE, 1287, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -269,10 +393,9 @@ public class EstadoOS extends javax.swing.JInternalFrame {
             tgeneral.addColumn("Reporte cliente");
             tgeneral.addColumn("Estatus");
             tgeneral.addColumn("Estatus Pago");
-            tgeneral.addColumn("Total");
             jTableGeneral.setModel(tgeneral);
 
-            String[] datos = new String[14];
+            String[] datos = new String[13];
 
             String sql = "select * from os";
             try {
@@ -294,10 +417,8 @@ public class EstadoOS extends javax.swing.JInternalFrame {
                     datos[10] = rs.getString(11);
                     datos[11] = rs.getString(18);
                     datos[12] = rs.getString(19);
-                    datos[13] = rs.getString(20);
                     tgeneral.addRow(datos);
-                    colorear();
-                    
+                    colorear1();
 
                 }
                 jTableGeneral.setModel(tgeneral);
@@ -351,7 +472,7 @@ public class EstadoOS extends javax.swing.JInternalFrame {
                     datos[12] = rs.getString(19);
                     datos[13] = rs.getString(20);
                     tProceso.addRow(datos);
-                    
+                    colorear2();
 
                 }
                 jTableGeneral.setModel(tProceso);
@@ -361,29 +482,223 @@ public class EstadoOS extends javax.swing.JInternalFrame {
                 JOptionPane.showMessageDialog(null, e);
             }
 
+        } else if (Pestañas.getTitleAt(Pestañas.getSelectedIndex()).equals("Terminadas")) {
+
+            conexion = conexionS.conn();
+            DefaultTableModel tTerminada = new DefaultTableModel();
+            tTerminada.addColumn("NumeroOS");
+            tTerminada.addColumn("Fecha Ingreso");
+            tTerminada.addColumn("Fecha salida");
+            tTerminada.addColumn("Emitida por");
+            tTerminada.addColumn("Tecnico Asignado");
+            tTerminada.addColumn("Nombre Cliente");
+            tTerminada.addColumn("Direccion Cliente");
+            tTerminada.addColumn("Telefono");
+            tTerminada.addColumn("Correo Cliente");
+            tTerminada.addColumn("Tipo de dispositivo");
+            tTerminada.addColumn("Reporte cliente");
+            tTerminada.addColumn("Estatus");
+            tTerminada.addColumn("Estatus Pago");
+            tTerminada.addColumn("Total");
+            jTableTerminadas.setModel(tTerminada);
+
+            String[] datos = new String[14];
+
+            String sql = "select * from os where Estatus= 'Terminada'";
+            try {
+
+                Statement leer = conexion.createStatement();
+                rs = leer.executeQuery(sql);
+
+                while (rs.next()) {
+                    datos[0] = rs.getString(1);
+                    datos[1] = rs.getString(2);
+                    datos[2] = rs.getString(3);
+                    datos[3] = rs.getString(4);
+                    datos[4] = rs.getString(5);
+                    datos[5] = rs.getString(6);
+                    datos[6] = rs.getString(7);
+                    datos[7] = rs.getString(8);
+                    datos[8] = rs.getString(9);
+                    datos[9] = rs.getString(10);
+                    datos[10] = rs.getString(11);
+                    datos[11] = rs.getString(18);
+                    datos[12] = rs.getString(19);
+                    datos[13] = rs.getString(20);
+                    tTerminada.addRow(datos);
+                    colorear3();
+                }
+                jTableGeneral.setModel(tTerminada);
+                conexion.close();
+
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, e);
+            }
+
+        } else if (Pestañas.getTitleAt(Pestañas.getSelectedIndex()).equals("Canceladas")) {
+
+            conexion = conexionS.conn();
+            DefaultTableModel tCancelada = new DefaultTableModel();
+            tCancelada.addColumn("NumeroOS");
+            tCancelada.addColumn("Fecha Ingreso");
+            tCancelada.addColumn("Fecha salida");
+            tCancelada.addColumn("Emitida por");
+            tCancelada.addColumn("Tecnico Asignado");
+            tCancelada.addColumn("Nombre Cliente");
+            tCancelada.addColumn("Direccion Cliente");
+            tCancelada.addColumn("Telefono");
+            tCancelada.addColumn("Correo Cliente");
+            tCancelada.addColumn("Tipo de dispositivo");
+            tCancelada.addColumn("Reporte cliente");
+            tCancelada.addColumn("Estatus");
+            tCancelada.addColumn("Estatus Pago");
+            tCancelada.addColumn("Total");
+            jTableCanceladas.setModel(tCancelada);
+
+            String[] datos = new String[14];
+
+            String sql = "select * from os where Estatus= 'Cancelada'";
+            try {
+
+                Statement leer = conexion.createStatement();
+                rs = leer.executeQuery(sql);
+
+                while (rs.next()) {
+                    datos[0] = rs.getString(1);
+                    datos[1] = rs.getString(2);
+                    datos[2] = rs.getString(3);
+                    datos[3] = rs.getString(4);
+                    datos[4] = rs.getString(5);
+                    datos[5] = rs.getString(6);
+                    datos[6] = rs.getString(7);
+                    datos[7] = rs.getString(8);
+                    datos[8] = rs.getString(9);
+                    datos[9] = rs.getString(10);
+                    datos[10] = rs.getString(11);
+                    datos[11] = rs.getString(18);
+                    datos[12] = rs.getString(19);
+                    datos[13] = rs.getString(20);
+                    tCancelada.addRow(datos);
+                    colorear4();
+                }
+                jTableCanceladas.setModel(tCancelada);
+                conexion.close();
+
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, e);
+            }
+
+        } else if (Pestañas.getTitleAt(Pestañas.getSelectedIndex()).equals("Asignada")) {
+
+            conexion = conexionS.conn();
+            DefaultTableModel tAsignada = new DefaultTableModel();
+            tAsignada.addColumn("NumeroOS");
+            tAsignada.addColumn("Fecha Ingreso");
+            tAsignada.addColumn("Fecha salida");
+            tAsignada.addColumn("Emitida por");
+            tAsignada.addColumn("Tecnico Asignado");
+            tAsignada.addColumn("Nombre Cliente");
+            tAsignada.addColumn("Direccion Cliente");
+            tAsignada.addColumn("Telefono");
+            tAsignada.addColumn("Correo Cliente");
+            tAsignada.addColumn("Tipo de dispositivo");
+            tAsignada.addColumn("Reporte cliente");
+            tAsignada.addColumn("Estatus");
+            tAsignada.addColumn("Estatus Pago");
+            jTableAsignado.setModel(tAsignada);
+
+            String[] datos = new String[14];
+
+            String sql = "select * from os where Estatus= 'Asignado'";
+            try {
+
+                Statement leer = conexion.createStatement();
+                rs = leer.executeQuery(sql);
+
+                while (rs.next()) {
+                    datos[0] = rs.getString(1);
+                    datos[1] = rs.getString(2);
+                    datos[2] = rs.getString(3);
+                    datos[3] = rs.getString(4);
+                    datos[4] = rs.getString(5);
+                    datos[5] = rs.getString(6);
+                    datos[6] = rs.getString(7);
+                    datos[7] = rs.getString(8);
+                    datos[8] = rs.getString(9);
+                    datos[9] = rs.getString(10);
+                    datos[10] = rs.getString(11);
+                    datos[11] = rs.getString(18);
+                    datos[12] = rs.getString(19);
+                    tAsignada.addRow(datos);
+                    colorear5();
+                }
+                jTableAsignado.setModel(tAsignada);
+                conexion.close();
+
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, e);
+            }
+
         }
+
     }//GEN-LAST:event_PestañasStateChanged
+
+    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
+        // TODO add your handling code here:
+        Seguimiento seguimiento = new Seguimiento();
+        seguimiento.setVisible(true);
+    }//GEN-LAST:event_jButton7ActionPerformed
+
+    private void seguimientoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_seguimientoActionPerformed
+        // TODO add your handling code here:
+        ActualizarSeguimiento actualizarseguimiento = new ActualizarSeguimiento();
+        actualizarseguimiento.setVisible(true);
+
+    }//GEN-LAST:event_seguimientoActionPerformed
+
+    private void jTableProcesoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableProcesoMouseClicked
+        // TODO add your handling code here:
+      
+        
+
+
+    }//GEN-LAST:event_jTableProcesoMouseClicked
+
+    private void jTableAsignadoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableAsignadoMouseClicked
+        // TODO add your handling code here:
+        int seleccionar = jTableAsignado.rowAtPoint(evt.getPoint());
+        NumOS = String.valueOf(jTableAsignado.getValueAt(seleccionar, 0));
+        Status = String.valueOf(jTableAsignado.getValueAt(seleccionar, 11));
+        Pago = String.valueOf(jTableAsignado.getValueAt(seleccionar, 12));
+    }//GEN-LAST:event_jTableAsignadoMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel Escritorio5;
+    private javax.swing.JPanel Escritorio6;
     private javax.swing.JTabbedPane Pestañas;
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton5;
+    private javax.swing.JButton jButton6;
+    private javax.swing.JButton jButton7;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel5;
+    private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JScrollPane jScrollPane7;
+    private javax.swing.JScrollPane jScrollPane9;
+    public static javax.swing.JTable jTableAsignado;
     private javax.swing.JTable jTableCanceladas;
     private javax.swing.JTable jTableGeneral;
-    private javax.swing.JTable jTableProceso;
+    public static javax.swing.JTable jTableProceso;
     private javax.swing.JTable jTableTerminadas;
+    private javax.swing.JButton seguimiento;
     // End of variables declaration//GEN-END:variables
 }

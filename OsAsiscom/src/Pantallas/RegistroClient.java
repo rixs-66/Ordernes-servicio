@@ -36,7 +36,10 @@ public class RegistroClient extends javax.swing.JFrame {
                         + rs.getString(1) + " Ya esta registrado");
             } else {
 
-                sql = ("insert into clientes(nombre,direccion,telefono,correo)"
+                sql = ("insert into clientes(nombre,"
+                        + "direccion,"
+                        + "telefono,"
+                        + "correo)"
                         + "values(?,?,?,?)");
                 try {
                     if (txtNombre.getText().isEmpty()
@@ -91,6 +94,7 @@ public class RegistroClient extends javax.swing.JFrame {
 
         jPanel2.setBackground(new java.awt.Color(46, 52, 60));
         jPanel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jPanel2.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
         jLabel1.setFont(new java.awt.Font("Roboto", 1, 12)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));

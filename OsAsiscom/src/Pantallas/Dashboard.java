@@ -218,7 +218,6 @@ public class Dashboard extends javax.swing.JFrame {
         navmenu.setLayout(navmenuLayout);
         navmenuLayout.setHorizontalGroup(
             navmenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jlfecha, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(navmenuLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(navmenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -243,6 +242,10 @@ public class Dashboard extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(btnEstadoOs2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
+            .addGroup(navmenuLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jlfecha, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         navmenuLayout.setVerticalGroup(
             navmenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -255,9 +258,9 @@ public class Dashboard extends javax.swing.JFrame {
                 .addComponent(puesto)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(cerrarSesion)
-                .addGap(38, 38, 38)
+                .addGap(39, 39, 39)
                 .addComponent(jlfecha, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(55, 55, 55)
+                .addGap(54, 54, 54)
                 .addComponent(btnUsuarios, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnClientes, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -451,7 +454,7 @@ public class Dashboard extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    public javax.swing.JPanel Escritorio;
+    public static javax.swing.JPanel Escritorio;
     private javax.swing.JPanel background;
     private javax.swing.JPanel bar;
     private javax.swing.JButton btOs;
