@@ -139,10 +139,10 @@ public class Os extends javax.swing.JInternalFrame {
         label12 = new javax.swing.JLabel();
         label14 = new javax.swing.JLabel();
         label11 = new javax.swing.JLabel();
-        cbDispositivo = new javax.swing.JComboBox<>();
         Marca = new javax.swing.JTextField();
         Modelo = new javax.swing.JTextField();
         numSerie = new javax.swing.JTextField();
+        TipoDispositivo = new javax.swing.JTextField();
         Accesorios = new javax.swing.JPanel();
         jPanel15 = new javax.swing.JPanel();
         jLabel11 = new javax.swing.JLabel();
@@ -407,15 +407,6 @@ public class Os extends javax.swing.JInternalFrame {
         label11.setText("N° Serie");
         DatosEquipo.add(label11, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 140, -1, -1));
 
-        cbDispositivo.setFont(new java.awt.Font("Roboto", 0, 12)); // NOI18N
-        cbDispositivo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "  ------------------------Selecciona un Dispositivo------------------------", "Laptop", "Proyector", "Impresora", "PC", "Tablet", "Monitor", "Teclado", "Plotter", "No Breaks" }));
-        cbDispositivo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cbDispositivoActionPerformed(evt);
-            }
-        });
-        DatosEquipo.add(cbDispositivo, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 50, 310, -1));
-
         Marca.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
         DatosEquipo.add(Marca, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 80, 310, -1));
 
@@ -429,6 +420,7 @@ public class Os extends javax.swing.JInternalFrame {
             }
         });
         DatosEquipo.add(numSerie, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 140, 310, -1));
+        DatosEquipo.add(TipoDispositivo, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 50, 310, -1));
 
         Accesorios.setBackground(new java.awt.Color(153, 153, 153));
         Accesorios.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -655,10 +647,6 @@ public class Os extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_cbTecnicoActionPerformed
 
-    private void cbDispositivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbDispositivoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cbDispositivoActionPerformed
-
     private void numSerieActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_numSerieActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_numSerieActionPerformed
@@ -674,7 +662,7 @@ public class Os extends javax.swing.JInternalFrame {
         Direccion.setText("");
         Telefono.setText("");
         Correo.setText("");
-        cbDispositivo.setSelectedIndex(0);
+        TipoDispositivo.setText("");
         Marca.setText("");
         Modelo.setText("");
         numSerie.setText("");
@@ -722,9 +710,7 @@ public class Os extends javax.swing.JInternalFrame {
                         + "values(?,?,?,?)");
                 try {
                     if (Nombre.getText().isEmpty()
-                            || Direccion.getText().isEmpty()
-                            || Telefono.getText().isEmpty()
-                            || Correo.getText().isEmpty()) {
+                            || Telefono.getText().isEmpty()) {
 
                         JOptionPane.showMessageDialog(null, "Campos obligatorios vacios");
                     } else {
@@ -825,11 +811,8 @@ public class Os extends javax.swing.JInternalFrame {
                             || cbTecnico.getSelectedItem().toString()
                             == "------Selecciona tecnico------"
                             || Nombre.getText().isEmpty()
-                            || Direccion.getText().isEmpty()
                             || Telefono.getText().isEmpty()
-                            || Correo.getText().isEmpty()
-                            || cbDispositivo.getSelectedItem().toString()
-                            == "  ------------------------Selecciona un Dispositivo------------------------"
+                            || TipoDispositivo.getText().isEmpty()
                             || Marca.getText().isEmpty()
                             || jTxtObservaciones.getText().isEmpty()
                             || jTxtReporte.getText().isEmpty()) {
@@ -848,7 +831,7 @@ public class Os extends javax.swing.JInternalFrame {
                         pst.setString(7, Direccion.getText());
                         pst.setString(8, Telefono.getText());
                         pst.setString(9, Correo.getText());
-                        pst.setString(10, cbDispositivo.getSelectedItem().toString());
+                        pst.setString(10, TipoDispositivo.getText());
                         pst.setString(11, Marca.getText());
                         pst.setString(12, Modelo.getText());
                         pst.setString(13, numSerie.getText());
@@ -908,9 +891,7 @@ public class Os extends javax.swing.JInternalFrame {
                 + "Observaciones=?,"//16
                 + "ReporteCliente=?,"//17
                 + "Estatus=?,"//18
-                + "EstatusPago=? where NumOs='" + numOS.getText()+"'");
-        
-        System.out.println(sql);
+                + "EstatusPago=? where NumOs='" + numOS.getText() + "'");
 
         try {
             if (numOS.getText().isBlank()
@@ -921,8 +902,7 @@ public class Os extends javax.swing.JInternalFrame {
                     || Direccion.getText().isEmpty()
                     || Telefono.getText().isEmpty()
                     || Correo.getText().isEmpty()
-                    || cbDispositivo.getSelectedItem().toString()
-                    == "  ------------------------Selecciona un Dispositivo------------------------"
+                    || TipoDispositivo.getText().isEmpty()
                     || Marca.getText().isEmpty()
                     || jTxtObservaciones.getText().isEmpty()
                     || jTxtReporte.getText().isEmpty()) {
@@ -940,7 +920,7 @@ public class Os extends javax.swing.JInternalFrame {
                 pst.setString(6, Direccion.getText());
                 pst.setString(7, Telefono.getText());
                 pst.setString(8, Correo.getText());
-                pst.setString(9, cbDispositivo.getSelectedItem().toString());
+                pst.setString(9, TipoDispositivo.getText());
                 pst.setString(10, Marca.getText());
                 pst.setString(11, Modelo.getText());
                 pst.setString(12, numSerie.getText());
@@ -989,8 +969,8 @@ public class Os extends javax.swing.JInternalFrame {
     private javax.swing.JButton SeleccionarCliente;
     public static javax.swing.JRadioButton Si;
     public static javax.swing.JTextField Telefono;
+    public static javax.swing.JTextField TipoDispositivo;
     private javax.swing.ButtonGroup buttonGroup1;
-    public static javax.swing.JComboBox<String> cbDispositivo;
     public static javax.swing.JComboBox<String> cbTecnico;
     public static com.toedter.calendar.JDateChooser ingreso;
     private javax.swing.JButton jButton1;

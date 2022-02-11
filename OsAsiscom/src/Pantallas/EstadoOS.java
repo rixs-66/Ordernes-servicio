@@ -23,7 +23,7 @@ public class EstadoOS extends javax.swing.JInternalFrame {
     PreparedStatement pst = null;
     ResultSet rs = null;
     Statement st = null;
-    public static String NumOS, Pago, Status,Seguimiento;
+    public static String NumOS, Pago, Status, Seguimiento;
 
     /**
      * Creates new form EstadoOS
@@ -645,21 +645,31 @@ public class EstadoOS extends javax.swing.JInternalFrame {
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
         // TODO add your handling code here:
-        Seguimiento seguimiento = new Seguimiento();
-        seguimiento.setVisible(true);
+
+        if (NumOS != null) {
+            Seguimiento seguimiento = new Seguimiento();
+            seguimiento.setVisible(true);
+        } else {
+            JOptionPane.showMessageDialog(null, "Seleccione una orden de servicio");
+        }
+
     }//GEN-LAST:event_jButton7ActionPerformed
 
     private void seguimientoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_seguimientoActionPerformed
         // TODO add your handling code here:
-        ActualizarSeguimiento actualizarseguimiento = new ActualizarSeguimiento();
-        actualizarseguimiento.setVisible(true);
+
+        if (NumOS != null) {
+            ActualizarSeguimiento actualizarseguimiento = new ActualizarSeguimiento();
+            actualizarseguimiento.setVisible(true);
+        } else {
+            JOptionPane.showMessageDialog(null,"Selecciona una Orden de servicio");
+        }
+
 
     }//GEN-LAST:event_seguimientoActionPerformed
 
     private void jTableProcesoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableProcesoMouseClicked
         // TODO add your handling code here:
-      
-        
 
 
     }//GEN-LAST:event_jTableProcesoMouseClicked

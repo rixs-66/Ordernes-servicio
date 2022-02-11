@@ -330,14 +330,21 @@ public class TableOS extends javax.swing.JFrame {
 
     private void selectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_selectActionPerformed
         // TODO add your handling code here:
-        try{
+
+        System.out.println("holamundo");
+
         Os.Actualizar.setEnabled(true);
         Os.numOS.setText(NumOs);
+       
+        try {
+            Date Fingreso = new SimpleDateFormat("d/MM/y").parse(FechaIngreso);
+            Date Fentrega = new SimpleDateFormat("d/MM/y").parse(FechaEntrega);
+            Os.ingreso.setDate(Fingreso);
+            Os.Salida.setDate(Fentrega);
+        } catch (Exception e) {
 
-        Date Fingreso = new SimpleDateFormat("d/MM/y").parse(FechaIngreso);
-        Date Fentrega = new SimpleDateFormat("d/MM/y").parse(FechaEntrega);
-        Os.ingreso.setDate(Fingreso);
-        Os.Salida.setDate(Fentrega);
+        }
+
         Os.cbTecnico.setSelectedItem(TecnicoAsignado);
         Os.EmitidaPor.setText(EmitidaPor);
 
@@ -362,16 +369,14 @@ public class TableOS extends javax.swing.JFrame {
         Os.Correo.setText(CorreoCliente);
         Os.jTxtObservaciones.setText(Observaciones);
         Os.jTxtReporte.setText(ReporteCliente);
-        Os.cbDispositivo.setSelectedItem(TipoDispositivo);
+        Os.TipoDispositivo.setText(TipoDispositivo);
         Os.Marca.setText(MarcaDispositivo);
         Os.Modelo.setText(Modelo);
         Os.numSerie.setText(NumSerie);
         Os.Estatus.setText(Estatus);
         Os.Pago.setText(EstatusPago);
         dispose();
-        }catch(Exception e){
-            
-        }
+        
 
 
     }//GEN-LAST:event_selectActionPerformed

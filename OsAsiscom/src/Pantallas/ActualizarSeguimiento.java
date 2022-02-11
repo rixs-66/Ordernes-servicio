@@ -124,7 +124,9 @@ public class ActualizarSeguimiento extends javax.swing.JFrame {
         Seguimiento = new javax.swing.JTextArea();
         jLabel1 = new javax.swing.JLabel();
         cbPago = new javax.swing.JComboBox<>();
-        jButton4 = new javax.swing.JButton();
+        jComboBox1 = new javax.swing.JComboBox<>();
+        jPanel1 = new javax.swing.JPanel();
+        jLabel4 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setResizable(false);
@@ -134,7 +136,7 @@ public class ActualizarSeguimiento extends javax.swing.JFrame {
 
         ID.setFont(new java.awt.Font("Roboto", 1, 14)); // NOI18N
         ID.setText("N° OS");
-        jPanel2.add(ID, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 20, 40, -1));
+        jPanel2.add(ID, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 40, 40, -1));
 
         jLabel2.setFont(new java.awt.Font("Roboto", 1, 14)); // NOI18N
         jLabel2.setText("Seguimiento");
@@ -229,7 +231,7 @@ public class ActualizarSeguimiento extends javax.swing.JFrame {
 
         jLabel1.setFont(new java.awt.Font("Roboto", 1, 14)); // NOI18N
         jLabel1.setText("Seguimiento de la orden de servicio numero:");
-        jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, -1, -1));
+        jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 40, -1, -1));
 
         cbPago.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "No Pagado", "Pagado" }));
         cbPago.addItemListener(new java.awt.event.ItemListener() {
@@ -237,10 +239,29 @@ public class ActualizarSeguimiento extends javax.swing.JFrame {
                 cbPagoItemStateChanged(evt);
             }
         });
-        jPanel2.add(cbPago, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 300, -1, -1));
+        jPanel2.add(cbPago, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 300, -1, -1));
 
-        jButton4.setText("Cancelar");
-        jPanel2.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 550, -1, -1));
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "En proceso", "Terminado" }));
+        jPanel2.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 300, -1, -1));
+
+        jLabel4.setFont(new java.awt.Font("Roboto", 1, 14)); // NOI18N
+        jLabel4.setText("Actualizar Seguimiento");
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(217, Short.MAX_VALUE)
+                .addComponent(jLabel4)
+                .addGap(213, 213, 213))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
+        );
+
+        jPanel2.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 580, 30));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -401,10 +422,12 @@ public class ActualizarSeguimiento extends javax.swing.JFrame {
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
+    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;

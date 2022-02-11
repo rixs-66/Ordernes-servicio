@@ -350,7 +350,7 @@ public class Seguimiento extends javax.swing.JFrame {
             pst.executeUpdate();
             JOptionPane.showMessageDialog(null, "Seguimiento agregado correctamente");
             dispose();
-            
+            ID.setText("");
 
         } catch (Exception e) {
 
