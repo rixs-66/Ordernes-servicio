@@ -233,7 +233,7 @@ public class Os extends javax.swing.JInternalFrame {
         DatosGenereales.add(label2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, -1, -1));
 
         label4.setFont(new java.awt.Font("Roboto", 1, 14)); // NOI18N
-        label4.setText("Fecha de entrega");
+        label4.setText("Fecha de Salida");
         DatosGenereales.add(label4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 110, -1, -1));
 
         label5.setFont(new java.awt.Font("Roboto", 1, 14)); // NOI18N
@@ -268,11 +268,11 @@ public class Os extends javax.swing.JInternalFrame {
         });
         DatosGenereales.add(cbTecnico, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 170, 170, -1));
 
-        Salida.setDateFormatString("dd/MM/y");
+        Salida.setDateFormatString("dd-MMM-yyyy");
         Salida.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
         DatosGenereales.add(Salida, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 110, 170, -1));
 
-        ingreso.setDateFormatString("dd/MM/y");
+        ingreso.setDateFormatString("dd-MMM-yyyy");
         ingreso.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
         DatosGenereales.add(ingreso, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 80, 170, -1));
 
@@ -786,7 +786,7 @@ public class Os extends javax.swing.JInternalFrame {
 
                 sql = ("insert into os (NumOs," //1
                         + "FechaIngreso," //2
-                        + "FechaEntrega," //3
+                        + "FechaSalida," //3
                         + "EmitidaPor," //4 
                         + "TecnicoAsignado,"//5
                         + "NombreCliente,"//6
@@ -875,7 +875,7 @@ public class Os extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
         String sql = ("Update os set "
                 + "FechaIngreso=?," //2
-                + "FechaEntrega=?," //3
+                + "FechaSalida=?," //3
                 + "EmitidaPor=?," //4 
                 + "TecnicoAsignado=?,"//5
                 + "NombreCliente=?,"//6

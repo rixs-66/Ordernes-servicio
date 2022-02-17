@@ -32,7 +32,7 @@ public class colorCelda extends DefaultTableCellRenderer {
             case "Asignado":
                 setBackground(new Color(36, 113, 163));
                 break;
-            case "Terminada":
+            case "Terminado":
                 setBackground(new Color(133, 225, 150));
                 break;
             case "Cancelada":

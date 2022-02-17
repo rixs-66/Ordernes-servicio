@@ -504,7 +504,7 @@ public class EstadoOS extends javax.swing.JInternalFrame {
 
             String[] datos = new String[14];
 
-            String sql = "select * from os where Estatus= 'Terminada'";
+            String sql = "select * from os where Estatus= 'Terminado'";
             try {
 
                 Statement leer = conexion.createStatement();
@@ -662,7 +662,7 @@ public class EstadoOS extends javax.swing.JInternalFrame {
             ActualizarSeguimiento actualizarseguimiento = new ActualizarSeguimiento();
             actualizarseguimiento.setVisible(true);
         } else {
-            JOptionPane.showMessageDialog(null,"Selecciona una Orden de servicio");
+            JOptionPane.showMessageDialog(null, "Selecciona una Orden de servicio");
         }
 
 
@@ -670,7 +670,10 @@ public class EstadoOS extends javax.swing.JInternalFrame {
 
     private void jTableProcesoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableProcesoMouseClicked
         // TODO add your handling code here:
-
+        int seleccionar = jTableProceso.rowAtPoint(evt.getPoint());
+        NumOS = String.valueOf(jTableProceso.getValueAt(seleccionar, 0));
+        Status = String.valueOf(jTableProceso.getValueAt(seleccionar, 11));
+        Pago = String.valueOf(jTableProceso.getValueAt(seleccionar, 12));
 
     }//GEN-LAST:event_jTableProcesoMouseClicked
 
@@ -686,7 +689,7 @@ public class EstadoOS extends javax.swing.JInternalFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel Escritorio5;
     private javax.swing.JPanel Escritorio6;
-    private javax.swing.JTabbedPane Pestañas;
+    public static javax.swing.JTabbedPane Pestañas;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton5;

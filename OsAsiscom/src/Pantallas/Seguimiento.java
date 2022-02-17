@@ -320,6 +320,10 @@ public class Seguimiento extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
+        if (aux == null) {
+            JOptionPane.showMessageDialog(null, "Porfavor Selecciones un servicio");
+            
+        }
 
         String sql = "Delete from servicios where ID=?";
 
@@ -338,15 +342,18 @@ public class Seguimiento extends javax.swing.JFrame {
 
     private void guardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_guardarActionPerformed
         // TODO add your handling code here:
+
         String sql = "Update os set Seguimiento=?,"
                 + "Estatus=?,"
-                + "EstatusPago=? where numOs='"+ID.getText()+"'";
-        
+                + "EstatusPago=?,"
+                + "Total=? where numOs='" + ID.getText() + "'";
+
         try {
             pst = conexion.prepareStatement(sql);
             pst.setString(1, Seguimiento.getText());
             pst.setString(2, Estatus.getText());
             pst.setString(3, Pago.getText());
+            pst.setString(4, Total.getText());
             pst.executeUpdate();
             JOptionPane.showMessageDialog(null, "Seguimiento agregado correctamente");
             dispose();
@@ -355,6 +362,7 @@ public class Seguimiento extends javax.swing.JFrame {
         } catch (Exception e) {
 
         }
+        EstadoOS.Pestañas.setSelectedIndex(2);
     }//GEN-LAST:event_guardarActionPerformed
 
     /**

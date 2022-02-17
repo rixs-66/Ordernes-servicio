@@ -8,6 +8,7 @@ package Pantallas;
 
 
 
+import java.awt.Color;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import javax.sound.sampled.AudioSystem;
@@ -101,6 +102,7 @@ public class Dashboard extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Sistema de ordenes de servicio ");
+        setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         setUndecorated(true);
         setResizable(false);
 
@@ -286,11 +288,13 @@ public class Dashboard extends javax.swing.JFrame {
         titulo.setText("Sistema de ordenes de servicio");
         bar.add(titulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 0, -1, 40));
 
+        minimizar.setBackground(new java.awt.Color(153, 153, 153));
         minimizar.setFont(new java.awt.Font("Roboto", 1, 24)); // NOI18N
         minimizar.setForeground(new java.awt.Color(255, 255, 255));
         minimizar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         minimizar.setText("-");
         minimizar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        minimizar.setOpaque(true);
         minimizar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 minimizarMouseClicked(evt);
@@ -298,14 +302,27 @@ public class Dashboard extends javax.swing.JFrame {
         });
         bar.add(minimizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(1460, 0, 40, 40));
 
+        cerrar.setBackground(new java.awt.Color(153, 153, 153));
         cerrar.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
         cerrar.setForeground(new java.awt.Color(255, 255, 255));
         cerrar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         cerrar.setText("X");
         cerrar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        cerrar.setOpaque(true);
+        cerrar.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                cerrarFocusGained(evt);
+            }
+        });
         cerrar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 cerrarMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                cerrarMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                cerrarMouseExited(evt);
             }
         });
         bar.add(cerrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(1500, 0, 40, 40));
@@ -416,6 +433,20 @@ public class Dashboard extends javax.swing.JFrame {
         Escritorio.removeAll();
         Escritorio.add(estadoOS).setVisible(true);
     }//GEN-LAST:event_btnEstadoOs2ActionPerformed
+
+    private void cerrarFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_cerrarFocusGained
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cerrarFocusGained
+
+    private void cerrarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cerrarMouseEntered
+        // TODO add your handling code here:
+        cerrar.setBackground(Color.red);
+    }//GEN-LAST:event_cerrarMouseEntered
+
+    private void cerrarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cerrarMouseExited
+        // TODO add your handling code here:
+        cerrar.setBackground(new Color(153,153,153));
+    }//GEN-LAST:event_cerrarMouseExited
 
     /**
      * @param args the command line arguments

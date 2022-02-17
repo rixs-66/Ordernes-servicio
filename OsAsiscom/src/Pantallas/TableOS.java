@@ -47,7 +47,7 @@ public class TableOS extends javax.swing.JFrame {
         DefaultTableModel tgeneral = new DefaultTableModel();
         tgeneral.addColumn("NumeroOS");
         tgeneral.addColumn("Fecha Ingreso");
-        tgeneral.addColumn("Fecha Entrega");
+        tgeneral.addColumn("Fecha Salida");
         tgeneral.addColumn("Emitida por");
         tgeneral.addColumn("Tecnico Asignado");
         tgeneral.addColumn("Nombre Cliente");
@@ -241,7 +241,7 @@ public class TableOS extends javax.swing.JFrame {
         DefaultTableModel tgeneral = new DefaultTableModel();
         tgeneral.addColumn("NumeroOS");
         tgeneral.addColumn("Fecha Ingreso");
-        tgeneral.addColumn("Fecha Entrega");
+        tgeneral.addColumn("Fecha Salida");
         tgeneral.addColumn("Emitida por");
         tgeneral.addColumn("Tecnico Asignado");
         tgeneral.addColumn("Nombre Cliente");
@@ -331,7 +331,7 @@ public class TableOS extends javax.swing.JFrame {
     private void selectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_selectActionPerformed
         // TODO add your handling code here:
 
-        System.out.println("holamundo");
+        
 
         Os.Actualizar.setEnabled(true);
         Os.numOS.setText(NumOs);

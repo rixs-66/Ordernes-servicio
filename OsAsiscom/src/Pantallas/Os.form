@@ -256,7 +256,7 @@
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Roboto" size="14" style="1"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Fecha de entrega"/>
+                <Property name="text" type="java.lang.String" value="Fecha de Salida"/>
               </Properties>
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
@@ -348,7 +348,7 @@
             </Component>
             <Component class="com.toedter.calendar.JDateChooser" name="Salida">
               <Properties>
-                <Property name="dateFormatString" type="java.lang.String" value="dd/MM/y"/>
+                <Property name="dateFormatString" type="java.lang.String" value="dd-MMM-yyyy"/>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Roboto" size="14" style="0"/>
                 </Property>
@@ -364,7 +364,7 @@
             </Component>
             <Component class="com.toedter.calendar.JDateChooser" name="ingreso">
               <Properties>
-                <Property name="dateFormatString" type="java.lang.String" value="dd/MM/y"/>
+                <Property name="dateFormatString" type="java.lang.String" value="dd-MMM-yyyy"/>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Roboto" size="14" style="0"/>
                 </Property>

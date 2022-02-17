@@ -23,7 +23,6 @@ public class ActualizarSeguimiento extends javax.swing.JFrame {
     PreparedStatement pst = null;
     ResultSet rs = null;
     Statement st = null;
-    
 
     public static String aux;
 
@@ -36,26 +35,32 @@ public class ActualizarSeguimiento extends javax.swing.JFrame {
         tableprecios.addColumn("Servicio");
         tableprecios.addColumn("Precio");
         Servicios.setModel(tableprecios);
-        
+
         conexion = conexionS.conn();
         cargarCombobox();
         ID.setText(EstadoOS.NumOS);
         CargarDatos();
         suma();
         Total.setEnabled(false);
-        
-        Estatus.setText("En proceso");
+
+        Estatus.setText(EstadoOS.Status);
         Pago.setText(EstadoOS.Pago);
-        
+        try {
+            cbEstatus.setSelectedItem(EstadoOS.Status);
+            cbPago.setSelectedItem(EstadoOS.Pago);
+
+        } catch (Exception E) {
+        }
+
     }
 
     private void suma() {
 
-        int  contar = Servicios.getRowCount();
+        int contar = Servicios.getRowCount();
         int suma = 0;
         for (int i = 0; i < contar; i++) {
             suma += Integer.parseInt(Servicios.getValueAt(i, 2).toString());
-            
+
         }
         Total.setText(String.valueOf(suma));
 
@@ -124,7 +129,7 @@ public class ActualizarSeguimiento extends javax.swing.JFrame {
         Seguimiento = new javax.swing.JTextArea();
         jLabel1 = new javax.swing.JLabel();
         cbPago = new javax.swing.JComboBox<>();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        cbEstatus = new javax.swing.JComboBox<>();
         jPanel1 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
 
@@ -209,6 +214,11 @@ public class ActualizarSeguimiento extends javax.swing.JFrame {
         jPanel2.add(Total, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 350, 70, -1));
 
         jButton3.setText("Guardar");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
         jPanel2.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 550, -1, -1));
 
         Seguimiento.setColumns(20);
@@ -241,8 +251,13 @@ public class ActualizarSeguimiento extends javax.swing.JFrame {
         });
         jPanel2.add(cbPago, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 300, -1, -1));
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "En proceso", "Terminado" }));
-        jPanel2.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 300, -1, -1));
+        cbEstatus.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "En proceso", "Terminado" }));
+        cbEstatus.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cbEstatusItemStateChanged(evt);
+            }
+        });
+        jPanel2.add(cbEstatus, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 300, -1, -1));
 
         jLabel4.setFont(new java.awt.Font("Roboto", 1, 14)); // NOI18N
         jLabel4.setText("Actualizar Seguimiento");
@@ -306,36 +321,36 @@ public class ActualizarSeguimiento extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        
-        try{
-        String sql = "select * from catalogoprecios where descripcion='" + cbServicios.getSelectedItem().toString() + "'";
 
         try {
-            Statement leer = conexion.createStatement();
-            rs = leer.executeQuery(sql);
-            if (rs.next()) {
-                String descripcion = rs.getString(2);
-                String precio = rs.getString(3);
+            String sql = "select * from catalogoprecios where descripcion='" + cbServicios.getSelectedItem().toString() + "'";
 
-                sql = ("insert into servicios (numOs,Servicio,Precio)values(?,?,?)");
-                pst = conexion.prepareStatement(sql);
-                pst.setString(1, ID.getText());
-                pst.setString(2, descripcion);
-                pst.setString(3, precio);
-                pst.executeUpdate();
-                JOptionPane.showMessageDialog(null, "Servicio agregado con Exito");
-                CargarDatos();
+            try {
+                Statement leer = conexion.createStatement();
+                rs = leer.executeQuery(sql);
+                if (rs.next()) {
+                    String descripcion = rs.getString(2);
+                    String precio = rs.getString(3);
 
-            } else {
-                JOptionPane.showMessageDialog(null, "selecciona un servicio");
+                    sql = ("insert into servicios (numOs,Servicio,Precio)values(?,?,?)");
+                    pst = conexion.prepareStatement(sql);
+                    pst.setString(1, ID.getText());
+                    pst.setString(2, descripcion);
+                    pst.setString(3, precio);
+                    pst.executeUpdate();
+                    JOptionPane.showMessageDialog(null, "Servicio agregado con Exito");
+                    CargarDatos();
+
+                } else {
+                    JOptionPane.showMessageDialog(null, "selecciona un servicio");
+                }
+
+            } catch (SQLException ex) {
+                Logger.getLogger(ActualizarSeguimiento.class.getName()).log(Level.SEVERE, null, ex);
             }
+            suma();
+        } catch (Exception e) {
 
-        } catch (SQLException ex) {
-            Logger.getLogger(ActualizarSeguimiento.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        suma();
-        }catch(Exception e){
-            
         }
 
 
@@ -369,9 +384,41 @@ public class ActualizarSeguimiento extends javax.swing.JFrame {
 
     private void cbPagoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbPagoItemStateChanged
         // TODO add your handling code here:
-        
+
         Pago.setText(cbPago.getSelectedItem().toString());
+
     }//GEN-LAST:event_cbPagoItemStateChanged
+
+    private void cbEstatusItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbEstatusItemStateChanged
+        // TODO add your handling code here:
+
+        Estatus.setText(cbEstatus.getSelectedItem().toString());
+
+    }//GEN-LAST:event_cbEstatusItemStateChanged
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+        String sql = "Update os set Seguimiento=?,"
+                + "Estatus=?,"
+                + "EstatusPago=?,"
+                + "Total=? where numOs='" + ID.getText() + "'";
+
+        try {
+            pst = conexion.prepareStatement(sql);
+            pst.setString(1, Seguimiento.getText());
+            pst.setString(2, Estatus.getText());
+            pst.setString(3, Pago.getText());
+            pst.setString(4, Total.getText());
+            pst.executeUpdate();
+            JOptionPane.showMessageDialog(null, "Seguimiento agregado correctamente");
+            dispose();
+            ID.setText("");
+
+        } catch (Exception e) {
+
+        }
+        EstadoOS.Pestañas.setSelectedIndex(2);
+    }//GEN-LAST:event_jButton3ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -416,13 +463,13 @@ public class ActualizarSeguimiento extends javax.swing.JFrame {
     private javax.swing.JTextArea Seguimiento;
     public static javax.swing.JTable Servicios;
     private javax.swing.JTextField Total;
+    private javax.swing.JComboBox<String> cbEstatus;
     private javax.swing.JComboBox<String> cbPago;
     private javax.swing.JComboBox<String> cbServicios;
     private javax.swing.JLabel contador;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
-    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
