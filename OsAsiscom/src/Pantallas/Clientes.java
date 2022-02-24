@@ -25,6 +25,7 @@ public class Clientes extends javax.swing.JInternalFrame {
     public static String id, direccion, nombre, telefono,  correo;
 
     public Clientes() {
+        
         initComponents();
         this.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 0, 0));
         BasicInternalFrameUI ui = (BasicInternalFrameUI) this.getUI();

@@ -12,6 +12,7 @@ import javax.swing.table.DefaultTableModel;
 import java.sql.*;
 import clases.conexionS;
 import Pantallas.Os;
+import javax.swing.ImageIcon;
 
 /**
  *
@@ -31,6 +32,7 @@ public class TableClient extends javax.swing.JFrame {
      */
     public TableClient() {
         initComponents();
+        setIconImage(new ImageIcon(getClass().getResource("/icons/logo.png")).getImage());
         conexion = conexionS.conn();
         mostrarDatos();
     }
@@ -210,7 +212,7 @@ public class TableClient extends javax.swing.JFrame {
 
         String sql = "select * from clientes where nombre=?";
 
-        if (Buscar.getText().isBlank()) {
+        if (Buscar.getText().isEmpty()) {
 
         }
         try {

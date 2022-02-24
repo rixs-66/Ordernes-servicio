@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Pantallas;
+package Tecnico;
 
+import Pantallas.*;
 import java.awt.Color;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -16,23 +17,25 @@ import javax.swing.JOptionPane;
  *
  * @author rica_
  */
-public class Dashboard extends javax.swing.JFrame {
+public class DashboardTC extends javax.swing.JFrame {
 
     /**
-     * Creates new form Dashboard
+     * Creates new form DashboardTC
      */
     public Clip clip;
     public String ruta = "/audio/";
 
-   
+    public void audio(String archivo) {
 
-    public Dashboard() {
+    }
+
+    public DashboardTC() {
         initComponents();
 
         try {
             ImageIcon icon = new ImageIcon(getClass().getResource("/Icons/logo.png"));
             setIconImage(icon.getImage());
-            
+
         } catch (Exception e) {
         }
 
@@ -68,16 +71,12 @@ public class Dashboard extends javax.swing.JFrame {
 
         background = new javax.swing.JPanel();
         navmenu = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
         nombre = new javax.swing.JLabel();
         puesto = new javax.swing.JLabel();
-        btnUsuarios = new javax.swing.JButton();
-        btnClientes = new javax.swing.JButton();
         btOs = new javax.swing.JButton();
-        btnAcerca = new javax.swing.JButton();
         jlfecha = new javax.swing.JLabel();
-        btnEstadoOs1 = new javax.swing.JButton();
         btnEstadoOs2 = new javax.swing.JButton();
+        RP = new javax.swing.JLabel();
         bar = new javax.swing.JPanel();
         titulo = new javax.swing.JLabel();
         minimizar = new javax.swing.JLabel();
@@ -98,45 +97,15 @@ public class Dashboard extends javax.swing.JFrame {
         navmenu.setBackground(new java.awt.Color(80, 34, 34));
         navmenu.setFont(new java.awt.Font("Roboto", 0, 12)); // NOI18N
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/uaser2.png"))); // NOI18N
-
-        nombre.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
+        nombre.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
         nombre.setForeground(new java.awt.Color(255, 255, 255));
         nombre.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         nombre.setText("Nombre de usuario");
 
-        puesto.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
+        puesto.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
         puesto.setForeground(new java.awt.Color(255, 255, 255));
         puesto.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         puesto.setText("Administrador");
-
-        btnUsuarios.setBackground(new java.awt.Color(80, 34, 34));
-        btnUsuarios.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
-        btnUsuarios.setForeground(new java.awt.Color(255, 255, 255));
-        btnUsuarios.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/user3.png"))); // NOI18N
-        btnUsuarios.setText("Usuarios");
-        btnUsuarios.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        btnUsuarios.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
-        btnUsuarios.setIconTextGap(10);
-        btnUsuarios.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnUsuariosActionPerformed(evt);
-            }
-        });
-
-        btnClientes.setBackground(new java.awt.Color(80, 34, 34));
-        btnClientes.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
-        btnClientes.setForeground(new java.awt.Color(255, 255, 255));
-        btnClientes.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/clientes.png"))); // NOI18N
-        btnClientes.setText("Clientes");
-        btnClientes.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        btnClientes.setIconTextGap(10);
-        btnClientes.setVerifyInputWhenFocusTarget(false);
-        btnClientes.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnClientesActionPerformed(evt);
-            }
-        });
 
         btOs.setBackground(new java.awt.Color(80, 34, 34));
         btOs.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
@@ -152,36 +121,10 @@ public class Dashboard extends javax.swing.JFrame {
             }
         });
 
-        btnAcerca.setBackground(new java.awt.Color(80, 34, 34));
-        btnAcerca.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
-        btnAcerca.setForeground(new java.awt.Color(255, 255, 255));
-        btnAcerca.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/acerca.png"))); // NOI18N
-        btnAcerca.setText("Acerca de ");
-        btnAcerca.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        btnAcerca.setIconTextGap(10);
-        btnAcerca.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAcercaActionPerformed(evt);
-            }
-        });
-
         jlfecha.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
         jlfecha.setForeground(new java.awt.Color(255, 255, 255));
         jlfecha.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jlfecha.setText("Fecha y hora");
-
-        btnEstadoOs1.setBackground(new java.awt.Color(80, 34, 34));
-        btnEstadoOs1.setFont(new java.awt.Font("Roboto", 0, 12)); // NOI18N
-        btnEstadoOs1.setForeground(new java.awt.Color(255, 255, 255));
-        btnEstadoOs1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/icons8_receipt_dollar_32px_1.png"))); // NOI18N
-        btnEstadoOs1.setText("Tabla Precios");
-        btnEstadoOs1.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        btnEstadoOs1.setIconTextGap(10);
-        btnEstadoOs1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnEstadoOs1ActionPerformed(evt);
-            }
-        });
 
         btnEstadoOs2.setBackground(new java.awt.Color(80, 34, 34));
         btnEstadoOs2.setFont(new java.awt.Font("Roboto", 0, 12)); // NOI18N
@@ -196,54 +139,43 @@ public class Dashboard extends javax.swing.JFrame {
             }
         });
 
+        RP.setFont(new java.awt.Font("Roboto", 0, 24)); // NOI18N
+        RP.setForeground(new java.awt.Color(255, 255, 255));
+        RP.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        RP.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/soporte-tecnico.png"))); // NOI18N
+        RP.setPreferredSize(new java.awt.Dimension(218, 218));
+
         javax.swing.GroupLayout navmenuLayout = new javax.swing.GroupLayout(navmenu);
         navmenu.setLayout(navmenuLayout);
         navmenuLayout.setHorizontalGroup(
             navmenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(navmenuLayout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(navmenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(navmenuLayout.createSequentialGroup()
-                        .addGap(50, 50, 50)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(navmenuLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(navmenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnAcerca, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btOs, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 218, Short.MAX_VALUE)
-                            .addComponent(btnClientes, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnUsuarios, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnEstadoOs1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnEstadoOs2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jlfecha, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addComponent(nombre, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(puesto, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(btOs, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnEstadoOs2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jlfecha, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(RP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(puesto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         navmenuLayout.setVerticalGroup(
             navmenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(navmenuLayout.createSequentialGroup()
-                .addContainerGap(70, Short.MAX_VALUE)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(36, 36, 36)
-                .addComponent(nombre)
-                .addGap(21, 21, 21)
+                .addContainerGap()
                 .addComponent(puesto)
-                .addGap(39, 39, 39)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(RP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(nombre)
+                .addGap(77, 77, 77)
                 .addComponent(jlfecha, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(54, 54, 54)
-                .addComponent(btnUsuarios, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnClientes, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(269, 269, 269)
                 .addComponent(btOs, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(5, 5, 5)
                 .addComponent(btnEstadoOs2, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnEstadoOs1, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(btnAcerca, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(36, 36, 36))
+                .addGap(19, 19, 19))
         );
 
         background.add(navmenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 40, 230, 770));
@@ -361,38 +293,6 @@ public class Dashboard extends javax.swing.JFrame {
         this.setExtendedState(ICONIFIED);
     }//GEN-LAST:event_minimizarMouseClicked
 
-    private void btnUsuariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUsuariosActionPerformed
-        // TODO add your handling code here:
-        Usuarios usuarios = new Usuarios();
-        Escritorio.removeAll();
-        Escritorio.add(usuarios).setVisible(true);
-
-
-    }//GEN-LAST:event_btnUsuariosActionPerformed
-
-    private void btnEstadoOs1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEstadoOs1ActionPerformed
-        // TODO add your handling code here:
-
-        Precios precios = new Precios();
-        Escritorio.removeAll();
-        Escritorio.add(precios).setVisible(true);
-    }//GEN-LAST:event_btnEstadoOs1ActionPerformed
-
-    private void btnAcercaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAcercaActionPerformed
-        // TODO add your handling code here:
-
-        Acerca acerca = new Acerca();
-        acerca.setVisible(true);
-
-    }//GEN-LAST:event_btnAcercaActionPerformed
-
-    private void btnClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClientesActionPerformed
-        // TODO add your handling code here:
-        Clientes clientes = new Clientes();
-        Escritorio.removeAll();
-        Escritorio.add(clientes).setVisible(true);
-    }//GEN-LAST:event_btnClientesActionPerformed
-
     private void btOsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btOsActionPerformed
         // TODO add your handling code here:
         Os os = new Os();
@@ -404,9 +304,10 @@ public class Dashboard extends javax.swing.JFrame {
     private void btnEstadoOs2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEstadoOs2ActionPerformed
         // TODO add your handling code here:
 
-        EstadoOS estadoOS = new EstadoOS();
+        EstadoOSTC tecnico = new EstadoOSTC();
         Escritorio.removeAll();
-        Escritorio.add(estadoOS).setVisible(true);
+        Escritorio.add(tecnico).setVisible(true);
+        
     }//GEN-LAST:event_btnEstadoOs2ActionPerformed
 
     private void cerrarFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_cerrarFocusGained
@@ -427,7 +328,7 @@ public class Dashboard extends javax.swing.JFrame {
         // TODO add your handling code here:
 
         minimizar.setBackground(new Color(97, 183, 255));
-             
+
     }//GEN-LAST:event_minimizarMouseEntered
 
     private void minimizarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_minimizarMouseExited
@@ -452,38 +353,37 @@ public class Dashboard extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Dashboard.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(DashboardTC.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Dashboard.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(DashboardTC.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Dashboard.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(DashboardTC.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Dashboard.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(DashboardTC.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
         //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Dashboard().setVisible(true);
+                new DashboardTC().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public static javax.swing.JPanel Escritorio;
+    private javax.swing.JLabel RP;
     private javax.swing.JPanel background;
     private javax.swing.JPanel bar;
     private javax.swing.JButton btOs;
-    private javax.swing.JButton btnAcerca;
-    private javax.swing.JButton btnClientes;
-    private javax.swing.JButton btnEstadoOs1;
     private javax.swing.JButton btnEstadoOs2;
-    private javax.swing.JButton btnUsuarios;
     private javax.swing.JLabel cerrar;
     private javax.swing.JLabel iconLogo;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jlfecha;
     private javax.swing.JLabel minimizar;
     private javax.swing.JPanel navmenu;

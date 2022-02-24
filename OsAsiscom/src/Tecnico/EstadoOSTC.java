@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Pantallas;
+package Tecnico;
 
+import Pantallas.*;
 import clases.*;
 import clases.conexionS;
 import java.sql.*;
@@ -14,7 +15,6 @@ import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.plaf.basic.BasicInternalFrameUI;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableRowSorter;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.view.JasperViewer;
@@ -23,7 +23,7 @@ import net.sf.jasperreports.view.JasperViewer;
  *
  * @author rica_
  */
-public class EstadoOS extends javax.swing.JInternalFrame {
+public class EstadoOSTC extends javax.swing.JInternalFrame {
 
     Connection conexion = null;
     PreparedStatement pst = null;
@@ -34,7 +34,7 @@ public class EstadoOS extends javax.swing.JInternalFrame {
     /**
      * Creates new form EstadoOS
      */
-    public EstadoOS() {
+    public EstadoOSTC() {
         initComponents();
         this.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 0, 0));
         BasicInternalFrameUI ui = (BasicInternalFrameUI) this.getUI();
@@ -113,7 +113,6 @@ public class EstadoOS extends javax.swing.JInternalFrame {
         jScrollPane7 = new javax.swing.JScrollPane();
         jTableProceso = new javax.swing.JTable();
         btnActualizaSeguimiento = new javax.swing.JButton();
-        verSeguimiento = new javax.swing.JButton();
         jPanel6 = new javax.swing.JPanel();
         jScrollPane6 = new javax.swing.JScrollPane();
         jTableTerminadas = new javax.swing.JTable();
@@ -283,14 +282,6 @@ public class EstadoOS extends javax.swing.JInternalFrame {
         });
         Escritorio5.add(btnActualizaSeguimiento, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
 
-        verSeguimiento.setText("Ver seguimiento");
-        verSeguimiento.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                verSeguimientoActionPerformed(evt);
-            }
-        });
-        Escritorio5.add(verSeguimiento, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 10, -1, -1));
-
         Pestañas.addTab("En proceso", Escritorio5);
 
         jPanel6.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -422,7 +413,7 @@ public class EstadoOS extends javax.swing.JInternalFrame {
 
             String[] datos = new String[13];
 
-            String sql = "select * from os";
+            String sql = "select * from os where TecnicoAsignado='"+DashboardTC.nombre.getText()+"'";
             try {
 
                 Statement leer = conexion.createStatement();
@@ -447,7 +438,6 @@ public class EstadoOS extends javax.swing.JInternalFrame {
 
                 }
                 jTableGeneral.setModel(tgeneral);
-               
                 conexion.close();
 
             } catch (Exception e) {
@@ -476,7 +466,7 @@ public class EstadoOS extends javax.swing.JInternalFrame {
 
             String[] datos = new String[14];
 
-            String sql = "select * from os where Estatus= 'En proceso'";
+            String sql = "select * from os where Estatus= 'En proceso' and TecnicoAsignado='"+DashboardTC.nombre.getText()+"'";
             try {
 
                 Statement leer = conexion.createStatement();
@@ -530,7 +520,7 @@ public class EstadoOS extends javax.swing.JInternalFrame {
 
             String[] datos = new String[14];
 
-            String sql = "select * from os where Estatus= 'Terminado'";
+            String sql = "select * from os where Estatus= 'Terminado' and TecnicoAsignado='"+DashboardTC.nombre.getText()+"'";
             try {
 
                 Statement leer = conexion.createStatement();
@@ -583,7 +573,7 @@ public class EstadoOS extends javax.swing.JInternalFrame {
 
             String[] datos = new String[14];
 
-            String sql = "select * from os where Estatus= 'Cancelada'";
+            String sql = "select * from os where Estatus= 'Cancelada' and TecnicoAsignado='"+DashboardTC.nombre.getText()+"'";
             try {
 
                 Statement leer = conexion.createStatement();
@@ -635,7 +625,7 @@ public class EstadoOS extends javax.swing.JInternalFrame {
 
             String[] datos = new String[14];
 
-            String sql = "select * from os where Estatus= 'Asignado'";
+            String sql = "select * from os where Estatus= 'Asignado' and TecnicoAsignado='"+DashboardTC.nombre.getText()+"'";
             try {
 
                 Statement leer = conexion.createStatement();
@@ -673,7 +663,7 @@ public class EstadoOS extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
 
         if (NumOS != null) {
-            Seguimiento seguimiento = new Seguimiento();
+            SeguimientoTC seguimiento = new SeguimientoTC();
             seguimiento.setVisible(true);
         } else {
             JOptionPane.showMessageDialog(null, "Seleccione una orden de servicio");
@@ -685,7 +675,7 @@ public class EstadoOS extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
 
         if (NumOS != null) {
-            ActualizarSeguimiento actualizarseguimiento = new ActualizarSeguimiento();
+            ActualizarSeguimientoTC actualizarseguimiento = new ActualizarSeguimientoTC();
             actualizarseguimiento.setVisible(true);
         } else {
             JOptionPane.showMessageDialog(null, "Selecciona una Orden de servicio");
@@ -747,15 +737,6 @@ public class EstadoOS extends javax.swing.JInternalFrame {
 
     }//GEN-LAST:event_ImprimirKeyPressed
 
-    private void verSeguimientoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_verSeguimientoActionPerformed
-        // TODO add your handling code here:
-        
-        JOptionPane.showMessageDialog(this, ui);
-        
-        
-        
-    }//GEN-LAST:event_verSeguimientoActionPerformed
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel Escritorio5;
@@ -782,6 +763,5 @@ public class EstadoOS extends javax.swing.JInternalFrame {
     private javax.swing.JTable jTableGeneral;
     public static javax.swing.JTable jTableProceso;
     private javax.swing.JTable jTableTerminadas;
-    private javax.swing.JButton verSeguimiento;
     // End of variables declaration//GEN-END:variables
 }

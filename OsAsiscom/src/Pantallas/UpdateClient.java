@@ -8,6 +8,7 @@ package Pantallas;
 import java.sql.*;
 import javax.swing.JOptionPane;
 import clases.conexionS;
+import javax.swing.ImageIcon;
 
 public class UpdateClient extends javax.swing.JFrame {
 
@@ -18,6 +19,7 @@ public class UpdateClient extends javax.swing.JFrame {
     public UpdateClient() {
 
         initComponents();
+        setIconImage(new ImageIcon(getClass().getResource("/icons/logo.png")).getImage());
 
         conexion = conexionS.conn();
 
@@ -25,7 +27,6 @@ public class UpdateClient extends javax.swing.JFrame {
         txtDireccion.setText(Clientes.direccion);
         txtTelefono.setText(Clientes.telefono);
         txtCorreo.setText(Clientes.correo);
-        
 
     }
 
@@ -34,7 +35,7 @@ public class UpdateClient extends javax.swing.JFrame {
                 + "nombre=?,"
                 + "direccion=?,"
                 + "telefono=?,"
-                + "correo=? where idCliente=" + Clientes.id ;
+                + "correo=? where idCliente=" + Clientes.id;
         try {
             if (txtNombre.getText().isEmpty()
                     || txtCorreo.getText().isEmpty()

@@ -8,36 +8,38 @@ package Pantallas;
 import java.sql.*;
 import javax.swing.JOptionPane;
 import clases.conexionS;
+import javax.swing.ImageIcon;
 
 public class UpdateUser extends javax.swing.JFrame {
-    
+
     Connection conexion = null;
     PreparedStatement pst = null;
     ResultSet rs = null;
-    
+
     public UpdateUser() {
-        
+
         initComponents();
-        
+        setIconImage(new ImageIcon(getClass().getResource("/icons/logo.png")).getImage());
+
         conexion = conexionS.conn();
-        
+
         txtnumEmpleado.setText(Usuarios.numE);
-        txtNombre.setText(Usuarios.nombre);   
+        txtNombre.setText(Usuarios.nombre);
         txtTelefono.setText(Usuarios.telefono);
         txtContraseña.setText(Usuarios.contraseña);
-        txtCorreo.setText(Usuarios.correo);        
+        txtCorreo.setText(Usuarios.correo);
         listPerfil.setSelectedItem(Usuarios.perfil);
-        
+
     }
-    
+
     private void actualizar() {
-        String sql="update empleados set "
+        String sql = "update empleados set "
                 + "numE=?,"
                 + "nombre=?,"
                 + "telefono=?,"
                 + "pass=?,"
                 + "correo=?,"
-                + "perfil=? where id="+Usuarios.id;
+                + "perfil=? where id=" + Usuarios.id;
         try {
             if (txtnumEmpleado.getText().isEmpty()
                     || txtNombre.getText().isEmpty()
@@ -63,7 +65,7 @@ public class UpdateUser extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, e);
         }
     }
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -238,7 +240,7 @@ public class UpdateUser extends javax.swing.JFrame {
     private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
         // TODO add your handling code here:
         actualizar();
-       
+
 
     }//GEN-LAST:event_btnUpdateActionPerformed
 

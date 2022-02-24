@@ -21,6 +21,7 @@ public class Precios extends javax.swing.JInternalFrame {
     PreparedStatement pst = null;
     ResultSet rs = null;
     Statement st = null;
+    public static String Id, Servicios, Precio;
 
     /**
      * Creates new form Precios
@@ -38,10 +39,11 @@ public class Precios extends javax.swing.JInternalFrame {
     private void mostrarDatos() {
 
         DefaultTableModel tableprecios = new DefaultTableModel();
+        tableprecios.addColumn("Id");
         tableprecios.addColumn("Servicio");
         tableprecios.addColumn("Precio");
         TablePrecios.setModel(tableprecios);
-        String[] datos = new String[2];
+        String[] datos = new String[3];
 
         String sql = "select * from Catalogoprecios";
         try {
@@ -50,8 +52,9 @@ public class Precios extends javax.swing.JInternalFrame {
             rs = leer.executeQuery(sql);
 
             while (rs.next()) {
-                datos[0] = rs.getString(2);
-                datos[1] = rs.getString(3);
+                datos[0] = rs.getString(1);
+                datos[1] = rs.getString(2);
+                datos[2] = rs.getString(3);
                 tableprecios.addRow(datos);
             }
             TablePrecios.setModel(tableprecios);
@@ -124,20 +127,64 @@ public class Precios extends javax.swing.JInternalFrame {
             }
         ));
         TablePrecios.setRowHeight(50);
+        TablePrecios.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                TablePreciosMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(TablePrecios);
 
         jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 110, 650, 620));
 
         jButton1.setText("Agregar");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
         jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 80, -1, -1));
 
-        jButton2.setText("Eliminar");
+        jButton2.setText("Actualizar");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
         jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 80, -1, -1));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1310, 740));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        AgregarServicio agregarservicio = new AgregarServicio();
+        agregarservicio.setVisible(true);
+
+
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void TablePreciosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TablePreciosMouseClicked
+        // TODO add your handling code here:
+
+        int seleccionar = TablePrecios.rowAtPoint(evt.getPoint());
+        Id = String.valueOf(TablePrecios.getValueAt(seleccionar, 0));
+        Servicios = String.valueOf(TablePrecios.getValueAt(seleccionar, 1));
+        Precio = String.valueOf(TablePrecios.getValueAt(seleccionar, 2));
+
+    }//GEN-LAST:event_TablePreciosMouseClicked
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        if (Id ==null) {
+            JOptionPane.showMessageDialog(null, "Selecciona un servicio");
+
+        } else {
+            ActualizarServicio updateservicio = new ActualizarServicio();
+            updateservicio.setVisible(true);
+        }
+    }//GEN-LAST:event_jButton2ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

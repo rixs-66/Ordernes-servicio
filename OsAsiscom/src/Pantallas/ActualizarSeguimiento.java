@@ -10,6 +10,7 @@ import clases.conexionS;
 import java.sql.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -23,6 +24,7 @@ public class ActualizarSeguimiento extends javax.swing.JFrame {
     PreparedStatement pst = null;
     ResultSet rs = null;
     Statement st = null;
+    
 
     public static String aux;
 
@@ -31,6 +33,7 @@ public class ActualizarSeguimiento extends javax.swing.JFrame {
      */
     public ActualizarSeguimiento() {
         initComponents();
+        setIconImage(new ImageIcon(getClass().getResource("/icons/logo.png")).getImage());
         DefaultTableModel tableprecios = new DefaultTableModel();
         tableprecios.addColumn("Servicio");
         tableprecios.addColumn("Precio");
@@ -51,7 +54,25 @@ public class ActualizarSeguimiento extends javax.swing.JFrame {
 
         } catch (Exception E) {
         }
+        cargarSeguimiento();
+        EstadoOS.NumOS = null;
 
+    }
+
+    private void cargarSeguimiento() {
+        String sql = "Select Seguimiento from os where NumOs='" + ID.getText() + "'";
+
+        try {
+            Statement leer = conexion.createStatement();
+            rs = leer.executeQuery(sql);
+            if (rs.next()) {
+
+                Seguimiento.setText(rs.getString(1));
+
+            }
+
+        } catch (Exception e) {
+        }
     }
 
     private void suma() {
@@ -132,6 +153,7 @@ public class ActualizarSeguimiento extends javax.swing.JFrame {
         cbEstatus = new javax.swing.JComboBox<>();
         jPanel1 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
+        Cancelar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setResizable(false);
@@ -278,6 +300,17 @@ public class ActualizarSeguimiento extends javax.swing.JFrame {
 
         jPanel2.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 580, 30));
 
+        Cancelar.setBackground(new java.awt.Color(255, 102, 102));
+        Cancelar.setForeground(new java.awt.Color(0, 0, 0));
+        Cancelar.setText("Cancelar Orden de servicio");
+        Cancelar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        Cancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CancelarActionPerformed(evt);
+            }
+        });
+        jPanel2.add(Cancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 550, -1, -1));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -414,11 +447,45 @@ public class ActualizarSeguimiento extends javax.swing.JFrame {
             dispose();
             ID.setText("");
 
+            if (Estatus.getText().equals("Terminado")) {
+
+                EstadoOS.Pestañas.setSelectedIndex(3);
+
+            }
         } catch (Exception e) {
 
         }
-        EstadoOS.Pestañas.setSelectedIndex(2);
+
     }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void CancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CancelarActionPerformed
+        // TODO add your handling code here:
+        
+           String sql = "Update os set Seguimiento=?,"
+                + "Estatus=?,"
+                + "EstatusPago=?,"
+                + "Total=? where numOs='" + ID.getText() + "'";
+
+        try {
+            pst = conexion.prepareStatement(sql);
+            pst.setString(1, Seguimiento.getText());
+            pst.setString(2, "Cancelada");
+            pst.setString(3, Pago.getText());
+            pst.setString(4, Total.getText());
+            pst.executeUpdate();
+            JOptionPane.showMessageDialog(null, "Seguimiento Cancelado correctamente");
+            dispose();
+            ID.setText("");
+
+            if (Estatus.getText().equals("Terminado")) {
+
+                EstadoOS.Pestañas.setSelectedIndex(3);
+
+            }
+        } catch (Exception e) {
+
+        }
+    }//GEN-LAST:event_CancelarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -457,6 +524,7 @@ public class ActualizarSeguimiento extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton Cancelar;
     private javax.swing.JLabel Estatus;
     private javax.swing.JLabel ID;
     private javax.swing.JLabel Pago;

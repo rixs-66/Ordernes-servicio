@@ -8,6 +8,7 @@ package Pantallas;
 import java.sql.*;
 import javax.swing.JOptionPane;
 import clases.conexionS;
+import javax.swing.ImageIcon;
 
 public class RegistroClient extends javax.swing.JFrame {
 
@@ -18,6 +19,7 @@ public class RegistroClient extends javax.swing.JFrame {
     public RegistroClient() {
 
         initComponents();
+        setIconImage(new ImageIcon(getClass().getResource("/icons/logo.png")).getImage());
 
         conexion = conexionS.conn();
     }
@@ -232,6 +234,10 @@ public class RegistroClient extends javax.swing.JFrame {
     private void btnInsertarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInsertarActionPerformed
         // TODO add your handling code here:
         insertar();
+        txtNombre.setText("");
+        txtDireccion.setText("");
+        txtCorreo.setText("");
+        txtTelefono.setText("");
 
 
     }//GEN-LAST:event_btnInsertarActionPerformed

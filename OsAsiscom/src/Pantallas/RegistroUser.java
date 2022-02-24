@@ -8,6 +8,7 @@ package Pantallas;
 import java.sql.*;
 import javax.swing.JOptionPane;
 import clases.conexionS;
+import javax.swing.ImageIcon;
 
 public class RegistroUser extends javax.swing.JFrame {
 
@@ -18,7 +19,7 @@ public class RegistroUser extends javax.swing.JFrame {
     public RegistroUser() {
 
         initComponents();
-       
+       setIconImage(new ImageIcon(getClass().getResource("/icons/logo.png")).getImage());
 
         conexion = conexionS.conn();
     }

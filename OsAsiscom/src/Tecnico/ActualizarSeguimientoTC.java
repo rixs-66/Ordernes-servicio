@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Pantallas;
+package Tecnico;
 
+import Pantallas.*;
 import clases.cbServicios;
 import clases.conexionS;
 import java.sql.*;
@@ -18,7 +19,7 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author rica_
  */
-public class Seguimiento extends javax.swing.JFrame {
+public class ActualizarSeguimientoTC extends javax.swing.JFrame {
 
     Connection conexion = null;
     PreparedStatement pst = null;
@@ -30,7 +31,7 @@ public class Seguimiento extends javax.swing.JFrame {
     /**
      * Creates new form Seguimiento
      */
-    public Seguimiento() {
+    public ActualizarSeguimientoTC() {
         initComponents();
         setIconImage(new ImageIcon(getClass().getResource("/icons/logo.png")).getImage());
         DefaultTableModel tableprecios = new DefaultTableModel();
@@ -40,14 +41,38 @@ public class Seguimiento extends javax.swing.JFrame {
 
         conexion = conexionS.conn();
         cargarCombobox();
-        ID.setText(EstadoOS.NumOS);
+        ID.setText(EstadoOSTC.NumOS);
         CargarDatos();
         suma();
         Total.setEnabled(false);
-        Estatus.setText("En proceso");
-        Pago.setText(EstadoOS.Pago);
-        EstadoOS.NumOS = null;  
 
+        Estatus.setText(EstadoOSTC.Status);
+        Pago.setText(EstadoOSTC.Pago);
+        try {
+            cbEstatus.setSelectedItem(EstadoOSTC.Status);
+            cbPago.setSelectedItem(EstadoOSTC.Pago);
+
+        } catch (Exception E) {
+        }
+        cargarSeguimiento();
+        EstadoOSTC.NumOS = null;
+
+    }
+
+    private void cargarSeguimiento() {
+        String sql = "Select Seguimiento from os where NumOs='" + ID.getText() + "'";
+
+        try {
+            Statement leer = conexion.createStatement();
+            rs = leer.executeQuery(sql);
+            if (rs.next()) {
+
+                Seguimiento.setText(rs.getString(1));
+
+            }
+
+        } catch (Exception e) {
+        }
     }
 
     private void suma() {
@@ -120,10 +145,15 @@ public class Seguimiento extends javax.swing.JFrame {
         jButton2 = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         Total = new javax.swing.JTextField();
-        guardar = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
         jScrollPane3 = new javax.swing.JScrollPane();
         Seguimiento = new javax.swing.JTextArea();
         jLabel1 = new javax.swing.JLabel();
+        cbPago = new javax.swing.JComboBox<>();
+        cbEstatus = new javax.swing.JComboBox<>();
+        jPanel1 = new javax.swing.JPanel();
+        jLabel4 = new javax.swing.JLabel();
+        Cancelar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setResizable(false);
@@ -133,7 +163,7 @@ public class Seguimiento extends javax.swing.JFrame {
 
         ID.setFont(new java.awt.Font("Roboto", 1, 14)); // NOI18N
         ID.setText("N° OS");
-        jPanel2.add(ID, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 20, 40, -1));
+        jPanel2.add(ID, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 40, 40, -1));
 
         jLabel2.setFont(new java.awt.Font("Roboto", 1, 14)); // NOI18N
         jLabel2.setText("Seguimiento");
@@ -205,13 +235,13 @@ public class Seguimiento extends javax.swing.JFrame {
         });
         jPanel2.add(Total, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 350, 70, -1));
 
-        guardar.setText("Guardar");
-        guardar.addActionListener(new java.awt.event.ActionListener() {
+        jButton3.setText("Guardar");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                guardarActionPerformed(evt);
+                jButton3ActionPerformed(evt);
             }
         });
-        jPanel2.add(guardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 550, -1, -1));
+        jPanel2.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 550, -1, -1));
 
         Seguimiento.setColumns(20);
         Seguimiento.setRows(5);
@@ -233,7 +263,53 @@ public class Seguimiento extends javax.swing.JFrame {
 
         jLabel1.setFont(new java.awt.Font("Roboto", 1, 14)); // NOI18N
         jLabel1.setText("Seguimiento de la orden de servicio numero:");
-        jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, -1, -1));
+        jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 40, -1, -1));
+
+        cbPago.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "No Pagado", "Pagado" }));
+        cbPago.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cbPagoItemStateChanged(evt);
+            }
+        });
+        jPanel2.add(cbPago, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 300, -1, -1));
+
+        cbEstatus.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "En proceso", "Terminado" }));
+        cbEstatus.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cbEstatusItemStateChanged(evt);
+            }
+        });
+        jPanel2.add(cbEstatus, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 300, -1, -1));
+
+        jLabel4.setFont(new java.awt.Font("Roboto", 1, 14)); // NOI18N
+        jLabel4.setText("Actualizar Seguimiento");
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(217, Short.MAX_VALUE)
+                .addComponent(jLabel4)
+                .addGap(213, 213, 213))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
+        );
+
+        jPanel2.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 580, 30));
+
+        Cancelar.setBackground(new java.awt.Color(255, 102, 102));
+        Cancelar.setForeground(new java.awt.Color(0, 0, 0));
+        Cancelar.setText("Cancelar Orden de servicio");
+        Cancelar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        Cancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CancelarActionPerformed(evt);
+            }
+        });
+        jPanel2.add(Cancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 550, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -303,7 +379,7 @@ public class Seguimiento extends javax.swing.JFrame {
                 }
 
             } catch (SQLException ex) {
-                Logger.getLogger(Seguimiento.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(ActualizarSeguimientoTC.class.getName()).log(Level.SEVERE, null, ex);
             }
             suma();
         } catch (Exception e) {
@@ -323,10 +399,6 @@ public class Seguimiento extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-        if (aux == null) {
-            JOptionPane.showMessageDialog(null, "Porfavor Selecciones un servicio");
-            
-        }
 
         String sql = "Delete from servicios where ID=?";
 
@@ -343,9 +415,22 @@ public class Seguimiento extends javax.swing.JFrame {
         suma();
     }//GEN-LAST:event_jButton2ActionPerformed
 
-    private void guardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_guardarActionPerformed
+    private void cbPagoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbPagoItemStateChanged
         // TODO add your handling code here:
 
+        Pago.setText(cbPago.getSelectedItem().toString());
+
+    }//GEN-LAST:event_cbPagoItemStateChanged
+
+    private void cbEstatusItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbEstatusItemStateChanged
+        // TODO add your handling code here:
+
+        Estatus.setText(cbEstatus.getSelectedItem().toString());
+
+    }//GEN-LAST:event_cbEstatusItemStateChanged
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
         String sql = "Update os set Seguimiento=?,"
                 + "Estatus=?,"
                 + "EstatusPago=?,"
@@ -362,11 +447,41 @@ public class Seguimiento extends javax.swing.JFrame {
             dispose();
             ID.setText("");
 
+            if (Estatus.getText().equals("Terminado")) {
+
+                EstadoOSTC.Pestañas.setSelectedIndex(3);
+
+            }
         } catch (Exception e) {
 
         }
-        EstadoOS.Pestañas.setSelectedIndex(2);
-    }//GEN-LAST:event_guardarActionPerformed
+
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void CancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CancelarActionPerformed
+        // TODO add your handling code here:
+
+        String sql = "Update os set Seguimiento=?,"
+                + "Estatus=?,"
+                + "EstatusPago=?,"
+                + "Total=? where numOs='" + ID.getText() + "'";
+
+        try {
+            pst = conexion.prepareStatement(sql);
+            pst.setString(1, Seguimiento.getText());
+            pst.setString(2, "Cancelada");
+            pst.setString(3, Pago.getText());
+            pst.setString(4, Total.getText());
+            pst.executeUpdate();
+            JOptionPane.showMessageDialog(null, "Seguimiento Cancelado correctamente");
+            dispose();
+            ID.setText("");
+
+            EstadoOSTC.Pestañas.setSelectedIndex(4);
+
+        } catch (Exception e) {
+        }
+    }//GEN-LAST:event_CancelarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -385,39 +500,51 @@ public class Seguimiento extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Seguimiento.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ActualizarSeguimientoTC.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Seguimiento.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ActualizarSeguimientoTC.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Seguimiento.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ActualizarSeguimientoTC.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Seguimiento.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ActualizarSeguimientoTC.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Seguimiento().setVisible(true);
+                new ActualizarSeguimientoTC().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton Cancelar;
     private javax.swing.JLabel Estatus;
     private javax.swing.JLabel ID;
     private javax.swing.JLabel Pago;
     private javax.swing.JTextArea Seguimiento;
     public static javax.swing.JTable Servicios;
     private javax.swing.JTextField Total;
+    private javax.swing.JComboBox<String> cbEstatus;
+    private javax.swing.JComboBox<String> cbPago;
     private javax.swing.JComboBox<String> cbServicios;
     private javax.swing.JLabel contador;
-    private javax.swing.JButton guardar;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;

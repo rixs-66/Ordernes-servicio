@@ -5,14 +5,16 @@
  */
 package Pantallas;
 
+import Tecnico.*;
 import java.awt.Image;
-import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import java.sql.*;
 import javax.sound.sampled.AudioSystem;
 import javax.swing.JOptionPane;
 import clases.conexionS;
+import java.awt.event.KeyEvent;
 import javax.sound.sampled.Clip;
+import Recepcion.*;
 
 /**
  *
@@ -32,7 +34,7 @@ public class Login extends javax.swing.JFrame {
             clip = AudioSystem.getClip();
             clip.open(AudioSystem.getAudioInputStream(getClass().getResource(ruta + archivo + ".wav")));
             clip.start();
-            
+
         } catch (Exception e) {
         }
 
@@ -56,6 +58,7 @@ public class Login extends javax.swing.JFrame {
             //ingresara a la sesion
             if (rs.next()) {
                 String validarLogin = rs.getString(7);
+                
 
                 if (validarLogin.equals("Administrador")) {
                     audio("bells");
@@ -63,17 +66,29 @@ public class Login extends javax.swing.JFrame {
                     Dashboard principal = new Dashboard();
                     principal.setVisible(true);
                     Dashboard.nombre.setText(rs.getString(3));
-                    Dashboard.puesto.setText(rs.getString(7));                    
+                    Dashboard.puesto.setText(rs.getString(7));
                     this.dispose();
                     conexion.close();
+
+                } else if (validarLogin.equals("Recepcion")) {
+                    audio("bells");
+                    JOptionPane.showMessageDialog(null, "Bienvenido " + usuario);
+                    DashboardRP principal = new DashboardRP();
+                    principal.setVisible(true);
+                    DashboardRP.nombre.setText(rs.getString(3));
+                    DashboardRP.puesto.setText(rs.getString(7));
                     
+                    this.dispose();
+                    conexion.close();
                 } else if (validarLogin.equals("Técnico")) {
                     audio("bells");
                     JOptionPane.showMessageDialog(null, "Bienvenido " + usuario);
-                    Dashboard principal = new Dashboard();
-                    principal.setVisible(true);
-                    Dashboard.nombre.setText(rs.getString(3));
-                    Dashboard.puesto.setText(rs.getString(7));                    
+                    DashboardTC principal = new DashboardTC();
+                    principal.setVisible(true);                    
+                    DashboardTC.nombre.setText(rs.getString(3));
+                    DashboardTC.puesto.setText(rs.getString(7));
+                    
+                    
                     this.dispose();
                     conexion.close();
                 }
@@ -91,41 +106,41 @@ public class Login extends javax.swing.JFrame {
 
     public Login() {
         initComponents();
-        
+        conexion = conexionS.conn();
+
         try {
-            setIconImage(new ImageIcon(getClass().getResource("../icons/logo.png")).getImage());
+            ImageIcon icon = new ImageIcon(getClass().getResource("/Icons/logo.png"));
+            setIconImage(icon.getImage());
+
         } catch (Exception e) {
         }
 
-
-        ImageIcon imgUser = new ImageIcon("src/Icons/user.png");
-        Icon iconUser = new ImageIcon(imgUser.getImage().getScaledInstance(
+        ImageIcon imgUser = new ImageIcon(getClass().getResource("/Icons/logo.png"));
+        ImageIcon iconUser = new ImageIcon(imgUser.getImage().getScaledInstance(
                 lbUser.getWidth(), lbUser.getHeight(), Image.SCALE_DEFAULT));
         lbUser.setIcon(iconUser);
         this.repaint();
 
-        ImageIcon imgLista = new ImageIcon("src/Icons/lista.png");
-        Icon iconLista = new ImageIcon(imgLista.getImage().getScaledInstance(
+        ImageIcon imgLista = new ImageIcon(getClass().getResource("/Icons/lista.png"));
+        ImageIcon iconLista = new ImageIcon(imgLista.getImage().getScaledInstance(
                 lbLista.getWidth(), lbLista.getHeight(), Image.SCALE_DEFAULT));
         lbLista.setIcon(iconLista);
         this.repaint();
-
-        conexion = conexionS.conn();
         if (conexion != null) {
-            lbStatus.setText("Conectado a la base de datos de Asiscom");
-            ImageIcon DBimg = new ImageIcon("src/Icons/db.png");
-            Icon DBicon = new ImageIcon(DBimg.getImage().getScaledInstance(
-                    DB.getWidth(), DB.getHeight(), Image.SCALE_DEFAULT));
-            DB.setIcon(DBicon);
+            lbStatus.setText("Conectado a la Base de datos de ASISCOM");
+            ImageIcon DB1 = new ImageIcon(getClass().getResource("/Icons/DB.png"));
+            DB.setIcon(DB1);
             this.repaint();
-        } else {
-            lbStatus.setText("Fallo en la conexion");
-            ImageIcon DBimg = new ImageIcon("src/Icons/error.png");
-            Icon DBicon = new ImageIcon(DBimg.getImage().getScaledInstance(
-                    DB.getWidth(), DB.getHeight(), Image.SCALE_DEFAULT));
-            DB.setIcon(DBicon);
+
+        } else if (conexion == null) {
+            lbStatus.setText("Problemas de Conexion");
+            ImageIcon DB1 = new ImageIcon(getClass().getResource("/Icons/error.png"));
+            DB.setIcon(DB1);
+            this.repaint();
         }
 
+//       
+//       
     }
 
     /**
@@ -239,7 +254,7 @@ public class Login extends javax.swing.JFrame {
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("X");
-        jLabel1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jLabel1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jLabel1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jLabel1MouseClicked(evt);
@@ -272,11 +287,21 @@ public class Login extends javax.swing.JFrame {
                 jButton1ActionPerformed(evt);
             }
         });
+        jButton1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jButton1KeyPressed(evt);
+            }
+        });
 
         txtPass.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
         txtPass.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtPassActionPerformed(evt);
+            }
+        });
+        txtPass.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtPassKeyPressed(evt);
             }
         });
 
@@ -371,22 +396,22 @@ public class Login extends javax.swing.JFrame {
 
     private void actualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_actualizarActionPerformed
         // TODO add your handling code here:
-        conexion = conexionS.conn();
-        if (conexion != null) {
-            lbStatus.setText("Conectado a la base de datos de Asiscom");
-            ImageIcon DBimg = new ImageIcon("src/Icons/db.png");
-            Icon DBicon = new ImageIcon(DBimg.getImage().getScaledInstance(
-                    DB.getWidth(), DB.getHeight(), Image.SCALE_DEFAULT));
-            DB.setIcon(DBicon);
-            this.repaint();
-        } else {
-            lbStatus.setText("Fallo en la conexion");
-            ImageIcon DBimg = new ImageIcon("src/Icons/error.png");
-            Icon DBicon = new ImageIcon(DBimg.getImage().getScaledInstance(
-                    DB.getWidth(), DB.getHeight(), Image.SCALE_DEFAULT));
-            DB.setIcon(DBicon);
-        }
+
     }//GEN-LAST:event_actualizarActionPerformed
+
+    private void jButton1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jButton1KeyPressed
+        // TODO add your handling code here:
+
+    }//GEN-LAST:event_jButton1KeyPressed
+
+    private void txtPassKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPassKeyPressed
+        // TODO add your handling code here:
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+
+            IniciarSesion();
+
+        }
+    }//GEN-LAST:event_txtPassKeyPressed
 
     /**
      * @param args the command line arguments

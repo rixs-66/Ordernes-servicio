@@ -24,7 +24,7 @@ public class conexionS {
         //llamamos la libreria
         String driver = "com.mysql.cj.jdbc.Driver";
         //informacion de la base de datos
-        String url = "jdbc:mysql://localhost:3306/dbasiscom";
+        String url = "jdbc:mysql://localhost:3306/dbasiscom?useUnicode=true&characterEncoding=UTF-8";
         String user = "root";
         String password = "";
 

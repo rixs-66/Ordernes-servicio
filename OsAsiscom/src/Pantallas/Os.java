@@ -717,9 +717,9 @@ public class Os extends javax.swing.JInternalFrame {
 
                         pst = conexion.prepareStatement(sql);
                         pst.setString(1, Nombre.getText());
-                        pst.setString(2, Correo.getText());
-                        pst.setString(3, Direccion.getText());
-                        pst.setString(4, Telefono.getText());
+                        pst.setString(2, Direccion.getText());
+                        pst.setString(3, Telefono.getText());
+                        pst.setString(4, Correo.getText());
                         pst.executeUpdate();
 
                         JOptionPane.showMessageDialog(null, "Cliente agregado exitosamente");
@@ -806,7 +806,7 @@ public class Os extends javax.swing.JInternalFrame {
                         + "values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
 
                 try {
-                    if (numOS.getText().isBlank()
+                    if (numOS.getText().isEmpty()
                             || EmitidaPor.getText().isEmpty()
                             || cbTecnico.getSelectedItem().toString()
                             == "------Selecciona tecnico------"
@@ -894,7 +894,7 @@ public class Os extends javax.swing.JInternalFrame {
                 + "EstatusPago=? where NumOs='" + numOS.getText() + "'");
 
         try {
-            if (numOS.getText().isBlank()
+            if (numOS.getText().isEmpty()
                     || EmitidaPor.getText().isEmpty()
                     || cbTecnico.getSelectedItem().toString()
                     == "------Selecciona tecnico------"

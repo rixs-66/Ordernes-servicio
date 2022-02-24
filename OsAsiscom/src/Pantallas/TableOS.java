@@ -13,6 +13,7 @@ import clases.conexionS;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import Pantallas.Os;
+import javax.swing.ImageIcon;
 
 /**
  *
@@ -37,6 +38,7 @@ public class TableOS extends javax.swing.JFrame {
      */
     public TableOS() {
         initComponents();
+        setIconImage(new ImageIcon(getClass().getResource("/icons/logo.png")).getImage());
         conexion = conexionS.conn();
         mostrarDatos();
     }
@@ -331,53 +333,55 @@ public class TableOS extends javax.swing.JFrame {
     private void selectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_selectActionPerformed
         // TODO add your handling code here:
 
-        
-
-        Os.Actualizar.setEnabled(true);
-        Os.numOS.setText(NumOs);
-       
-        try {
-            Date Fingreso = new SimpleDateFormat("d/MM/y").parse(FechaIngreso);
-            Date Fentrega = new SimpleDateFormat("d/MM/y").parse(FechaEntrega);
-            Os.ingreso.setDate(Fingreso);
-            Os.Salida.setDate(Fentrega);
-        } catch (Exception e) {
-
-        }
-
-        Os.cbTecnico.setSelectedItem(TecnicoAsignado);
-        Os.EmitidaPor.setText(EmitidaPor);
-
-        if (Contraseña.isEmpty() && Accesorios.isEmpty()) {
-
-            Os.No.setSelected(true);
-            Os.Contraseña.setText("");
-            Os.Contraseña.setEnabled(false);
-            Os.txtAccerosorios.setEnabled(false);
-            Os.txtAccerosorios.setText("");
+        if (NumOs == null) {
+            JOptionPane.showMessageDialog(null, "selecciona una Orden de Servicio");
 
         } else {
-            Os.Si.setSelected(true);
-            Os.Contraseña.setText(Contraseña);
-            Os.Contraseña.setEnabled(true);
-            Os.txtAccerosorios.setEnabled(true);
-            Os.txtAccerosorios.setText(Accesorios);
-        }
-        Os.Nombre.setText(NombreCliente);
-        Os.Direccion.setText(DireccionCliente);
-        Os.Telefono.setText(TelefonoCliente);
-        Os.Correo.setText(CorreoCliente);
-        Os.jTxtObservaciones.setText(Observaciones);
-        Os.jTxtReporte.setText(ReporteCliente);
-        Os.TipoDispositivo.setText(TipoDispositivo);
-        Os.Marca.setText(MarcaDispositivo);
-        Os.Modelo.setText(Modelo);
-        Os.numSerie.setText(NumSerie);
-        Os.Estatus.setText(Estatus);
-        Os.Pago.setText(EstatusPago);
-        dispose();
-        
 
+            Os.Actualizar.setEnabled(true);
+            Os.numOS.setText(NumOs);
+
+            try {
+                Date Fingreso = new SimpleDateFormat("d/MM/y").parse(FechaIngreso);
+                Date Fentrega = new SimpleDateFormat("d/MM/y").parse(FechaEntrega);
+                Os.ingreso.setDate(Fingreso);
+                Os.Salida.setDate(Fentrega);
+            } catch (Exception e) {
+
+            }
+
+            Os.cbTecnico.setSelectedItem(TecnicoAsignado);
+            Os.EmitidaPor.setText(EmitidaPor);
+
+            if (Contraseña.isEmpty() && Accesorios.isEmpty()) {
+
+                Os.No.setSelected(true);
+                Os.Contraseña.setText("");
+                Os.Contraseña.setEnabled(false);
+                Os.txtAccerosorios.setEnabled(false);
+                Os.txtAccerosorios.setText("");
+
+            } else {
+                Os.Si.setSelected(true);
+                Os.Contraseña.setText(Contraseña);
+                Os.Contraseña.setEnabled(true);
+                Os.txtAccerosorios.setEnabled(true);
+                Os.txtAccerosorios.setText(Accesorios);
+            }
+            Os.Nombre.setText(NombreCliente);
+            Os.Direccion.setText(DireccionCliente);
+            Os.Telefono.setText(TelefonoCliente);
+            Os.Correo.setText(CorreoCliente);
+            Os.jTxtObservaciones.setText(Observaciones);
+            Os.jTxtReporte.setText(ReporteCliente);
+            Os.TipoDispositivo.setText(TipoDispositivo);
+            Os.Marca.setText(MarcaDispositivo);
+            Os.Modelo.setText(Modelo);
+            Os.numSerie.setText(NumSerie);
+            Os.Estatus.setText(Estatus);
+            Os.Pago.setText(EstatusPago);
+            dispose();
+        }
 
     }//GEN-LAST:event_selectActionPerformed
 

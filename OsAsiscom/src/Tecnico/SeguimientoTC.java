@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Pantallas;
+package Tecnico;
 
+import Pantallas.*;
 import clases.cbServicios;
 import clases.conexionS;
 import java.sql.*;
@@ -18,7 +19,7 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author rica_
  */
-public class Seguimiento extends javax.swing.JFrame {
+public class SeguimientoTC extends javax.swing.JFrame {
 
     Connection conexion = null;
     PreparedStatement pst = null;
@@ -30,7 +31,7 @@ public class Seguimiento extends javax.swing.JFrame {
     /**
      * Creates new form Seguimiento
      */
-    public Seguimiento() {
+    public SeguimientoTC() {
         initComponents();
         setIconImage(new ImageIcon(getClass().getResource("/icons/logo.png")).getImage());
         DefaultTableModel tableprecios = new DefaultTableModel();
@@ -40,13 +41,13 @@ public class Seguimiento extends javax.swing.JFrame {
 
         conexion = conexionS.conn();
         cargarCombobox();
-        ID.setText(EstadoOS.NumOS);
+        ID.setText(EstadoOSTC.NumOS);
         CargarDatos();
         suma();
         Total.setEnabled(false);
         Estatus.setText("En proceso");
-        Pago.setText(EstadoOS.Pago);
-        EstadoOS.NumOS = null;  
+        Pago.setText(EstadoOSTC.Pago);
+        EstadoOSTC.NumOS = null;  
 
     }
 
@@ -303,7 +304,7 @@ public class Seguimiento extends javax.swing.JFrame {
                 }
 
             } catch (SQLException ex) {
-                Logger.getLogger(Seguimiento.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(SeguimientoTC.class.getName()).log(Level.SEVERE, null, ex);
             }
             suma();
         } catch (Exception e) {
@@ -365,7 +366,7 @@ public class Seguimiento extends javax.swing.JFrame {
         } catch (Exception e) {
 
         }
-        EstadoOS.Pestañas.setSelectedIndex(2);
+        EstadoOSTC.Pestañas.setSelectedIndex(2);
     }//GEN-LAST:event_guardarActionPerformed
 
     /**
@@ -385,20 +386,23 @@ public class Seguimiento extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Seguimiento.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(SeguimientoTC.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Seguimiento.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(SeguimientoTC.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Seguimiento.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(SeguimientoTC.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Seguimiento.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(SeguimientoTC.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Seguimiento().setVisible(true);
+                new SeguimientoTC().setVisible(true);
             }
         });
     }
