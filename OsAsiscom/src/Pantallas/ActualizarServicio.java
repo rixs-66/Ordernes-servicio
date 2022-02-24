@@ -19,19 +19,23 @@ public class ActualizarServicio extends javax.swing.JFrame {
     Connection conexion = null;
     PreparedStatement pst = null;
     ResultSet rs = null;
-   
 
     /**
      * Creates new form AgregarServicio
      */
     public ActualizarServicio() {
-        
+
         initComponents();
         ID.setText(Precios.Id);
         servicio.setText(Precios.Servicios);
         precio.setText(Precios.Precio);
         conexion = conexionS.conn();
-        setIconImage(new ImageIcon(getClass().getResource("/icons/logo.png")).getImage());
+        try {
+            ImageIcon icon = new ImageIcon(getClass().getResource("/Icons/logo.png"));
+            setIconImage(icon.getImage());
+
+        } catch (Exception e) {
+        }
     }
 
     /**
@@ -65,6 +69,7 @@ public class ActualizarServicio extends javax.swing.JFrame {
         jPanel2.setBackground(new java.awt.Color(102, 102, 102));
 
         jLabel1.setFont(new java.awt.Font("Roboto", 1, 14)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Actualizar Servicios");
 
@@ -136,22 +141,19 @@ public class ActualizarServicio extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        
+
         String sql = " update catalogoprecios set descripcion=?,precio=? "
-                + "where id= '"+ ID.getText()+"'";
+                + "where id= '" + ID.getText() + "'";
         try {
             pst = conexion.prepareStatement(sql);
             pst.setString(1, servicio.getText());
             pst.setString(2, precio.getText());
-            pst.executeUpdate();            
+            pst.executeUpdate();
             Precios.Id = null;
             dispose();
-                       
-            JOptionPane.showMessageDialog(null,"Actualizado correctamente");
-            
-            
-            
-            
+
+            JOptionPane.showMessageDialog(null, "Actualizado correctamente");
+
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e);
         }

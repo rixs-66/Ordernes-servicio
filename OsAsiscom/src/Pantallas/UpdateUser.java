@@ -19,7 +19,12 @@ public class UpdateUser extends javax.swing.JFrame {
     public UpdateUser() {
 
         initComponents();
-        setIconImage(new ImageIcon(getClass().getResource("/icons/logo.png")).getImage());
+        try {
+            ImageIcon icon = new ImageIcon(getClass().getResource("/Icons/logo.png"));
+            setIconImage(icon.getImage());
+
+        } catch (Exception e) {
+        }
 
         conexion = conexionS.conn();
 

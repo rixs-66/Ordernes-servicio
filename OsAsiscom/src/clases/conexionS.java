@@ -7,7 +7,6 @@ package clases;
 
 import java.sql.*;
 
-
 /**
  *
  * @author rica_
@@ -24,9 +23,10 @@ public class conexionS {
         //llamamos la libreria
         String driver = "com.mysql.cj.jdbc.Driver";
         //informacion de la base de datos
-        String url = "jdbc:mysql://localhost:3306/dbasiscom?useUnicode=true&characterEncoding=UTF-8";
-        String user = "root";
-        String password = "";
+
+        String url = "jdbc:mysql://gcosuministros.com:3306/gcosumin_OS?useUnicode=true&characterEncoding=UTF-8";
+        String user = "gcosumin";
+        String password = "Asiscom2021*";
 
         //establecer conecion entre java y base de datos
         try {
@@ -37,9 +37,5 @@ public class conexionS {
             return null;
         }
     }
-    
-    
-
-  
 
 }

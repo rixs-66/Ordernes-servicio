@@ -8,8 +8,12 @@ package Pantallas;
 import clases.conexionS;
 import java.sql.*;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
+import javax.swing.SwingConstants;
 import javax.swing.plaf.basic.BasicInternalFrameUI;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumnModel;
 
 /**
  *
@@ -22,6 +26,7 @@ public class Precios extends javax.swing.JInternalFrame {
     ResultSet rs = null;
     Statement st = null;
     public static String Id, Servicios, Precio;
+    DefaultTableModel tableprecios = new DefaultTableModel();
 
     /**
      * Creates new form Precios
@@ -33,19 +38,22 @@ public class Precios extends javax.swing.JInternalFrame {
         ui.setNorthPane(null);
         conexion = conexionS.conn();
         mostrarDatos();
+        DefaultTableCellRenderer tcr = new DefaultTableCellRenderer();
+        tcr.setHorizontalAlignment(SwingConstants.CENTER);
+        TablePrecios.getColumnModel().getColumn(1).setCellRenderer(tcr);
 
     }
 
     private void mostrarDatos() {
 
-        DefaultTableModel tableprecios = new DefaultTableModel();
-        tableprecios.addColumn("Id");
-        tableprecios.addColumn("Servicio");
+        tableprecios.addColumn("ID");
+        tableprecios.addColumn("Servicios");
         tableprecios.addColumn("Precio");
-        TablePrecios.setModel(tableprecios);
-        String[] datos = new String[3];
 
-        String sql = "select * from Catalogoprecios";
+        TablePrecios.setModel(tableprecios);
+
+        String[] datos = new String[3];
+        String sql = "select * from catalogoprecios";
         try {
 
             Statement leer = conexion.createStatement();
@@ -56,7 +64,10 @@ public class Precios extends javax.swing.JInternalFrame {
                 datos[1] = rs.getString(2);
                 datos[2] = rs.getString(3);
                 tableprecios.addRow(datos);
+
             }
+            TablePrecios.getColumnModel().getColumn(1).setPreferredWidth(500);
+
             TablePrecios.setModel(tableprecios);
 
         } catch (Exception e) {
@@ -114,19 +125,24 @@ public class Precios extends javax.swing.JInternalFrame {
 
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1310, -1));
 
+        TablePrecios = new javax.swing.JTable(){
+            public boolean isCellEditable(int rowIndex, int colIndex){
+                return false;
+            }
+        };
         TablePrecios.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         TablePrecios.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {},
-                {},
-                {},
-                {}
+
             },
             new String [] {
 
             }
         ));
+        TablePrecios.setFocusable(false);
         TablePrecios.setRowHeight(50);
+        TablePrecios.getTableHeader().setResizingAllowed(false);
+        TablePrecios.getTableHeader().setReorderingAllowed(false);
         TablePrecios.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 TablePreciosMouseClicked(evt);
@@ -134,7 +150,7 @@ public class Precios extends javax.swing.JInternalFrame {
         });
         jScrollPane1.setViewportView(TablePrecios);
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 110, 650, 620));
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 110, 830, 620));
 
         jButton1.setText("Agregar");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -142,7 +158,7 @@ public class Precios extends javax.swing.JInternalFrame {
                 jButton1ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 80, -1, -1));
+        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 80, -1, -1));
 
         jButton2.setText("Actualizar");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -150,7 +166,7 @@ public class Precios extends javax.swing.JInternalFrame {
                 jButton2ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 80, -1, -1));
+        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 80, -1, -1));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1310, 740));
 
@@ -177,7 +193,7 @@ public class Precios extends javax.swing.JInternalFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-        if (Id ==null) {
+        if (Id == null) {
             JOptionPane.showMessageDialog(null, "Selecciona un servicio");
 
         } else {

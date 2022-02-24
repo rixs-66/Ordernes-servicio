@@ -33,7 +33,12 @@ public class ActualizarSeguimientoTC extends javax.swing.JFrame {
      */
     public ActualizarSeguimientoTC() {
         initComponents();
-        setIconImage(new ImageIcon(getClass().getResource("/icons/logo.png")).getImage());
+        try {
+            ImageIcon icon = new ImageIcon(getClass().getResource("/Icons/logo.png"));
+            setIconImage(icon.getImage());
+
+        } catch (Exception e) {
+        }
         DefaultTableModel tableprecios = new DefaultTableModel();
         tableprecios.addColumn("Servicio");
         tableprecios.addColumn("Precio");
@@ -180,6 +185,11 @@ public class ActualizarSeguimientoTC extends javax.swing.JFrame {
         Pago.setText("Pago");
         jPanel2.add(Pago, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 290, 80, 40));
 
+        Servicios = new javax.swing.JTable(){
+            public boolean isCellEditable(int rowIndex, int colIndex){
+                return false;
+            }
+        };
         Servicios.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},

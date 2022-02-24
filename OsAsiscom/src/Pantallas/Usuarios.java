@@ -82,8 +82,7 @@ public class Usuarios extends javax.swing.JInternalFrame {
     }
 
     private void Delete() {
-        int confirmar = JOptionPane.showConfirmDialog(null, "¿Desea eliminar al empleado "
-                + nombre, "Atención", JOptionPane.YES_NO_OPTION);
+        int confirmar = JOptionPane.showConfirmDialog(null, "<html>¿Desea eliminar al empleado?<h3>"+nombre+"</h3><html>", "Atención", JOptionPane.YES_NO_OPTION);
         if (confirmar == JOptionPane.YES_OPTION) {
             String sql = "delete from empleados where id=?";
             try {
@@ -320,7 +319,13 @@ public class Usuarios extends javax.swing.JInternalFrame {
 
         String numero = buscar.getText();
 
-        String sql = "select * from empleados where id=" + numero;
+        String sql = "select * from empleados where id= " + numero;
+
+        if (numero == null) {
+            JOptionPane.showMessageDialog(null, "Campo Vació");
+
+        }
+
         try {
 
             Statement leer = conexion.createStatement();
@@ -339,7 +344,7 @@ public class Usuarios extends javax.swing.JInternalFrame {
             tbEmpleados.setModel(templeados);
 
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, e);
+            JOptionPane.showMessageDialog(null, "campos vacios");
         }
     }//GEN-LAST:event_btnBuscarActionPerformed
 

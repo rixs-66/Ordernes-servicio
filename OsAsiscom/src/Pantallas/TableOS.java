@@ -38,7 +38,12 @@ public class TableOS extends javax.swing.JFrame {
      */
     public TableOS() {
         initComponents();
-        setIconImage(new ImageIcon(getClass().getResource("/icons/logo.png")).getImage());
+        try {
+            ImageIcon icon = new ImageIcon(getClass().getResource("/Icons/logo.png"));
+            setIconImage(icon.getImage());
+
+        } catch (Exception e) {
+        }
         conexion = conexionS.conn();
         mostrarDatos();
     }
@@ -158,6 +163,11 @@ public class TableOS extends javax.swing.JFrame {
             .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
         );
 
+        TableOS = new javax.swing.JTable(){
+            public boolean isCellEditable(int rowIndex, int colIndex){
+                return false;
+            }
+        };
         TableOS.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},

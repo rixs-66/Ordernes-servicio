@@ -32,7 +32,12 @@ public class Seguimiento extends javax.swing.JFrame {
      */
     public Seguimiento() {
         initComponents();
-        setIconImage(new ImageIcon(getClass().getResource("/icons/logo.png")).getImage());
+        try {
+            ImageIcon icon = new ImageIcon(getClass().getResource("/Icons/logo.png"));
+            setIconImage(icon.getImage());
+
+        } catch (Exception e) {
+        }
         DefaultTableModel tableprecios = new DefaultTableModel();
         tableprecios.addColumn("Servicio");
         tableprecios.addColumn("Precio");
@@ -46,7 +51,7 @@ public class Seguimiento extends javax.swing.JFrame {
         Total.setEnabled(false);
         Estatus.setText("En proceso");
         Pago.setText(EstadoOS.Pago);
-        EstadoOS.NumOS = null;  
+        EstadoOS.NumOS = null;
 
     }
 
@@ -150,6 +155,11 @@ public class Seguimiento extends javax.swing.JFrame {
         Pago.setText("Pago");
         jPanel2.add(Pago, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 290, 80, 40));
 
+        Servicios = new javax.swing.JTable(){
+            public boolean isCellEditable(int rowIndex, int colIndex){
+                return false;
+            }
+        };
         Servicios.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -325,7 +335,7 @@ public class Seguimiento extends javax.swing.JFrame {
         // TODO add your handling code here:
         if (aux == null) {
             JOptionPane.showMessageDialog(null, "Porfavor Selecciones un servicio");
-            
+
         }
 
         String sql = "Delete from servicios where ID=?";

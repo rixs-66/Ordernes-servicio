@@ -69,7 +69,7 @@ public class Clientes extends javax.swing.JInternalFrame {
     }
 
     private void Delete() {
-        int confirmar = JOptionPane.showConfirmDialog(null, "¿Desea eliminar al Cliente "+ nombre, "Atención", JOptionPane.YES_NO_OPTION);
+        int confirmar = JOptionPane.showConfirmDialog(null, "<html>¿Desea eliminar al Cliente? <h3>"+nombre+"</h3><html>", "Atención", JOptionPane.YES_NO_OPTION);
         if (confirmar == JOptionPane.YES_OPTION) {
             String sql = "delete from clientes where idCliente=?";
             try {

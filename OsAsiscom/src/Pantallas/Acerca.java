@@ -5,6 +5,7 @@
  */
 package Pantallas;
 
+import java.text.Normalizer;
 import javax.swing.ImageIcon;
 
 /**
@@ -12,14 +13,19 @@ import javax.swing.ImageIcon;
  * @author rica_
  */
 public class Acerca extends javax.swing.JFrame {
-    
 
     /**
      * Creates new form Acerca
      */
     public Acerca() {
         initComponents();
-        setIconImage(new ImageIcon(getClass().getResource("/icons/logo.png")).getImage());
+        try {
+            ImageIcon icon = new ImageIcon(getClass().getResource("/Icons/logo.png"));
+            setIconImage(icon.getImage());
+
+        } catch (Exception e) {
+        }
+
     }
 
     /**

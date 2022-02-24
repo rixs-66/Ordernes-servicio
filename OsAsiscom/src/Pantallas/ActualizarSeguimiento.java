@@ -24,7 +24,6 @@ public class ActualizarSeguimiento extends javax.swing.JFrame {
     PreparedStatement pst = null;
     ResultSet rs = null;
     Statement st = null;
-    
 
     public static String aux;
 
@@ -33,7 +32,12 @@ public class ActualizarSeguimiento extends javax.swing.JFrame {
      */
     public ActualizarSeguimiento() {
         initComponents();
-        setIconImage(new ImageIcon(getClass().getResource("/icons/logo.png")).getImage());
+        try {
+            ImageIcon icon = new ImageIcon(getClass().getResource("/Icons/logo.png"));
+            setIconImage(icon.getImage());
+
+        } catch (Exception e) {
+        }
         DefaultTableModel tableprecios = new DefaultTableModel();
         tableprecios.addColumn("Servicio");
         tableprecios.addColumn("Precio");
@@ -180,6 +184,11 @@ public class ActualizarSeguimiento extends javax.swing.JFrame {
         Pago.setText("Pago");
         jPanel2.add(Pago, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 290, 80, 40));
 
+        Servicios = new javax.swing.JTable(){
+            public boolean isCellEditable(int rowIndex, int colIndex){
+                return false;
+            }
+        };
         Servicios.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -460,8 +469,8 @@ public class ActualizarSeguimiento extends javax.swing.JFrame {
 
     private void CancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CancelarActionPerformed
         // TODO add your handling code here:
-        
-           String sql = "Update os set Seguimiento=?,"
+
+        String sql = "Update os set Seguimiento=?,"
                 + "Estatus=?,"
                 + "EstatusPago=?,"
                 + "Total=? where numOs='" + ID.getText() + "'";

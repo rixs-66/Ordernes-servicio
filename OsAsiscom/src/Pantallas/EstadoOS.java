@@ -192,7 +192,7 @@ public class EstadoOS extends javax.swing.JInternalFrame {
         });
         Escritorio6.add(btnSeguimiento, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
 
-        jTableGeneral = new javax.swing.JTable(){
+        jTableAsignado = new javax.swing.JTable(){
             public boolean isCellEditable(int rowIndex, int colIndex){
                 return false;
             }
@@ -246,7 +246,7 @@ public class EstadoOS extends javax.swing.JInternalFrame {
 
         Escritorio5.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jTableGeneral = new javax.swing.JTable(){
+        jTableProceso = new javax.swing.JTable(){
             public boolean isCellEditable(int rowIndex, int colIndex){
                 return false;
             }
@@ -295,7 +295,7 @@ public class EstadoOS extends javax.swing.JInternalFrame {
 
         jPanel6.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jTableGeneral = new javax.swing.JTable(){
+        jTableTerminadas = new javax.swing.JTable(){
             public boolean isCellEditable(int rowIndex, int colIndex){
                 return false;
             }
@@ -447,7 +447,7 @@ public class EstadoOS extends javax.swing.JInternalFrame {
 
                 }
                 jTableGeneral.setModel(tgeneral);
-               
+
                 conexion.close();
 
             } catch (Exception e) {
@@ -749,11 +749,25 @@ public class EstadoOS extends javax.swing.JInternalFrame {
 
     private void verSeguimientoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_verSeguimientoActionPerformed
         // TODO add your handling code here:
-        
-        JOptionPane.showMessageDialog(this, ui);
-        
-        
-        
+        conexion = conexionS.conn();
+        String sql = "select Seguimiento from os where NumOs= '" + NumOS + "'";
+        System.out.println(sql);
+        try {
+            Statement leer = conexion.createStatement();
+            rs = leer.executeQuery(sql);
+
+            if (rs.next()) {
+               
+                JOptionPane.showMessageDialog(null, rs.getString(1), "Seguimiento", JOptionPane.PLAIN_MESSAGE);
+                 
+            }
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e);
+
+        }
+
+
     }//GEN-LAST:event_verSeguimientoActionPerformed
 
 

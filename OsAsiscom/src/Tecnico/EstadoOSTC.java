@@ -120,7 +120,6 @@ public class EstadoOSTC extends javax.swing.JInternalFrame {
         jPanel7 = new javax.swing.JPanel();
         jScrollPane5 = new javax.swing.JScrollPane();
         jTableCanceladas = new javax.swing.JTable();
-        jButton5 = new javax.swing.JButton();
 
         setPreferredSize(new java.awt.Dimension(1320, 770));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -191,7 +190,7 @@ public class EstadoOSTC extends javax.swing.JInternalFrame {
         });
         Escritorio6.add(btnSeguimiento, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
 
-        jTableGeneral = new javax.swing.JTable(){
+        jTableAsignado = new javax.swing.JTable(){
             public boolean isCellEditable(int rowIndex, int colIndex){
                 return false;
             }
@@ -245,7 +244,7 @@ public class EstadoOSTC extends javax.swing.JInternalFrame {
 
         Escritorio5.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jTableGeneral = new javax.swing.JTable(){
+        jTableProceso = new javax.swing.JTable(){
             public boolean isCellEditable(int rowIndex, int colIndex){
                 return false;
             }
@@ -286,7 +285,7 @@ public class EstadoOSTC extends javax.swing.JInternalFrame {
 
         jPanel6.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jTableGeneral = new javax.swing.JTable(){
+        jTableTerminadas = new javax.swing.JTable(){
             public boolean isCellEditable(int rowIndex, int colIndex){
                 return false;
             }
@@ -336,7 +335,7 @@ public class EstadoOSTC extends javax.swing.JInternalFrame {
         jPanel7.setFont(new java.awt.Font("Rage Italic", 0, 14)); // NOI18N
         jPanel7.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jTableGeneral = new javax.swing.JTable(){
+        jTableCanceladas = new javax.swing.JTable(){
             public boolean isCellEditable(int rowIndex, int colIndex){
                 return false;
             }
@@ -359,9 +358,6 @@ public class EstadoOSTC extends javax.swing.JInternalFrame {
         jScrollPane5.setViewportView(jTableCanceladas);
 
         jPanel7.add(jScrollPane5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 40, 1260, 630));
-
-        jButton5.setText("Imprimir informe");
-        jPanel7.add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
 
         Pestañas.addTab("Canceladas", jPanel7);
 
@@ -745,7 +741,6 @@ public class EstadoOSTC extends javax.swing.JInternalFrame {
     public static javax.swing.JTabbedPane Pestañas;
     public static javax.swing.JButton btnActualizaSeguimiento;
     public static javax.swing.JButton btnSeguimiento;
-    private javax.swing.JButton jButton5;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
