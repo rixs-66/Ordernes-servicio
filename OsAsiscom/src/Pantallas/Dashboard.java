@@ -110,9 +110,8 @@ public class Dashboard extends javax.swing.JFrame {
         puesto.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         puesto.setText("Administrador");
 
-        btnUsuarios.setBackground(new java.awt.Color(80, 34, 34));
         btnUsuarios.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
-        btnUsuarios.setForeground(new java.awt.Color(255, 255, 255));
+        btnUsuarios.setForeground(new java.awt.Color(0, 0, 0));
         btnUsuarios.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/user3.png"))); // NOI18N
         btnUsuarios.setText("Usuarios");
         btnUsuarios.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
@@ -124,9 +123,8 @@ public class Dashboard extends javax.swing.JFrame {
             }
         });
 
-        btnClientes.setBackground(new java.awt.Color(80, 34, 34));
         btnClientes.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
-        btnClientes.setForeground(new java.awt.Color(255, 255, 255));
+        btnClientes.setForeground(new java.awt.Color(0, 0, 0));
         btnClientes.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/clientes.png"))); // NOI18N
         btnClientes.setText("Clientes");
         btnClientes.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
@@ -138,9 +136,8 @@ public class Dashboard extends javax.swing.JFrame {
             }
         });
 
-        btOs.setBackground(new java.awt.Color(80, 34, 34));
         btOs.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
-        btOs.setForeground(new java.awt.Color(255, 255, 255));
+        btOs.setForeground(new java.awt.Color(0, 0, 0));
         btOs.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/icons8_bill_32px.png"))); // NOI18N
         btOs.setText("Ordenes de servicio");
         btOs.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
@@ -152,9 +149,8 @@ public class Dashboard extends javax.swing.JFrame {
             }
         });
 
-        btnAcerca.setBackground(new java.awt.Color(80, 34, 34));
         btnAcerca.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
-        btnAcerca.setForeground(new java.awt.Color(255, 255, 255));
+        btnAcerca.setForeground(new java.awt.Color(0, 0, 0));
         btnAcerca.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/acerca.png"))); // NOI18N
         btnAcerca.setText("Acerca de ");
         btnAcerca.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
@@ -170,9 +166,8 @@ public class Dashboard extends javax.swing.JFrame {
         jlfecha.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jlfecha.setText("Fecha y hora");
 
-        btnEstadoOs1.setBackground(new java.awt.Color(80, 34, 34));
         btnEstadoOs1.setFont(new java.awt.Font("Roboto", 0, 12)); // NOI18N
-        btnEstadoOs1.setForeground(new java.awt.Color(255, 255, 255));
+        btnEstadoOs1.setForeground(new java.awt.Color(0, 0, 0));
         btnEstadoOs1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/icons8_receipt_dollar_32px_1.png"))); // NOI18N
         btnEstadoOs1.setText("Tabla Precios");
         btnEstadoOs1.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
@@ -183,9 +178,8 @@ public class Dashboard extends javax.swing.JFrame {
             }
         });
 
-        btnEstadoOs2.setBackground(new java.awt.Color(80, 34, 34));
         btnEstadoOs2.setFont(new java.awt.Font("Roboto", 0, 12)); // NOI18N
-        btnEstadoOs2.setForeground(new java.awt.Color(255, 255, 255));
+        btnEstadoOs2.setForeground(new java.awt.Color(0, 0, 0));
         btnEstadoOs2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/icons8_true_false_32px_1.png"))); // NOI18N
         btnEstadoOs2.setText("Estado OS");
         btnEstadoOs2.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);

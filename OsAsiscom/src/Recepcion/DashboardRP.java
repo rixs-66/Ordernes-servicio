@@ -98,9 +98,8 @@ public class DashboardRP extends javax.swing.JFrame {
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/campana-de-recepcion2.png"))); // NOI18N
 
-        btOs.setBackground(new java.awt.Color(80, 34, 34));
         btOs.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
-        btOs.setForeground(new java.awt.Color(255, 255, 255));
+        btOs.setForeground(new java.awt.Color(0, 0, 0));
         btOs.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/icons8_bill_32px.png"))); // NOI18N
         btOs.setText("Ordenes de servicio");
         btOs.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
@@ -117,9 +116,8 @@ public class DashboardRP extends javax.swing.JFrame {
         jlfecha.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jlfecha.setText("Fecha y hora");
 
-        btnEstadoOs2.setBackground(new java.awt.Color(80, 34, 34));
         btnEstadoOs2.setFont(new java.awt.Font("Roboto", 0, 12)); // NOI18N
-        btnEstadoOs2.setForeground(new java.awt.Color(255, 255, 255));
+        btnEstadoOs2.setForeground(new java.awt.Color(0, 0, 0));
         btnEstadoOs2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/icons8_true_false_32px_1.png"))); // NOI18N
         btnEstadoOs2.setText("Estado OS");
         btnEstadoOs2.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);

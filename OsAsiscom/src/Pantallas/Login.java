@@ -70,7 +70,7 @@ public class Login extends javax.swing.JFrame {
                     this.dispose();
                     conexion.close();
 
-                } else if (validarLogin.equals("Recepcion")) {
+                } else if (validarLogin.equals("Recepción")) {
                     audio("bells");
                     JOptionPane.showMessageDialog(null, "Bienvenido " + usuario);
                     DashboardRP principal = new DashboardRP();

@@ -14,7 +14,6 @@ import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.plaf.basic.BasicInternalFrameUI;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableRowSorter;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.view.JasperViewer;
@@ -102,7 +101,7 @@ public class EstadoOS extends javax.swing.JInternalFrame {
         jLabel1 = new javax.swing.JLabel();
         Pestañas = new javax.swing.JTabbedPane();
         jPanel3 = new javax.swing.JPanel();
-        jScrollPane1 = new javax.swing.JScrollPane();
+        jScrollPane10 = new javax.swing.JScrollPane();
         jTableGeneral = new javax.swing.JTable();
         jPanel4 = new javax.swing.JPanel();
         Escritorio6 = new javax.swing.JPanel();
@@ -121,7 +120,6 @@ public class EstadoOS extends javax.swing.JInternalFrame {
         jPanel7 = new javax.swing.JPanel();
         jScrollPane5 = new javax.swing.JScrollPane();
         jTableCanceladas = new javax.swing.JTable();
-        jButton5 = new javax.swing.JButton();
 
         setPreferredSize(new java.awt.Dimension(1320, 770));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -156,29 +154,34 @@ public class EstadoOS extends javax.swing.JInternalFrame {
 
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jTableGeneral = new javax.swing.JTable(){
+        jTableAsignado = new javax.swing.JTable(){
             public boolean isCellEditable(int rowIndex, int colIndex){
                 return false;
             }
         };
-        jTableGeneral.setFont(new java.awt.Font("Roboto", 0, 14));
+        jTableGeneral.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
         jTableGeneral.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {},
+                {},
+                {},
+                {}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+
             }
         ));
         jTableGeneral.setFocusable(false);
         jTableGeneral.setRowHeight(30);
         jTableGeneral.getTableHeader().setReorderingAllowed(false);
-        jScrollPane1.setViewportView(jTableGeneral);
+        jTableGeneral.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTableGeneralMouseClicked(evt);
+            }
+        });
+        jScrollPane10.setViewportView(jTableGeneral);
 
-        jPanel3.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 40, 1260, 630));
+        jPanel3.add(jScrollPane10, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 40, 1260, 630));
 
         Pestañas.addTab("General", jPanel3);
 
@@ -283,13 +286,15 @@ public class EstadoOS extends javax.swing.JInternalFrame {
         });
         Escritorio5.add(btnActualizaSeguimiento, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
 
+        verSeguimiento.setBackground(new java.awt.Color(0, 0, 0));
+        verSeguimiento.setForeground(new java.awt.Color(255, 255, 255));
         verSeguimiento.setText("Ver seguimiento");
         verSeguimiento.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 verSeguimientoActionPerformed(evt);
             }
         });
-        Escritorio5.add(verSeguimiento, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 10, -1, -1));
+        Escritorio5.add(verSeguimiento, new org.netbeans.lib.awtextra.AbsoluteConstraints(1150, 10, -1, -1));
 
         Pestañas.addTab("En proceso", Escritorio5);
 
@@ -369,9 +374,6 @@ public class EstadoOS extends javax.swing.JInternalFrame {
 
         jPanel7.add(jScrollPane5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 40, 1260, 630));
 
-        jButton5.setText("Imprimir informe");
-        jPanel7.add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
-
         Pestañas.addTab("Canceladas", jPanel7);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -418,9 +420,10 @@ public class EstadoOS extends javax.swing.JInternalFrame {
             tgeneral.addColumn("Reporte cliente");
             tgeneral.addColumn("Estatus");
             tgeneral.addColumn("Estatus Pago");
+
             jTableGeneral.setModel(tgeneral);
 
-            String[] datos = new String[13];
+            String[] datos = new String[14];
 
             String sql = "select * from os";
             try {
@@ -501,7 +504,7 @@ public class EstadoOS extends javax.swing.JInternalFrame {
                     colorear2();
 
                 }
-                jTableGeneral.setModel(tProceso);
+                jTableProceso.setModel(tProceso);
                 conexion.close();
 
             } catch (Exception e) {
@@ -554,7 +557,7 @@ public class EstadoOS extends javax.swing.JInternalFrame {
                     tTerminada.addRow(datos);
                     colorear3();
                 }
-                jTableGeneral.setModel(tTerminada);
+                jTableTerminadas.setModel(tTerminada);
                 conexion.close();
 
             } catch (Exception e) {
@@ -739,6 +742,7 @@ public class EstadoOS extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
         int seleccionar = jTableTerminadas.rowAtPoint(evt.getPoint());
         NumOS = String.valueOf(jTableTerminadas.getValueAt(seleccionar, 0));
+        
 
     }//GEN-LAST:event_jTableTerminadasMouseClicked
 
@@ -751,15 +755,15 @@ public class EstadoOS extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
         conexion = conexionS.conn();
         String sql = "select Seguimiento from os where NumOs= '" + NumOS + "'";
-        System.out.println(sql);
+
         try {
             Statement leer = conexion.createStatement();
             rs = leer.executeQuery(sql);
 
             if (rs.next()) {
-               
+
                 JOptionPane.showMessageDialog(null, rs.getString(1), "Seguimiento", JOptionPane.PLAIN_MESSAGE);
-                 
+
             }
 
         } catch (Exception e) {
@@ -770,6 +774,10 @@ public class EstadoOS extends javax.swing.JInternalFrame {
 
     }//GEN-LAST:event_verSeguimientoActionPerformed
 
+    private void jTableGeneralMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableGeneralMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTableGeneralMouseClicked
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel Escritorio5;
@@ -778,7 +786,6 @@ public class EstadoOS extends javax.swing.JInternalFrame {
     public static javax.swing.JTabbedPane Pestañas;
     public static javax.swing.JButton btnActualizaSeguimiento;
     public static javax.swing.JButton btnSeguimiento;
-    private javax.swing.JButton jButton5;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
@@ -786,14 +793,14 @@ public class EstadoOS extends javax.swing.JInternalFrame {
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
-    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane10;
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JScrollPane jScrollPane7;
     private javax.swing.JScrollPane jScrollPane9;
     public static javax.swing.JTable jTableAsignado;
     private javax.swing.JTable jTableCanceladas;
-    private javax.swing.JTable jTableGeneral;
+    public static javax.swing.JTable jTableGeneral;
     public static javax.swing.JTable jTableProceso;
     private javax.swing.JTable jTableTerminadas;
     private javax.swing.JButton verSeguimiento;

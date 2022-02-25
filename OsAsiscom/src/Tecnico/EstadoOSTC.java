@@ -113,6 +113,7 @@ public class EstadoOSTC extends javax.swing.JInternalFrame {
         jScrollPane7 = new javax.swing.JScrollPane();
         jTableProceso = new javax.swing.JTable();
         btnActualizaSeguimiento = new javax.swing.JButton();
+        verSeguimiento = new javax.swing.JButton();
         jPanel6 = new javax.swing.JPanel();
         jScrollPane6 = new javax.swing.JScrollPane();
         jTableTerminadas = new javax.swing.JTable();
@@ -280,6 +281,16 @@ public class EstadoOSTC extends javax.swing.JInternalFrame {
             }
         });
         Escritorio5.add(btnActualizaSeguimiento, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
+
+        verSeguimiento.setBackground(new java.awt.Color(0, 0, 0));
+        verSeguimiento.setForeground(new java.awt.Color(255, 255, 255));
+        verSeguimiento.setText("Ver seguimiento");
+        verSeguimiento.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                verSeguimientoActionPerformed(evt);
+            }
+        });
+        Escritorio5.add(verSeguimiento, new org.netbeans.lib.awtextra.AbsoluteConstraints(1150, 10, -1, -1));
 
         Pestañas.addTab("En proceso", Escritorio5);
 
@@ -713,7 +724,7 @@ public class EstadoOSTC extends javax.swing.JInternalFrame {
                 ver.setIconImage(new ImageIcon(getClass().getResource("/icons/logo.png")).getImage());
 
             } catch (Exception e) {
-                JOptionPane.showMessageDialog(null, e);
+                
             }
         } else {
             JOptionPane.showMessageDialog(null, "Selecciona una Orden de Servicio");
@@ -732,6 +743,28 @@ public class EstadoOSTC extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
 
     }//GEN-LAST:event_ImprimirKeyPressed
+
+    private void verSeguimientoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_verSeguimientoActionPerformed
+        // TODO add your handling code here:
+        conexion = conexionS.conn();
+        String sql = "select Seguimiento from os where NumOs= '" + NumOS + "'";
+
+        try {
+            Statement leer = conexion.createStatement();
+            rs = leer.executeQuery(sql);
+
+            if (rs.next()) {
+
+                JOptionPane.showMessageDialog(null, rs.getString(1), "Seguimiento", JOptionPane.PLAIN_MESSAGE);
+
+            }
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e);
+
+        }
+
+    }//GEN-LAST:event_verSeguimientoActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -758,5 +791,6 @@ public class EstadoOSTC extends javax.swing.JInternalFrame {
     private javax.swing.JTable jTableGeneral;
     public static javax.swing.JTable jTableProceso;
     private javax.swing.JTable jTableTerminadas;
+    private javax.swing.JButton verSeguimiento;
     // End of variables declaration//GEN-END:variables
 }

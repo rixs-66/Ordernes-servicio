@@ -12,9 +12,11 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import clases.*;
 import Pantallas.*;
+import java.util.HashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JTextField;
+import net.sf.jasperreports.engine.JasperFillManager;
 
 /**
  *
@@ -103,6 +105,7 @@ public class Os extends javax.swing.JInternalFrame {
         jLabel1 = new javax.swing.JLabel();
         NuevaOs = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
+        Imprimir = new javax.swing.JButton();
         DatosGenereales = new javax.swing.JPanel();
         jPanel8 = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
@@ -208,6 +211,22 @@ public class Os extends javax.swing.JInternalFrame {
             }
         });
         Banner.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 0, 100, 40));
+
+        Imprimir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/icons8_print_24px.png"))); // NOI18N
+        Imprimir.setMnemonic('p');
+        Imprimir.setText("Imprimir Copia");
+        Imprimir.setToolTipText("CRTL + P");
+        Imprimir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ImprimirActionPerformed(evt);
+            }
+        });
+        Imprimir.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                ImprimirKeyPressed(evt);
+            }
+        });
+        Banner.add(Imprimir, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 0, 150, 40));
 
         DatosGenereales.setBackground(new java.awt.Color(153, 153, 153));
         DatosGenereales.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -551,10 +570,10 @@ public class Os extends javax.swing.JInternalFrame {
         Pago.setText("No Pagado");
         Pago.setOpaque(true);
         Pago.addAncestorListener(new javax.swing.event.AncestorListener() {
+            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
+            }
             public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
                 PagoAncestorAdded(evt);
-            }
-            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
             }
             public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
             }
@@ -942,6 +961,16 @@ public class Os extends javax.swing.JInternalFrame {
 
     }//GEN-LAST:event_ActualizarActionPerformed
 
+    private void ImprimirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ImprimirActionPerformed
+        // TODO add your handling code here:
+        TableOSimprimir ver = new TableOSimprimir();
+        ver.setVisible(true);
+    }//GEN-LAST:event_ImprimirActionPerformed
+
+    private void ImprimirKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_ImprimirKeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ImprimirKeyPressed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel Accesorios;
@@ -957,6 +986,7 @@ public class Os extends javax.swing.JInternalFrame {
     public static javax.swing.JTextField EmitidaPor;
     public static javax.swing.JLabel Estatus;
     private javax.swing.JButton GuardarOs;
+    private javax.swing.JButton Imprimir;
     public static javax.swing.JTextField Marca;
     public static javax.swing.JTextField Modelo;
     public static javax.swing.JRadioButton No;
