@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report1" language="groovy" pageWidth="612" pageHeight="792" columnWidth="572" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="537310eb-b816-4623-bd8e-45de13694c1e">
-	<property name="ireport.zoom" value="1.3636363636363638"/>
+	<property name="ireport.zoom" value="0.75"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
 	<style name="table">
@@ -258,6 +258,7 @@
 		</field>
 	</subDataset>
 	<parameter name="OS" class="java.lang.String"/>
+	<parameter name="Logo2" class="java.io.InputStream"/>
 	<queryString>
 		<![CDATA[Select * from os where NumOs = $P{OS}]]>
 	</queryString>
@@ -361,8 +362,8 @@
 				<text><![CDATA[Tel. (442) 223-26-26]]></text>
 			</staticText>
 			<image>
-				<reportElement x="6" y="0" width="71" height="59" uuid="3dded054-f7eb-4fb6-9d0a-d7a2a647b548"/>
-				<imageExpression><![CDATA["C:\\Program Files (x86)\\OS Asiscom\\OsAsiscom\\src\\Icons\\user4.png"]]></imageExpression>
+				<reportElement x="0" y="0" width="90" height="59" uuid="f3181cbb-28ff-4b93-9a66-aae5dbf49ee6"/>
+				<imageExpression><![CDATA[$P{Logo2}]]></imageExpression>
 			</image>
 		</band>
 	</title>
@@ -456,7 +457,7 @@
 				<text><![CDATA[Fecha Entrega]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="194" y="138" width="38" height="14" uuid="8cb06481-a7b6-40f8-aeac-aa20c22f1a5b"/>
+				<reportElement x="194" y="138" width="46" height="14" uuid="8cb06481-a7b6-40f8-aeac-aa20c22f1a5b"/>
 				<textElement verticalAlignment="Bottom">
 					<font fontName="Roboto" isBold="true"/>
 				</textElement>
@@ -761,7 +762,7 @@
 							<staticText>
 								<reportElement x="0" y="0" width="503" height="30" uuid="8bd3dcb5-f66a-44fe-957d-451ab98c549b"/>
 								<textElement textAlignment="Center" verticalAlignment="Middle">
-									<font fontName="Roboto" size="8"/>
+									<font fontName="DejaVu Sans" size="8"/>
 								</textElement>
 								<text><![CDATA[Servicios realizados]]></text>
 							</staticText>
@@ -770,7 +771,7 @@
 							<textField>
 								<reportElement x="0" y="0" width="503" height="20" uuid="9ac41823-a13f-4303-8add-57c61d849aa8"/>
 								<textElement textAlignment="Center" verticalAlignment="Middle">
-									<font fontName="Roboto" size="8"/>
+									<font fontName="DejaVu Sans" size="8"/>
 								</textElement>
 								<textFieldExpression><![CDATA[$F{servicio}]]></textFieldExpression>
 							</textField>
@@ -781,7 +782,7 @@
 							<staticText>
 								<reportElement x="0" y="0" width="61" height="30" uuid="fee4de74-889e-44f0-9fe7-bdde3dc37fbc"/>
 								<textElement textAlignment="Center" verticalAlignment="Middle">
-									<font fontName="Roboto" size="8"/>
+									<font fontName="DejaVu Sans" size="8"/>
 								</textElement>
 								<text><![CDATA[Precio]]></text>
 							</staticText>
@@ -790,7 +791,7 @@
 							<textField>
 								<reportElement x="0" y="0" width="61" height="20" uuid="9e439f9c-2b72-4ba2-980f-1b0d546482fc"/>
 								<textElement textAlignment="Center" verticalAlignment="Middle">
-									<font fontName="Roboto" size="8"/>
+									<font fontName="DejaVu Sans" size="8"/>
 								</textElement>
 								<textFieldExpression><![CDATA[$F{precio}]]></textFieldExpression>
 							</textField>

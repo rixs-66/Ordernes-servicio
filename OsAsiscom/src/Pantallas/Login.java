@@ -15,6 +15,7 @@ import clases.conexionS;
 import java.awt.event.KeyEvent;
 import javax.sound.sampled.Clip;
 import Recepcion.*;
+import java.awt.Cursor;
 
 /**
  *
@@ -41,6 +42,7 @@ public class Login extends javax.swing.JFrame {
     }
 
     public void IniciarSesion() {
+       
         String sql = "select * from empleados where nombre =? and pass =?";
         String usuario = txtUsuario.getText();
         try {
@@ -53,10 +55,13 @@ public class Login extends javax.swing.JFrame {
             pst.setString(2, captura);
             //ejecutamos el query
             rs = pst.executeQuery();
+            
+            
 
             //si existe un usuario y contraseñas iguales a los de la base de dato
             //ingresara a la sesion
             if (rs.next()) {
+                this.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
                 String validarLogin = rs.getString(7);
                 
 
@@ -71,7 +76,7 @@ public class Login extends javax.swing.JFrame {
                     conexion.close();
 
                 } else if (validarLogin.equals("Recepción")) {
-                    audio("bells");
+                    audio("login");
                     JOptionPane.showMessageDialog(null, "Bienvenido " + usuario);
                     DashboardRP principal = new DashboardRP();
                     principal.setVisible(true);
@@ -81,7 +86,7 @@ public class Login extends javax.swing.JFrame {
                     this.dispose();
                     conexion.close();
                 } else if (validarLogin.equals("Técnico")) {
-                    audio("bells");
+                    audio("login");
                     JOptionPane.showMessageDialog(null, "Bienvenido " + usuario);
                     DashboardTC principal = new DashboardTC();
                     principal.setVisible(true);                    
@@ -125,8 +130,18 @@ public class Login extends javax.swing.JFrame {
         ImageIcon iconLista = new ImageIcon(imgLista.getImage().getScaledInstance(
                 lbLista.getWidth(), lbLista.getHeight(), Image.SCALE_DEFAULT));
         lbLista.setIcon(iconLista);
-        this.repaint();
-        if (conexion != null) {
+        this.repaint();        
+        conectar();
+        
+              
+//       
+    }
+    
+    private void conectar() {
+        
+        conexion = conexionS.conn();
+    
+     if (conexion != null) {
             lbStatus.setText("Conectado a la Base de datos de ASISCOM");
             ImageIcon DB1 = new ImageIcon(getClass().getResource("/Icons/DB.png"));
             DB.setIcon(DB1);
@@ -138,9 +153,6 @@ public class Login extends javax.swing.JFrame {
             DB.setIcon(DB1);
             this.repaint();
         }
-
-//       
-//       
     }
 
     /**
@@ -396,6 +408,7 @@ public class Login extends javax.swing.JFrame {
 
     private void actualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_actualizarActionPerformed
         // TODO add your handling code here:
+        conectar();
 
     }//GEN-LAST:event_actualizarActionPerformed
 

@@ -673,6 +673,7 @@ public class Os extends javax.swing.JInternalFrame {
     private void NuevaOsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NuevaOsActionPerformed
         // TODO add your handling code here:
         agregarnumOS();
+        
         ingreso.setDate(null);
         Salida.setDate(null);
         EmitidaPor.setText("");
@@ -790,7 +791,7 @@ public class Os extends javax.swing.JInternalFrame {
 
     private void GuardarOsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GuardarOsActionPerformed
         // TODO add your handling code here:
-
+        conexion = conexionS.conn();
         String sql = "Select NumOs from os where NumOs=?";
 
         try {
@@ -863,6 +864,7 @@ public class Os extends javax.swing.JInternalFrame {
                         pst.executeUpdate();
 
                         JOptionPane.showMessageDialog(null, "Orden de servicio " + numOS.getText() + " Se agrego correctamente");
+                        conexion.close();
 
                     }
 
@@ -875,6 +877,7 @@ public class Os extends javax.swing.JInternalFrame {
         } catch (Exception e) {
 
         }
+        
 
 
     }//GEN-LAST:event_GuardarOsActionPerformed
@@ -952,6 +955,7 @@ public class Os extends javax.swing.JInternalFrame {
                 pst.executeUpdate();
 
                 JOptionPane.showMessageDialog(null, "Orden de servicio " + numOS.getText() + " Se Actualizo correctamente");
+                conexion.close();
 
             }
 

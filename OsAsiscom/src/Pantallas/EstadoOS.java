@@ -722,6 +722,7 @@ public class EstadoOS extends javax.swing.JInternalFrame {
 
                 HashMap filtro = new HashMap();
                 filtro.put("OS", NumOS);
+                filtro.put("Logo2",getClass().getResourceAsStream("/Icons/logo.png"));
 
                 JasperPrint imprimir = JasperFillManager.fillReport(getClass().getResourceAsStream("/Reportes/report1.jasper"), filtro, conexionS.conn());
                 JasperViewer ver = new JasperViewer(imprimir, false);
@@ -730,7 +731,8 @@ public class EstadoOS extends javax.swing.JInternalFrame {
                 ver.setIconImage(new ImageIcon(getClass().getResource("/icons/logo.png")).getImage());
 
             } catch (Exception e) {
-                JOptionPane.showMessageDialog(null, e);
+                
+                
             }
         } else {
             JOptionPane.showMessageDialog(null, "Selecciona una Orden de Servicio");

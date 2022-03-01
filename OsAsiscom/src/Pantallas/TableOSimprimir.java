@@ -336,6 +336,7 @@ public class TableOSimprimir extends javax.swing.JFrame {
             try {
                 HashMap filtro = new HashMap();
                 filtro.put("OS", NumOs);
+                filtro.put("Logo",getClass().getResourceAsStream("/Icons/logo.png"));
 
                 JasperPrint imprimir = JasperFillManager.fillReport(getClass().getResourceAsStream("/Reportes/report2.jasper"), filtro, conexionS.conn());
                 JasperViewer ver = new JasperViewer(imprimir, false);
