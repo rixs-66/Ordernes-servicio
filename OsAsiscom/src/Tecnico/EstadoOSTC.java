@@ -5,7 +5,6 @@
  */
 package Tecnico;
 
-import Pantallas.*;
 import clases.*;
 import clases.conexionS;
 import java.sql.*;
@@ -413,14 +412,14 @@ public class EstadoOSTC extends javax.swing.JInternalFrame {
             tgeneral.addColumn("Telefono");
             tgeneral.addColumn("Correo Cliente");
             tgeneral.addColumn("Tipo de dispositivo");
-            tgeneral.addColumn("Reporte cliente");
+            tgeneral.addColumn("Marca Dispositivo");
             tgeneral.addColumn("Estatus");
             tgeneral.addColumn("Estatus Pago");
             jTableGeneral.setModel(tgeneral);
 
             String[] datos = new String[13];
 
-            String sql = "select * from os where TecnicoAsignado='"+DashboardTC.nombre.getText()+"'";
+            String sql = "select * from os where TecnicoAsignado='" + DashboardTC.nombre.getText() + "'";
             try {
 
                 Statement leer = conexion.createStatement();
@@ -465,7 +464,7 @@ public class EstadoOSTC extends javax.swing.JInternalFrame {
             tProceso.addColumn("Telefono");
             tProceso.addColumn("Correo Cliente");
             tProceso.addColumn("Tipo de dispositivo");
-            tProceso.addColumn("Reporte cliente");
+            tProceso.addColumn("Marca Dispositivo");
             tProceso.addColumn("Estatus");
             tProceso.addColumn("Estatus Pago");
             tProceso.addColumn("Total");
@@ -473,7 +472,7 @@ public class EstadoOSTC extends javax.swing.JInternalFrame {
 
             String[] datos = new String[14];
 
-            String sql = "select * from os where Estatus= 'En proceso' and TecnicoAsignado='"+DashboardTC.nombre.getText()+"'";
+            String sql = "select * from os where Estatus= 'En proceso' and TecnicoAsignado='" + DashboardTC.nombre.getText() + "'";
             try {
 
                 Statement leer = conexion.createStatement();
@@ -519,7 +518,7 @@ public class EstadoOSTC extends javax.swing.JInternalFrame {
             tTerminada.addColumn("Telefono");
             tTerminada.addColumn("Correo Cliente");
             tTerminada.addColumn("Tipo de dispositivo");
-            tTerminada.addColumn("Reporte cliente");
+            tTerminada.addColumn("Marca Dispositivo");
             tTerminada.addColumn("Estatus");
             tTerminada.addColumn("Estatus Pago");
             tTerminada.addColumn("Total");
@@ -527,7 +526,7 @@ public class EstadoOSTC extends javax.swing.JInternalFrame {
 
             String[] datos = new String[14];
 
-            String sql = "select * from os where Estatus= 'Terminado' and TecnicoAsignado='"+DashboardTC.nombre.getText()+"'";
+            String sql = "select * from os where Estatus= 'Terminado' and TecnicoAsignado='" + DashboardTC.nombre.getText() + "'";
             try {
 
                 Statement leer = conexion.createStatement();
@@ -572,7 +571,7 @@ public class EstadoOSTC extends javax.swing.JInternalFrame {
             tCancelada.addColumn("Telefono");
             tCancelada.addColumn("Correo Cliente");
             tCancelada.addColumn("Tipo de dispositivo");
-            tCancelada.addColumn("Reporte cliente");
+            tCancelada.addColumn("Marca Dispositivo");
             tCancelada.addColumn("Estatus");
             tCancelada.addColumn("Estatus Pago");
             tCancelada.addColumn("Total");
@@ -580,7 +579,7 @@ public class EstadoOSTC extends javax.swing.JInternalFrame {
 
             String[] datos = new String[14];
 
-            String sql = "select * from os where Estatus= 'Cancelada' and TecnicoAsignado='"+DashboardTC.nombre.getText()+"'";
+            String sql = "select * from os where Estatus= 'Cancelada' and TecnicoAsignado='" + DashboardTC.nombre.getText() + "'";
             try {
 
                 Statement leer = conexion.createStatement();
@@ -625,14 +624,14 @@ public class EstadoOSTC extends javax.swing.JInternalFrame {
             tAsignada.addColumn("Telefono");
             tAsignada.addColumn("Correo Cliente");
             tAsignada.addColumn("Tipo de dispositivo");
-            tAsignada.addColumn("Reporte cliente");
+            tAsignada.addColumn("Marca Dispositivo");
             tAsignada.addColumn("Estatus");
             tAsignada.addColumn("Estatus Pago");
             jTableAsignado.setModel(tAsignada);
 
             String[] datos = new String[14];
 
-            String sql = "select * from os where Estatus= 'Asignado' and TecnicoAsignado='"+DashboardTC.nombre.getText()+"'";
+            String sql = "select * from os where Estatus= 'Asignado' and TecnicoAsignado='" + DashboardTC.nombre.getText() + "'";
             try {
 
                 Statement leer = conexion.createStatement();
@@ -716,6 +715,7 @@ public class EstadoOSTC extends javax.swing.JInternalFrame {
 
                 HashMap filtro = new HashMap();
                 filtro.put("OS", NumOS);
+                filtro.put("Logo2", getClass().getResourceAsStream("/Icons/logo.png"));
 
                 JasperPrint imprimir = JasperFillManager.fillReport(getClass().getResourceAsStream("/Reportes/report1.jasper"), filtro, conexionS.conn());
                 JasperViewer ver = new JasperViewer(imprimir, false);
@@ -724,7 +724,7 @@ public class EstadoOSTC extends javax.swing.JInternalFrame {
                 ver.setIconImage(new ImageIcon(getClass().getResource("/icons/logo.png")).getImage());
 
             } catch (Exception e) {
-                
+
             }
         } else {
             JOptionPane.showMessageDialog(null, "Selecciona una Orden de Servicio");

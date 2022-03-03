@@ -5,13 +5,11 @@
  */
 package Pantallas;
 
-import static Pantallas.Clientes.tbClientes;
 import java.sql.Statement;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import java.sql.*;
 import clases.conexionS;
-import Pantallas.Os;
 import javax.swing.ImageIcon;
 
 /**
@@ -40,6 +38,7 @@ public class TableClient extends javax.swing.JFrame {
         }
         conexion = conexionS.conn();
         mostrarDatos();
+
     }
 
     private void mostrarDatos() {
@@ -88,7 +87,6 @@ public class TableClient extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         SeleccionarCliente = new javax.swing.JTable();
-        jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         Buscar = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
@@ -147,14 +145,6 @@ public class TableClient extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(SeleccionarCliente);
 
-        jButton1.setFont(new java.awt.Font("Roboto", 0, 11)); // NOI18N
-        jButton1.setText("Buscar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-
         jButton2.setFont(new java.awt.Font("Roboto", 0, 11)); // NOI18N
         jButton2.setText("Seleccionar");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -163,9 +153,15 @@ public class TableClient extends javax.swing.JFrame {
             }
         });
 
+        Buscar.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                BuscarKeyReleased(evt);
+            }
+        });
+
         jLabel2.setFont(new java.awt.Font("Roboto", 1, 14)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel2.setText("NumOS");
+        jLabel2.setText("Nombre Cliente");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -181,8 +177,6 @@ public class TableClient extends javax.swing.JFrame {
                         .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(Buscar, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jButton2)
                         .addGap(0, 0, Short.MAX_VALUE)))
@@ -192,10 +186,9 @@ public class TableClient extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 15, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 23, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(Buscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1)
                     .addComponent(jButton2)
                     .addComponent(jLabel2))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -208,44 +201,6 @@ public class TableClient extends javax.swing.JFrame {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-
-        DefaultTableModel tclientes = new DefaultTableModel();
-        tclientes.addColumn("Nombre");
-        tclientes.addColumn("Direccion");
-        tclientes.addColumn("Telefono");
-        tclientes.addColumn("Correo");
-        SeleccionarCliente.setModel(tclientes);
-        String[] datos = new String[4];
-
-        String sql = "select * from clientes where nombre=?";
-
-        if (Buscar.getText().isEmpty()) {
-
-        }
-        try {
-
-            pst = conexion.prepareStatement(sql);
-            pst.setString(1, Buscar.getText());
-            rs = pst.executeQuery();
-
-            while (rs.next()) {
-                datos[0] = rs.getString(2);
-                datos[1] = rs.getString(3);
-                datos[2] = rs.getString(4);
-                datos[3] = rs.getString(5);
-
-                tclientes.addRow(datos);
-            }
-            SeleccionarCliente.setModel(tclientes);
-
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, e);
-            mostrarDatos();
-        }
-    }//GEN-LAST:event_jButton1ActionPerformed
 
     private void SeleccionarClienteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SeleccionarClienteMouseClicked
         // TODO add your handling code here:
@@ -272,6 +227,54 @@ public class TableClient extends javax.swing.JFrame {
 
 
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void BuscarKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BuscarKeyReleased
+        // TODO add your handling code here:
+
+        Runnable runnable = new Runnable() {
+            @Override
+            public void run() {
+
+                conexion = conexionS.conn();
+                DefaultTableModel tclientes = new DefaultTableModel();
+                tclientes.addColumn("Nombre");
+                tclientes.addColumn("Direccion");
+                tclientes.addColumn("Telefono");
+                tclientes.addColumn("Correo");
+                SeleccionarCliente.setModel(tclientes);
+                String[] datos = new String[4];
+
+                String sql = "select * from clientes where nombre like" + "'%" + Buscar.getText() + "%'";
+
+                if (Buscar.getText().isEmpty()) {
+
+                }
+                try {
+
+                    Statement leer = conexion.createStatement();
+                    rs = leer.executeQuery(sql);
+
+                    while (rs.next()) {
+                        datos[0] = rs.getString(2);
+                        datos[1] = rs.getString(3);
+                        datos[2] = rs.getString(4);
+                        datos[3] = rs.getString(5);
+
+                        tclientes.addRow(datos);
+                    }
+                    SeleccionarCliente.setModel(tclientes);
+
+                } catch (SQLException e) {
+
+                }
+
+            }
+        };
+        Thread hilo = new Thread(runnable);
+        hilo.start();
+
+
+    }//GEN-LAST:event_BuscarKeyReleased
 
     /**
      * @param args the command line arguments
@@ -311,7 +314,6 @@ public class TableClient extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField Buscar;
     private javax.swing.JTable SeleccionarCliente;
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

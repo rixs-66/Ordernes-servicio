@@ -97,6 +97,8 @@ public class ActualizarSeguimiento extends javax.swing.JFrame {
         cbServicios.setModel(cb.getvalues());
 
     }
+    
+    
 
     private void CargarDatos() {
 
@@ -158,6 +160,7 @@ public class ActualizarSeguimiento extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         Cancelar = new javax.swing.JButton();
+        jButton4 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setResizable(false);
@@ -320,6 +323,14 @@ public class ActualizarSeguimiento extends javax.swing.JFrame {
         });
         jPanel2.add(Cancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 550, -1, -1));
 
+        jButton4.setText("Refaccion");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
+        jPanel2.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 550, 150, 30));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -440,6 +451,7 @@ public class ActualizarSeguimiento extends javax.swing.JFrame {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
+        conexion = conexionS.conn();
         String sql = "Update os set Seguimiento=?,"
                 + "Estatus=?,"
                 + "EstatusPago=?,"
@@ -496,6 +508,14 @@ public class ActualizarSeguimiento extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_CancelarActionPerformed
 
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        // TODO add your handling code here:
+        
+       Refaccion refaccion = new Refaccion();
+       refaccion.setVisible(true);   
+       
+    }//GEN-LAST:event_jButton4ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -535,7 +555,7 @@ public class ActualizarSeguimiento extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Cancelar;
     private javax.swing.JLabel Estatus;
-    private javax.swing.JLabel ID;
+    public static javax.swing.JLabel ID;
     private javax.swing.JLabel Pago;
     private javax.swing.JTextArea Seguimiento;
     public static javax.swing.JTable Servicios;
@@ -547,6 +567,7 @@ public class ActualizarSeguimiento extends javax.swing.JFrame {
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

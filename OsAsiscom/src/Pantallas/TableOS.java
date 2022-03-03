@@ -127,7 +127,6 @@ public class TableOS extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         TableOS = new javax.swing.JTable();
-        jButton1 = new javax.swing.JButton();
         select = new javax.swing.JButton();
         Buscar = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
@@ -186,14 +185,6 @@ public class TableOS extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(TableOS);
 
-        jButton1.setFont(new java.awt.Font("Roboto", 0, 11)); // NOI18N
-        jButton1.setText("Buscar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-
         select.setFont(new java.awt.Font("Roboto", 0, 11)); // NOI18N
         select.setText("Seleccionar");
         select.addActionListener(new java.awt.event.ActionListener() {
@@ -202,9 +193,15 @@ public class TableOS extends javax.swing.JFrame {
             }
         });
 
+        Buscar.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                BuscarKeyReleased(evt);
+            }
+        });
+
         jLabel2.setFont(new java.awt.Font("Roboto", 1, 14)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel2.setText("Nombre");
+        jLabel2.setText("Num OS");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -219,8 +216,6 @@ public class TableOS extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(Buscar, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(select)))
                 .addContainerGap(17, Short.MAX_VALUE))
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -232,7 +227,6 @@ public class TableOS extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 23, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(Buscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1)
                     .addComponent(select)
                     .addComponent(jLabel2))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -245,73 +239,6 @@ public class TableOS extends javax.swing.JFrame {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-
-        conexion = conexionS.conn();
-        DefaultTableModel tgeneral = new DefaultTableModel();
-        tgeneral.addColumn("NumeroOS");
-        tgeneral.addColumn("Fecha Ingreso");
-        tgeneral.addColumn("Fecha Salida");
-        tgeneral.addColumn("Emitida por");
-        tgeneral.addColumn("Tecnico Asignado");
-        tgeneral.addColumn("Nombre Cliente");
-        tgeneral.addColumn("Direccion Cliente");
-        tgeneral.addColumn("Telefono");
-        tgeneral.addColumn("Correo Cliente");
-        tgeneral.addColumn("Tipo de dispositivo");
-        tgeneral.addColumn("Marca Dispositivo");
-        tgeneral.addColumn("Modelo");
-        tgeneral.addColumn("Numero de serie");
-        tgeneral.addColumn("Contraseña");
-        tgeneral.addColumn("Accesorios");
-        tgeneral.addColumn("Obersvaciones");
-        tgeneral.addColumn("Reporte cliente");
-        tgeneral.addColumn("Estatus");
-        tgeneral.addColumn("Estatus Pago");
-        TableOS.setModel(tgeneral);
-
-        String[] datos = new String[19];
-
-        String sql = "select * from os where NumOs='" + Buscar.getText() + "'";
-        try {
-
-            Statement leer = conexion.createStatement();
-            rs = leer.executeQuery(sql);
-
-            while (rs.next()) {
-                datos[0] = rs.getString(1);
-                datos[1] = rs.getString(2);
-                datos[2] = rs.getString(3);
-                datos[3] = rs.getString(4);
-                datos[4] = rs.getString(5);
-                datos[5] = rs.getString(6);
-                datos[6] = rs.getString(7);
-                datos[7] = rs.getString(8);
-                datos[8] = rs.getString(9);
-                datos[9] = rs.getString(10);
-                datos[10] = rs.getString(11);
-                datos[11] = rs.getString(12);
-                datos[12] = rs.getString(13);
-                datos[13] = rs.getString(14);
-                datos[14] = rs.getString(15);
-                datos[15] = rs.getString(16);
-                datos[16] = rs.getString(17);
-                datos[17] = rs.getString(18);
-                datos[18] = rs.getString(19);
-                tgeneral.addRow(datos);
-
-            }
-            TableOS.setModel(tgeneral);
-            conexion.close();
-
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, e);
-        }
-
-
-    }//GEN-LAST:event_jButton1ActionPerformed
 
     private void TableOSMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TableOSMouseClicked
         // TODO add your handling code here:
@@ -342,6 +269,7 @@ public class TableOS extends javax.swing.JFrame {
 
     private void selectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_selectActionPerformed
         // TODO add your handling code here:
+         conexion = conexionS.conn();
 
         if (NumOs == null) {
             JOptionPane.showMessageDialog(null, "selecciona una Orden de Servicio");
@@ -352,12 +280,22 @@ public class TableOS extends javax.swing.JFrame {
             Os.numOS.setText(NumOs);
 
             try {
-                Date Fingreso = new SimpleDateFormat("d/MM/y").parse(FechaIngreso);
-                Date Fentrega = new SimpleDateFormat("d/MM/y").parse(FechaEntrega);
-                Os.ingreso.setDate(Fingreso);
-                Os.Salida.setDate(Fentrega);
-            } catch (Exception e) {
+                if (FechaEntrega != "null" && FechaIngreso != "null") {
 
+                    Date Fingreso = new SimpleDateFormat("dd-MMM-yyyy").parse(FechaIngreso);
+                    Date Fentrega = new SimpleDateFormat("dd-MMM-yyyy").parse(FechaEntrega);
+                    Os.ingreso.setDate(Fingreso);
+                    Os.Salida.setDate(Fentrega);
+                    System.out.println("a");
+                } else if (FechaEntrega == "null" && FechaIngreso != "null") {
+
+                    Date Fingreso = new SimpleDateFormat("dd-MMM-yyyy").parse(FechaIngreso);
+                    Os.ingreso.setDate(Fingreso);
+                    System.out.println("b");
+                }
+
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, e);
             }
 
             Os.cbTecnico.setSelectedItem(TecnicoAsignado);
@@ -394,6 +332,70 @@ public class TableOS extends javax.swing.JFrame {
         }
 
     }//GEN-LAST:event_selectActionPerformed
+
+    private void BuscarKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BuscarKeyReleased
+        // TODO add your handling code here:
+         conexion = conexionS.conn();
+        DefaultTableModel tgeneral = new DefaultTableModel();
+        tgeneral.addColumn("NumeroOS");
+        tgeneral.addColumn("Fecha Ingreso");
+        tgeneral.addColumn("Fecha Salida");
+        tgeneral.addColumn("Emitida por");
+        tgeneral.addColumn("Tecnico Asignado");
+        tgeneral.addColumn("Nombre Cliente");
+        tgeneral.addColumn("Direccion Cliente");
+        tgeneral.addColumn("Telefono");
+        tgeneral.addColumn("Correo Cliente");
+        tgeneral.addColumn("Tipo de dispositivo");
+        tgeneral.addColumn("Marca Dispositivo");
+        tgeneral.addColumn("Modelo");
+        tgeneral.addColumn("Numero de serie");
+        tgeneral.addColumn("Contraseña");
+        tgeneral.addColumn("Accesorios");
+        tgeneral.addColumn("Obersvaciones");
+        tgeneral.addColumn("Reporte cliente");
+        tgeneral.addColumn("Estatus");
+        tgeneral.addColumn("Estatus Pago");
+        TableOS.setModel(tgeneral);
+
+        String[] datos = new String[19];
+
+        String sql = "select * from os where NumOs like '%"+Buscar.getText()+"%'";
+        try {
+
+            Statement leer = conexion.createStatement();
+            rs = leer.executeQuery(sql);
+
+            while (rs.next()) {
+                datos[0] = rs.getString(1);
+                datos[1] = rs.getString(2);
+                datos[2] = rs.getString(3);
+                datos[3] = rs.getString(4);
+                datos[4] = rs.getString(5);
+                datos[5] = rs.getString(6);
+                datos[6] = rs.getString(7);
+                datos[7] = rs.getString(8);
+                datos[8] = rs.getString(9);
+                datos[9] = rs.getString(10);
+                datos[10] = rs.getString(11);
+                datos[11] = rs.getString(12);
+                datos[12] = rs.getString(13);
+                datos[13] = rs.getString(14);
+                datos[14] = rs.getString(15);
+                datos[15] = rs.getString(16);
+                datos[16] = rs.getString(17);
+                datos[17] = rs.getString(18);
+                datos[18] = rs.getString(19);
+                tgeneral.addRow(datos);
+
+            }
+            TableOS.setModel(tgeneral);
+            conexion.close();
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e);
+        }
+    }//GEN-LAST:event_BuscarKeyReleased
 
     /**
      * @param args the command line arguments
@@ -434,7 +436,6 @@ public class TableOS extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField Buscar;
     private javax.swing.JTable TableOS;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

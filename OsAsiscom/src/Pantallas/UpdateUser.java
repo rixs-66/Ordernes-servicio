@@ -38,6 +38,7 @@ public class UpdateUser extends javax.swing.JFrame {
     }
 
     private void actualizar() {
+        conexion = conexionS.conn();
         String sql = "update empleados set "
                 + "numE=?,"
                 + "nombre=?,"

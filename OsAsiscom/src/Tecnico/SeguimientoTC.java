@@ -356,7 +356,7 @@ public class SeguimientoTC extends javax.swing.JFrame {
 
     private void guardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_guardarActionPerformed
         // TODO add your handling code here:
-
+        conexion = conexionS.conn();
         String sql = "Update os set Seguimiento=?,"
                 + "Estatus=?,"
                 + "EstatusPago=?,"

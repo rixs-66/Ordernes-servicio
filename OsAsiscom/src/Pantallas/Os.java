@@ -12,11 +12,9 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import clases.*;
 import Pantallas.*;
-import java.util.HashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JTextField;
-import net.sf.jasperreports.engine.JasperFillManager;
 
 /**
  *
@@ -55,6 +53,7 @@ public class Os extends javax.swing.JInternalFrame {
     }
 
     private void agregarnumOS() {
+        conexion = conexionS.conn();
         String sql = "Select count(*) from os";
 
         Statement leer;
@@ -673,7 +672,7 @@ public class Os extends javax.swing.JInternalFrame {
     private void NuevaOsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NuevaOsActionPerformed
         // TODO add your handling code here:
         agregarnumOS();
-        
+
         ingreso.setDate(null);
         Salida.setDate(null);
         EmitidaPor.setText("");
@@ -844,7 +843,12 @@ public class Os extends javax.swing.JInternalFrame {
                         pst = conexion.prepareStatement(sql);
                         pst.setString(1, numOS.getText());
                         pst.setString(2, ((JTextField) ingreso.getDateEditor().getUiComponent()).getText());
-                        pst.setString(3, ((JTextField) Salida.getDateEditor().getUiComponent()).getText());
+                        if (((JTextField) Salida.getDateEditor().getUiComponent()).getText().isEmpty()) {
+
+                            pst.setString(3, null);
+                        } else {
+                            pst.setString(3, ((JTextField) Salida.getDateEditor().getUiComponent()).getText());
+                        }
                         pst.setString(4, EmitidaPor.getText());
                         pst.setString(5, cbTecnico.getSelectedItem().toString());
                         pst.setString(6, Nombre.getText());
@@ -864,6 +868,8 @@ public class Os extends javax.swing.JInternalFrame {
                         pst.executeUpdate();
 
                         JOptionPane.showMessageDialog(null, "Orden de servicio " + numOS.getText() + " Se agrego correctamente");
+                        numOS.setText("");
+                        agregarnumOS();
                         conexion.close();
 
                     }
@@ -877,7 +883,6 @@ public class Os extends javax.swing.JInternalFrame {
         } catch (Exception e) {
 
         }
-        
 
 
     }//GEN-LAST:event_GuardarOsActionPerformed
@@ -888,6 +893,7 @@ public class Os extends javax.swing.JInternalFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
+
         TableOS tableos = new TableOS();
         tableos.setVisible(true);
         GuardarOs.setEnabled(false);
@@ -895,6 +901,8 @@ public class Os extends javax.swing.JInternalFrame {
 
     private void ActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ActualizarActionPerformed
         // TODO add your handling code here:
+
+        conexion = conexionS.conn();
         String sql = ("Update os set "
                 + "FechaIngreso=?," //2
                 + "FechaSalida=?," //3
@@ -921,9 +929,7 @@ public class Os extends javax.swing.JInternalFrame {
                     || cbTecnico.getSelectedItem().toString()
                     == "------Selecciona tecnico------"
                     || Nombre.getText().isEmpty()
-                    || Direccion.getText().isEmpty()
                     || Telefono.getText().isEmpty()
-                    || Correo.getText().isEmpty()
                     || TipoDispositivo.getText().isEmpty()
                     || Marca.getText().isEmpty()
                     || jTxtObservaciones.getText().isEmpty()
@@ -935,7 +941,12 @@ public class Os extends javax.swing.JInternalFrame {
 
                 pst = conexion.prepareStatement(sql);
                 pst.setString(1, ((JTextField) ingreso.getDateEditor().getUiComponent()).getText());
-                pst.setString(2, ((JTextField) Salida.getDateEditor().getUiComponent()).getText());
+                if (((JTextField) Salida.getDateEditor().getUiComponent()).getText().isEmpty()) {
+
+                    pst.setString(2, null);
+                } else {
+                    pst.setString(2, ((JTextField) Salida.getDateEditor().getUiComponent()).getText());
+                }
                 pst.setString(3, EmitidaPor.getText());
                 pst.setString(4, cbTecnico.getSelectedItem().toString());
                 pst.setString(5, Nombre.getText());

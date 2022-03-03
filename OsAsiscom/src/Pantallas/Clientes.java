@@ -285,11 +285,13 @@ public class Clientes extends javax.swing.JInternalFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
+        conexion = conexionS.conn();
         mostrarDatos();
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
         // TODO add your handling code here:
+        conexion = conexionS.conn();
         DefaultTableModel tclientes = new DefaultTableModel();
         tclientes.addColumn("ID");
         tclientes.addColumn("Nombre");

@@ -417,7 +417,7 @@ public class EstadoOS extends javax.swing.JInternalFrame {
             tgeneral.addColumn("Telefono");
             tgeneral.addColumn("Correo Cliente");
             tgeneral.addColumn("Tipo de dispositivo");
-            tgeneral.addColumn("Reporte cliente");
+            tgeneral.addColumn("Marca Dispositivo");
             tgeneral.addColumn("Estatus");
             tgeneral.addColumn("Estatus Pago");
 
@@ -471,7 +471,7 @@ public class EstadoOS extends javax.swing.JInternalFrame {
             tProceso.addColumn("Telefono");
             tProceso.addColumn("Correo Cliente");
             tProceso.addColumn("Tipo de dispositivo");
-            tProceso.addColumn("Reporte cliente");
+            tProceso.addColumn("Marca Dispositivo");
             tProceso.addColumn("Estatus");
             tProceso.addColumn("Estatus Pago");
             tProceso.addColumn("Total");
@@ -525,7 +525,7 @@ public class EstadoOS extends javax.swing.JInternalFrame {
             tTerminada.addColumn("Telefono");
             tTerminada.addColumn("Correo Cliente");
             tTerminada.addColumn("Tipo de dispositivo");
-            tTerminada.addColumn("Reporte cliente");
+            tTerminada.addColumn("Marca Dispositivo");
             tTerminada.addColumn("Estatus");
             tTerminada.addColumn("Estatus Pago");
             tTerminada.addColumn("Total");
@@ -578,7 +578,7 @@ public class EstadoOS extends javax.swing.JInternalFrame {
             tCancelada.addColumn("Telefono");
             tCancelada.addColumn("Correo Cliente");
             tCancelada.addColumn("Tipo de dispositivo");
-            tCancelada.addColumn("Reporte cliente");
+            tCancelada.addColumn("Marca Dispositivo");
             tCancelada.addColumn("Estatus");
             tCancelada.addColumn("Estatus Pago");
             tCancelada.addColumn("Total");
@@ -631,7 +631,7 @@ public class EstadoOS extends javax.swing.JInternalFrame {
             tAsignada.addColumn("Telefono");
             tAsignada.addColumn("Correo Cliente");
             tAsignada.addColumn("Tipo de dispositivo");
-            tAsignada.addColumn("Reporte cliente");
+            tAsignada.addColumn("Marca Dispositivo");
             tAsignada.addColumn("Estatus");
             tAsignada.addColumn("Estatus Pago");
             jTableAsignado.setModel(tAsignada);

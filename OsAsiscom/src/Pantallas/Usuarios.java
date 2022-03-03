@@ -306,6 +306,7 @@ public class Usuarios extends javax.swing.JInternalFrame {
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
         // TODO add your handling code here:
+        conexion = conexionS.conn();
         DefaultTableModel templeados = new DefaultTableModel();
         templeados.addColumn("ID");
         templeados.addColumn("Numero de empleado");

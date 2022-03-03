@@ -56,6 +56,7 @@ public class Dashboard extends javax.swing.JFrame {
         hilo.start();
 
     }
+    
 
     /**
      * This method is called from within the constructor to initialize the form.

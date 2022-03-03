@@ -30,7 +30,7 @@ public class RegistroClient extends javax.swing.JFrame {
     }
 
     private void insertar() {
-
+        conexion = conexionS.conn();
         String sql = "Select nombre from clientes where nombre=?";
 
         try {
@@ -238,6 +238,7 @@ public class RegistroClient extends javax.swing.JFrame {
 
     private void btnInsertarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInsertarActionPerformed
         // TODO add your handling code here:
+
         insertar();
         txtNombre.setText("");
         txtDireccion.setText("");

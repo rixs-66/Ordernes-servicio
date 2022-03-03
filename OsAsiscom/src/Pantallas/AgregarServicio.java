@@ -131,22 +131,30 @@ public class AgregarServicio extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         conexion = conexionS.conn();
+        if (servicio.getText().isEmpty() || precio.getText().isEmpty()) {
 
-        String sql = "insert into catalogoprecios(descripcion,precio)values(?,?)";
+            JOptionPane.showMessageDialog(null, "Campos obligatorios vacios");
 
-        try {
-            pst = conexion.prepareStatement(sql);
+        } else {
 
-            pst.setString(1, servicio.getText());
-            pst.setString(2, precio.getText());
-            pst.executeUpdate();
+            conexion = conexionS.conn();
 
-            JOptionPane.showMessageDialog(null, "Servicio agregado con exito");
-            servicio.setText("");
-            precio.setText("");
-            dispose();
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, e);
+            String sql = "insert into catalogoprecios(descripcion,precio)values(?,?)";
+
+            try {
+                pst = conexion.prepareStatement(sql);
+
+                pst.setString(1, servicio.getText());
+                pst.setString(2, precio.getText());
+                pst.executeUpdate();
+
+                JOptionPane.showMessageDialog(null, "Servicio agregado con exito");
+                servicio.setText("");
+                precio.setText("");
+                dispose();
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, e);
+            }
         }
 
     }//GEN-LAST:event_jButton1ActionPerformed

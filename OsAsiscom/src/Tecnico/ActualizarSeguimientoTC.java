@@ -42,7 +42,7 @@ public class ActualizarSeguimientoTC extends javax.swing.JFrame {
         DefaultTableModel tableprecios = new DefaultTableModel();
         tableprecios.addColumn("Servicio");
         tableprecios.addColumn("Precio");
-        Servicios.setModel(tableprecios);
+        ServiciosTC.setModel(tableprecios);
 
         conexion = conexionS.conn();
         cargarCombobox();
@@ -82,10 +82,10 @@ public class ActualizarSeguimientoTC extends javax.swing.JFrame {
 
     private void suma() {
 
-        int contar = Servicios.getRowCount();
+        int contar = ServiciosTC.getRowCount();
         int suma = 0;
         for (int i = 0; i < contar; i++) {
-            suma += Integer.parseInt(Servicios.getValueAt(i, 2).toString());
+            suma += Integer.parseInt(ServiciosTC.getValueAt(i, 2).toString());
 
         }
         Total.setText(String.valueOf(suma));
@@ -105,7 +105,7 @@ public class ActualizarSeguimientoTC extends javax.swing.JFrame {
         tableprecios.addColumn("ID");
         tableprecios.addColumn("Servicio");
         tableprecios.addColumn("Precio");
-        Servicios.setModel(tableprecios);
+        ServiciosTC.setModel(tableprecios);
         String[] datos = new String[3];
 
         String sql = "select * from servicios where numOs='" + ID.getText() + "'";
@@ -121,7 +121,7 @@ public class ActualizarSeguimientoTC extends javax.swing.JFrame {
                 datos[2] = rs.getString(4);
                 tableprecios.addRow(datos);
             }
-            Servicios.setModel(tableprecios);
+            ServiciosTC.setModel(tableprecios);
 
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e);
@@ -144,7 +144,7 @@ public class ActualizarSeguimientoTC extends javax.swing.JFrame {
         contador = new javax.swing.JLabel();
         Pago = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        Servicios = new javax.swing.JTable();
+        ServiciosTC = new javax.swing.JTable();
         cbServicios = new javax.swing.JComboBox<>();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
@@ -159,6 +159,7 @@ public class ActualizarSeguimientoTC extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         Cancelar = new javax.swing.JButton();
+        jButton4 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setResizable(false);
@@ -185,12 +186,12 @@ public class ActualizarSeguimientoTC extends javax.swing.JFrame {
         Pago.setText("Pago");
         jPanel2.add(Pago, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 290, 80, 40));
 
-        Servicios = new javax.swing.JTable(){
+        ServiciosTC = new javax.swing.JTable(){
             public boolean isCellEditable(int rowIndex, int colIndex){
                 return false;
             }
         };
-        Servicios.setModel(new javax.swing.table.DefaultTableModel(
+        ServiciosTC.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -201,12 +202,12 @@ public class ActualizarSeguimientoTC extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        Servicios.addMouseListener(new java.awt.event.MouseAdapter() {
+        ServiciosTC.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                ServiciosMouseClicked(evt);
+                ServiciosTCMouseClicked(evt);
             }
         });
-        jScrollPane2.setViewportView(Servicios);
+        jScrollPane2.setViewportView(ServiciosTC);
 
         jPanel2.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 380, 560, 160));
 
@@ -321,6 +322,14 @@ public class ActualizarSeguimientoTC extends javax.swing.JFrame {
         });
         jPanel2.add(Cancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 550, -1, -1));
 
+        jButton4.setText("Refaccion");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
+        jPanel2.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 550, 150, 30));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -364,6 +373,7 @@ public class ActualizarSeguimientoTC extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
+        conexion = conexionS.conn();
 
         try {
             String sql = "select * from catalogoprecios where descripcion='" + cbServicios.getSelectedItem().toString() + "'";
@@ -399,17 +409,17 @@ public class ActualizarSeguimientoTC extends javax.swing.JFrame {
 
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void ServiciosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ServiciosMouseClicked
+    private void ServiciosTCMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ServiciosTCMouseClicked
         // TODO add your handling code here:
-        int seleccionar = Servicios.rowAtPoint(evt.getPoint());
-        aux = String.valueOf(Servicios.getValueAt(seleccionar, 0));
+        int seleccionar = ServiciosTC.rowAtPoint(evt.getPoint());
+        aux = String.valueOf(ServiciosTC.getValueAt(seleccionar, 0));
 
 
-    }//GEN-LAST:event_ServiciosMouseClicked
+    }//GEN-LAST:event_ServiciosTCMouseClicked
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-
+        conexion = conexionS.conn();
         String sql = "Delete from servicios where ID=?";
 
         try {
@@ -419,10 +429,12 @@ public class ActualizarSeguimientoTC extends javax.swing.JFrame {
 
             JOptionPane.showMessageDialog(null, "Servicio eliminado");
             CargarDatos();
+            conexion.close();
 
         } catch (Exception e) {
         }
         suma();
+
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void cbPagoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbPagoItemStateChanged
@@ -441,6 +453,7 @@ public class ActualizarSeguimientoTC extends javax.swing.JFrame {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
+        conexion = conexionS.conn();
         String sql = "Update os set Seguimiento=?,"
                 + "Estatus=?,"
                 + "EstatusPago=?,"
@@ -470,6 +483,7 @@ public class ActualizarSeguimientoTC extends javax.swing.JFrame {
 
     private void CancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CancelarActionPerformed
         // TODO add your handling code here:
+        conexion = conexionS.conn();
 
         String sql = "Update os set Seguimiento=?,"
                 + "Estatus=?,"
@@ -492,6 +506,14 @@ public class ActualizarSeguimientoTC extends javax.swing.JFrame {
         } catch (Exception e) {
         }
     }//GEN-LAST:event_CancelarActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        // TODO add your handling code here:
+
+        RefaccionTC refaccion = new RefaccionTC();
+        refaccion.setVisible(true);
+
+    }//GEN-LAST:event_jButton4ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -538,10 +560,10 @@ public class ActualizarSeguimientoTC extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Cancelar;
     private javax.swing.JLabel Estatus;
-    private javax.swing.JLabel ID;
+    public static javax.swing.JLabel ID;
     private javax.swing.JLabel Pago;
     private javax.swing.JTextArea Seguimiento;
-    public static javax.swing.JTable Servicios;
+    public static javax.swing.JTable ServiciosTC;
     private javax.swing.JTextField Total;
     private javax.swing.JComboBox<String> cbEstatus;
     private javax.swing.JComboBox<String> cbPago;
@@ -550,6 +572,7 @@ public class ActualizarSeguimientoTC extends javax.swing.JFrame {
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

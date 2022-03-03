@@ -5,36 +5,63 @@
  */
 package Pantallas;
 
+import static Pantallas.ActualizarSeguimiento.Servicios;
 import clases.conexionS;
 import java.sql.*;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
  * @author rica_
  */
-public class ActualizarServicio extends javax.swing.JFrame {
+public class Refaccion extends javax.swing.JFrame {
 
     Connection conexion = null;
     PreparedStatement pst = null;
     ResultSet rs = null;
+    int aux;
 
     /**
      * Creates new form AgregarServicio
      */
-    public ActualizarServicio() {
-
+    public Refaccion() {
         initComponents();
-        ID.setText(Precios.Id);
-        servicio.setText(Precios.Servicios);
-        precio.setText(Precios.Precio);
-        conexion = conexionS.conn();
         try {
             ImageIcon icon = new ImageIcon(getClass().getResource("/Icons/logo.png"));
             setIconImage(icon.getImage());
 
         } catch (Exception e) {
+        }
+    }
+
+    private void CargarDatos() {
+        conexion = conexionS.conn();
+        DefaultTableModel tableprecios = new DefaultTableModel();
+        tableprecios.addColumn("ID");
+        tableprecios.addColumn("Servicio");
+        tableprecios.addColumn("Precio");
+        Servicios.setModel(tableprecios);
+        String[] datos = new String[3];
+
+        String sql = "select * from servicios where numOs='" + ActualizarSeguimiento.ID.getText() + "'";
+
+        try {
+
+            Statement leer = conexion.createStatement();
+            rs = leer.executeQuery(sql);
+
+            while (rs.next()) {
+                datos[0] = rs.getString(1);
+                datos[1] = rs.getString(3);
+                datos[2] = rs.getString(4);
+                tableprecios.addRow(datos);
+            }
+            Servicios.setModel(tableprecios);
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e);
         }
     }
 
@@ -51,17 +78,15 @@ public class ActualizarServicio extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        servicio = new javax.swing.JTextField();
+        Servicio = new javax.swing.JTextField();
         precio = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        ID = new javax.swing.JLabel();
 
         jLabel4.setText("jLabel4");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setIconImages(null);
 
         jPanel1.setBackground(new java.awt.Color(102, 102, 102));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -71,7 +96,7 @@ public class ActualizarServicio extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Roboto", 1, 14)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Actualizar Servicios");
+        jLabel1.setText("Agregar Refacción");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -89,8 +114,13 @@ public class ActualizarServicio extends javax.swing.JFrame {
 
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
-        servicio.setFont(new java.awt.Font("Roboto", 0, 12)); // NOI18N
-        jPanel1.add(servicio, new org.netbeans.lib.awtextra.AbsoluteConstraints(49, 76, 300, -1));
+        Servicio.setFont(new java.awt.Font("Roboto", 0, 12)); // NOI18N
+        Servicio.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ServicioActionPerformed(evt);
+            }
+        });
+        jPanel1.add(Servicio, new org.netbeans.lib.awtextra.AbsoluteConstraints(49, 76, 300, -1));
 
         precio.setFont(new java.awt.Font("Roboto", 0, 12)); // NOI18N
         precio.addActionListener(new java.awt.event.ActionListener() {
@@ -101,7 +131,7 @@ public class ActualizarServicio extends javax.swing.JFrame {
         jPanel1.add(precio, new org.netbeans.lib.awtextra.AbsoluteConstraints(49, 138, 300, -1));
 
         jButton1.setFont(new java.awt.Font("Roboto", 0, 12)); // NOI18N
-        jButton1.setText("Actualizar");
+        jButton1.setText("Agregar");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -109,16 +139,15 @@ public class ActualizarServicio extends javax.swing.JFrame {
         });
         jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 180, -1, -1));
 
+        jLabel2.setFont(new java.awt.Font("Roboto", 0, 12)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Nombre del Servicio");
         jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 60, -1, -1));
 
+        jLabel3.setFont(new java.awt.Font("Roboto", 0, 12)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("Precio");
         jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 120, -1, -1));
-
-        ID.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        ID.setText("ID");
-        ID.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jPanel1.add(ID, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 60, 40, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -135,31 +164,47 @@ public class ActualizarServicio extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        conexion = conexionS.conn();
+
+        if (Servicio.getText().isEmpty() || precio.getText().isEmpty()) {
+
+            JOptionPane.showMessageDialog(null, "Campos obligatorios vacios");
+
+        } else {
+            conexion = conexionS.conn();
+
+            String sql = "insert into servicios(numOs,Servicio,Precio)values(?,?,?)";
+
+            try {
+                pst = conexion.prepareStatement(sql);
+                pst.setString(1, ActualizarSeguimiento.ID.getText());
+                pst.setString(2, Servicio.getText());
+                pst.setString(3, precio.getText());
+                pst.executeUpdate();
+
+                JOptionPane.showMessageDialog(null, "Servicio agregado con exito");
+                Servicio.setText("");
+                precio.setText("");
+
+                CargarDatos();
+
+                dispose();
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, e);
+            }
+        }
+
+    }//GEN-LAST:event_jButton1ActionPerformed
+
     private void precioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_precioActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_precioActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void ServicioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ServicioActionPerformed
         // TODO add your handling code here:
-        conexion = conexionS.conn();
-        String sql = " update catalogoprecios set descripcion=?,precio=? "
-                + "where id= '" + ID.getText() + "'";
-        try {
-            pst = conexion.prepareStatement(sql);
-            pst.setString(1, servicio.getText());
-            pst.setString(2, precio.getText());
-            pst.executeUpdate();
-            Precios.Id = null;
-            dispose();
-
-            JOptionPane.showMessageDialog(null, "Actualizado correctamente");
-
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, e);
-        }
-
-
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_ServicioActionPerformed
 
     /**
      * @param args the command line arguments
@@ -178,13 +223,13 @@ public class ActualizarServicio extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(ActualizarServicio.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Refaccion.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(ActualizarServicio.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Refaccion.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(ActualizarServicio.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Refaccion.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(ActualizarServicio.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Refaccion.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
         //</editor-fold>
@@ -192,13 +237,13 @@ public class ActualizarServicio extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new ActualizarServicio().setVisible(true);
+                new Refaccion().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel ID;
+    private javax.swing.JTextField Servicio;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -207,6 +252,5 @@ public class ActualizarServicio extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JTextField precio;
-    private javax.swing.JTextField servicio;
     // End of variables declaration//GEN-END:variables
 }

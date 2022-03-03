@@ -36,6 +36,8 @@ public class UpdateClient extends javax.swing.JFrame {
     }
 
     private void actualizar() {
+        conexion = conexionS.conn();
+
         String sql = "update clientes set "
                 + "nombre=?,"
                 + "direccion=?,"
@@ -43,7 +45,6 @@ public class UpdateClient extends javax.swing.JFrame {
                 + "correo=? where idCliente=" + Clientes.id;
         try {
             if (txtNombre.getText().isEmpty()
-                    || txtCorreo.getText().isEmpty()
                     || txtTelefono.getText().isEmpty()) {
 
                 JOptionPane.showMessageDialog(null, "Campos obligatorios vacios");
@@ -51,10 +52,11 @@ public class UpdateClient extends javax.swing.JFrame {
 
                 pst = conexion.prepareStatement(sql);
                 pst.setString(1, txtNombre.getText());
-                pst.setString(2, txtCorreo.getText());
-                pst.setString(3, txtDireccion.getText());
-                pst.setString(4, txtTelefono.getText());
+                pst.setString(2, txtDireccion.getText());
+                pst.setString(3, txtTelefono.getText());
+                pst.setString(4, txtCorreo.getText());
                 pst.executeUpdate();
+                JOptionPane.showMessageDialog(null, "Actualizacion correcta");
                 dispose();
             }
 

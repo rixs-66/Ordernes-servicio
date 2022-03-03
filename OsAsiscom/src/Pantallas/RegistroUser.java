@@ -30,6 +30,7 @@ public class RegistroUser extends javax.swing.JFrame {
     }
 
     private void insertar() {
+        conexion = conexionS.conn();
         String sql = ("insert into empleados(numE,nombre,telefono,pass,correo,perfil)"
                 + "values(?,?,?,?,?,?)");
         try {
